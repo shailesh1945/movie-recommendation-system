@@ -1,0 +1,32 @@
+package com.movie.recsys.service;
+
+
+import com.movie.recsys.dto.ApiResponse;
+import com.movie.recsys.dto.movie.MovieDetailsResponse;
+import com.movie.recsys.dto.movie.MovieRequest;
+import com.movie.recsys.dto.movie.MovieResponse;
+import com.movie.recsys.dto.movie.MovieSearchRequest;
+
+import java.util.List;
+
+public interface MovieService {
+
+    List<MovieResponse> getAllMovies();
+
+    MovieDetailsResponse getMovieById(Integer movieId);
+
+    List<MovieResponse> searchMovies(MovieSearchRequest request);
+
+    List<MovieResponse> latestMovies();
+
+    List<MovieResponse> topRatedMovies();
+
+    ApiResponse<Void> addMovie(MovieRequest request);
+
+    ApiResponse<Void> updateMovie(
+            Integer movieId,
+            MovieRequest request);
+
+    ApiResponse<Void> deleteMovie(Integer movieId);
+
+}
