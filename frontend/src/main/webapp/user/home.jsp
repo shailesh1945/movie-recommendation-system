@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>hello user</h1>
+<jsp:include page="../component/userNavbar.jsp"/>
+
+<jsp:include page="../component/welcomeSection.jsp"/>
+
+<jsp:include page="../component/recommendedMovies.jsp"/>
 </body>
 </html>
