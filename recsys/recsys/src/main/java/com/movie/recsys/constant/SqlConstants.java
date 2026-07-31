@@ -48,4 +48,12 @@ public final class SqlConstants {
         WHERE u.email = ?
         """;
 
+
+    public static final String GET_ALL_LANGUAGES = """
+        SELECT
+            language_id,
+            language_name
+        FROM language
+        ORDER BY language_name
+        """;
 }

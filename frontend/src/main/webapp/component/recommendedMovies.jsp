@@ -1,127 +1,170 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 
-<section class="container-fluid py-5">
+<style>
 
-	<div class="d-flex justify-content-between align-items-center mb-4">
+.section-title{
+    color:#ffffff;
+    font-size:34px;
+    font-weight:700;
+}
 
-		<h2 class="fw-bold text-white">Recommended For You</h2>
+.section-subtitle{
+    color:#a8a8a8;
+    font-size:17px;
+}
 
-	</div>
+.movie-card{
 
-	<div class="row g-4">
+    background:#181b22;
 
-		<!-- Movie 1 -->
+    border:none;
 
-		<div class="col-lg-4 col-md-6">
+    border-radius:18px;
 
-			<div
-				class="card bg-dark border-0 text-white rounded-4 overflow-hidden">
+    overflow:hidden;
 
-				<img src="../asset/images/movie1.jpg" class="card-img-top"
-					alt="Movie">
+    transition:.35s;
 
-				<div class="card-img-overlay d-flex flex-column justify-content-end">
+    height:100%;
+}
 
-					<div class="mb-2">
+.movie-card:hover{
 
-						<span class="badge bg-danger"> TOP PICK </span> <span
-							class="badge bg-dark"> 98% Match </span>
+    transform:translateY(-10px);
 
-					</div>
+    box-shadow:0 12px 30px rgba(0,0,0,.45);
+}
 
-					<h3 class="fw-bold">Sands of Solitude</h3>
+.movie-poster{
 
-					<div class="mt-2">
+    height:340px;
 
-						<button class="btn btn-light fw-semibold me-2">Watch Now
-						</button>
+    object-fit:cover;
+}
 
-						<button class="btn btn-secondary fw-semibold">+ Watchlist
-						</button>
+.movie-title{
 
-					</div>
+    color:#ffffff;
 
-				</div>
+    font-size:20px;
 
-			</div>
+    font-weight:600;
 
-		</div>
+    margin-bottom:12px;
+}
 
-		<!-- Movie 2 -->
+.movie-info{
 
-		<div class="col-lg-4 col-md-6">
+    color:#bdbdbd;
 
-			<div
-				class="card bg-dark border-0 text-white rounded-4 overflow-hidden">
+    font-size:14px;
 
-				<img src="../asset/images/movie2.jpg" class="card-img-top"
-					alt="Movie">
+    margin-bottom:8px;
+}
 
-				<div class="card-img-overlay d-flex flex-column justify-content-end">
+.rating{
 
-					<div class="mb-2">
+    color:#ffc107;
 
-						<span class="badge bg-warning text-dark"> TRENDING </span> <span
-							class="badge bg-dark"> 94% Match </span>
+    font-size:15px;
 
-					</div>
+    font-weight:600;
+}
 
-					<h3 class="fw-bold">The Binary Ghost</h3>
+.details-btn{
 
-					<div class="mt-2">
+    width:100%;
 
-						<button class="btn btn-light fw-semibold me-2">Watch Now
-						</button>
+    border-radius:10px;
 
-						<button class="btn btn-secondary fw-semibold">+ Watchlist
-						</button>
+    margin-top:auto;
+}
 
-					</div>
+.loading{
 
-				</div>
+    color:#bdbdbd;
 
-			</div>
+    text-align:center;
 
-		</div>
+    padding:60px 0;
 
-		<!-- Movie 3 -->
+    font-size:18px;
+}
 
-		<div class="col-lg-4 col-md-6">
+.empty-state{
 
-			<div
-				class="card bg-dark border-0 text-white rounded-4 overflow-hidden">
+    color:#bdbdbd;
 
-				<img src="../asset/images/movie3.jpg" class="card-img-top"
-					alt="Movie">
+    text-align:center;
 
-				<div class="card-img-overlay d-flex flex-column justify-content-end">
+    padding:60px 0;
+}
 
-					<div class="mb-2">
+.empty-state i{
 
-						<span class="badge bg-danger"> NEW RELEASE </span> <span
-							class="badge bg-dark"> 91% Match </span>
+    font-size:60px;
 
-					</div>
+    color:#dc3545;
 
-					<h3 class="fw-bold">Verdant Echoes</h3>
+    margin-bottom:20px;
+}
 
-					<div class="mt-2">
+</style>
 
-						<button class="btn btn-light fw-semibold me-2">Watch Now
-						</button>
+<section class="container py-5">
 
-						<button class="btn btn-secondary fw-semibold">+ Watchlist
-						</button>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-					</div>
+        <div>
 
-				</div>
+            <h2 class="section-title">
 
-			</div>
+                <i class="bi bi-stars text-danger"></i>
 
-		</div>
+                Recommended Movies
 
-	</div>
+            </h2>
+
+            <p class="section-subtitle">
+
+                Explore movies carefully selected from our collection.
+
+            </p>
+
+        </div>
+
+        <button class="btn btn-outline-danger">
+
+            View All
+
+        </button>
+
+    </div>
+
+    <!-- Movies will be loaded here dynamically -->
+
+    <div class="row g-4" id="recommendedMoviesContainer">
+
+        <div class="col-12">
+
+            <div class="loading">
+
+                <div class="spinner-border text-danger mb-3"
+                     role="status">
+
+                </div>
+
+                <p>
+
+                    Loading movies...
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>

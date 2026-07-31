@@ -1,121 +1,242 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
 
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Movie Navbar</title>
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
 
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
-body {
-	background: #0f1117;
-	height: 200vh;
+
+.glass-navbar{
+
+    background:#0f1117;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
 }
 
-.glass-navbar {
-	background: rgba(15, 17, 23, .55);
-	backdrop-filter: blur(18px);
-	-webkit-backdrop-filter: blur(18px);
-	border-bottom: 1px solid rgba(255, 255, 255, .08);
+.navbar-brand{
+
+    font-size:32px;
+
+    font-weight:700;
+
 }
 
-.search-box {
-	width: 260px;
+.nav-link{
+
+    color:#c9c9c9 !important;
+
+    margin:0 10px;
+
+    transition:.3s;
+
 }
 
-.profile-img {
-	width: 34px;
-	height: 34px;
-	object-fit: cover;
+.nav-link:hover{
+
+    color:#ffffff !important;
+
 }
+
+.search-box{
+
+    width:280px;
+
+}
+
+.profile-img{
+
+    width:40px;
+
+    height:40px;
+
+    object-fit:cover;
+
+}
+
+.dropdown-menu{
+
+    background:#1b1b1b;
+
+    border:1px solid #333;
+
+}
+
+.dropdown-item{
+
+    color:white;
+
+}
+
+.dropdown-item:hover{
+
+    background:#dc3545;
+
+    color:white;
+
+}
+
+.notification{
+
+    cursor:pointer;
+
+}
+
 </style>
 
-</head>
+<nav class="navbar navbar-expand-lg navbar-dark glass-navbar sticky-top py-3">
 
-<body>
+    <div class="container-fluid px-4">
 
-	<nav
-		class="navbar navbar-expand-lg navbar-dark glass-navbar sticky-top py-2">
+        <!-- Logo -->
 
-		<div class="container-fluid px-4">
+        <a class="navbar-brand text-danger"
+           href="${pageContext.request.contextPath}/user/home.jsp">
 
-			<!-- Logo -->
+            MovieRcsys
 
-			<a class="navbar-brand fw-bold text-danger fs-4" href="#">
-				MovieRcsys </a>
+        </a>
 
-			<!-- Mobile -->
+        <!-- Mobile -->
 
-			<button class="navbar-toggler" data-bs-toggle="collapse"
-				data-bs-target="#navbarMenu">
+        <button class="navbar-toggler"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu">
 
-				<span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
 
-			</button>
+        </button>
 
-			<div class="collapse navbar-collapse" id="navbarMenu">
+        <div class="collapse navbar-collapse"
+             id="navbarMenu">
 
-				<!-- Center Menu -->
+            <!-- Center -->
 
-				<ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav mx-auto">
 
-					<li class="nav-item"><a
-						class="nav-link fw-semibold text-light" href="#"> Movies </a></li>
+                <li class="nav-item">
 
-					<li class="nav-item"><a
-						class="nav-link fw-semibold text-light" href="#"> TV Shows </a></li>
+                    <a class="nav-link active"
+                       href="#">
 
-					<li class="nav-item"><a
-						class="nav-link fw-semibold text-light" href="#"> Originals </a></li>
+                        Home
 
-				</ul>
+                    </a>
 
-				<!-- Right -->
+                </li>
 
-				<div class="d-flex align-items-center gap-3">
+                <li class="nav-item">
 
-					<div class="input-group search-box">
+                    <a class="nav-link"
+                       href="#">
 
-						<span
-							class="input-group-text bg-dark border-secondary text-secondary">
+                        Movies
 
-							<i class="bi bi-search"></i>
+                    </a>
 
-						</span> <input type="text"
-							class="form-control bg-dark border-secondary text-white"
-							placeholder="Search titles...">
+                </li>
 
-					</div>
+                <li class="nav-item">
 
-					<a href="#" class="text-white fs-5"> <i class="bi bi-bell"></i>
+                    <a class="nav-link"
+                       href="#">
 
-					</a> <a href="#" class="text-white fs-5"> <i class="bi bi-gear"></i>
+                        TV Shows
 
-					</a> <a href="#"> <img src="https://i.pravatar.cc/150?img=12"
-						class="rounded-circle profile-img border border-secondary">
+                    </a>
 
-					</a>
+                </li>
 
-				</div>
+                <li class="nav-item">
 
-			</div>
+                    <a class="nav-link"
+                       href="#">
 
-		</div>
+                        Genres
 
-	</nav>
+                    </a>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+                </li>
 
-</body>
+                <li class="nav-item">
 
-</html>
+                    <a class="nav-link"
+                       href="#">
+
+                        My List
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+            <!-- Right -->
+
+            <div class="d-flex align-items-center gap-3">
+
+                <!-- Search -->
+
+                <div class="input-group search-box">
+
+                    <span class="input-group-text bg-dark border-secondary text-secondary">
+
+                        <i class="bi bi-search"></i>
+
+                    </span>
+
+                    <input type="text"
+                           class="form-control bg-dark border-secondary text-white"
+                           placeholder="Search movies...">
+
+                </div>
+
+                <!-- Notification -->
+
+                <a href="#"
+                   class="text-white fs-5 notification">
+
+                    <i class="bi bi-bell"></i>
+
+                </a>
+
+                <!-- Profile -->
+
+                <div class="dropdown">
+
+    <button class="btn btn-link p-0 border-0"
+            type="button"
+            id="profileDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+
+        <img src="https://i.pravatar.cc/150?img=12"
+             class="rounded-circle profile-img border border-secondary"
+             alt="Profile">
+
+    </button>
+
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+
+        <li><a class="dropdown-item" href="#">My Profile</a></li>
+
+        <li><a class="dropdown-item" href="#">My Watchlist</a></li>
+
+        <li><hr class="dropdown-divider"></li>
+
+        <li><a class="dropdown-item text-danger" href="#" id="logoutBtn">Logout</a></li>
+
+    </ul>
+
+</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>

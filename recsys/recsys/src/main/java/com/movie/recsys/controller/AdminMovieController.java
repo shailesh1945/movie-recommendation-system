@@ -2,12 +2,16 @@ package com.movie.recsys.controller;
 
 
 import com.movie.recsys.dto.ApiResponse;
+import com.movie.recsys.dto.movie.MovieDetailsResponse;
 import com.movie.recsys.dto.movie.MovieRequest;
+import com.movie.recsys.dto.movie.MovieResponse;
 import com.movie.recsys.service.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/movies")
@@ -26,6 +30,23 @@ public class AdminMovieController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(movieService.addMovie(request));
+
+    }
+
+    @GetMapping
+    public ResponseEntity<List<MovieResponse>> getAllMovies(){
+
+        return ResponseEntity.ok(
+                movieService.getAllMovies());
+
+    }
+
+    @GetMapping("/{movieId}")
+    public ResponseEntity<MovieDetailsResponse> getMovie(
+            @PathVariable Integer movieId){
+
+        return ResponseEntity.ok(
+                movieService.getMovieById(movieId));
 
     }
 

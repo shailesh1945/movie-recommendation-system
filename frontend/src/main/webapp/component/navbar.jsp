@@ -52,7 +52,6 @@ body {
 #registerModal .modal-dialog {
 	max-width: 550px;
 }
-
 </style>
 
 </head>
@@ -98,7 +97,8 @@ body {
 		<div class="modal-dialog modal-dialog-centered modal-md">
 
 			<div
-				class="modal-content register-modal border border-secondary rounded-4 text-white" id="regpage">
+				class="modal-content register-modal border border-secondary rounded-4 text-white"
+				id="regpage">
 
 				<div class="modal-body p-4">
 
@@ -155,10 +155,10 @@ body {
 									class="form-select bg-dark text-white border-secondary"
 									id="gender" required>
 
-									<option selected disabled>Select Gender</option>
-									<option>Male</option>
-									<option>Female</option>
-									<option>Other</option>
+									<option value="" selected disabled>Select Gender</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Other">Other</option>
 
 								</select>
 
@@ -179,9 +179,7 @@ body {
 
 								<span
 									class="input-group-text bg-dark border-secondary text-white">
-
 									<i class="bi bi-eye"></i>
-
 								</span>
 
 							</div>
@@ -235,7 +233,7 @@ body {
 						<div class="mb-4">
 
 							<label class="form-label text-secondary fw-semibold small">
-								EMAIL ADDRESS </label> <input type="email" id="email"
+								EMAIL ADDRESS </label> <input type="email" id="loginEmail"
 								class="form-control form-control-lg bg-dark text-white border-secondary"
 								placeholder="name@example.com" required>
 
@@ -254,13 +252,11 @@ body {
 
 							<div class="input-group input-group-lg">
 
-								<input type="password" id="password"
+								<input type="password" id="loginPassword"
 									class="form-control bg-dark text-white border-secondary"
 									placeholder="Password" required> <span
 									class="input-group-text bg-dark border-secondary text-white">
-
 									<i class="bi bi-eye"></i>
-
 								</span>
 
 							</div>
@@ -277,6 +273,7 @@ body {
 						</div>
 
 						<button type="submit" class="btn btn-danger btn-lg w-100 fw-bold">
+
 							Sign In</button>
 
 					</form>
@@ -285,8 +282,9 @@ body {
 
 					<div class="text-center">
 
-						<span class="text-secondary"> Don't have an account? </span> <a
-							href="#" class="text-danger fw-bold text-decoration-none ms-1">
+						<span class="text-secondary">Don't have an account?</span> <a
+							href="#" id="openRegister"
+							class="text-danger fw-bold text-decoration-none ms-1">
 							Register </a>
 
 					</div>

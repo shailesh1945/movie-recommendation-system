@@ -51,9 +51,8 @@
 
 	<div class="mt-auto p-4 border-top border-secondary">
 
-		<a href="#" class="nav-link text-white"> <i
+		<a href="#" id="logoutBtn" class="nav-link text-white"> <i
 			class="bi bi-box-arrow-right me-3"></i> Logout
-
 		</a>
 
 	</div>

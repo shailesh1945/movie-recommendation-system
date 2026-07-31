@@ -20,7 +20,7 @@ const API = {
 
 	        DETAILS: "/api/movies/",
 
-	        SEARCH: "/api//movies/search",
+	        SEARCH: "/api/movies/search",
 
 	        LATEST: "/api/movies/latest",
 
