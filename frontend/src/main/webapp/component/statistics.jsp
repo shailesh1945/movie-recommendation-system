@@ -20,7 +20,7 @@
 
 						<div>
 
-							<p class="text-secondary mb-2">Students</p>
+							<p class="text-secondary mb-2">Users</p>
 
 							<h1 class="fw-bold mb-0">1,250</h1>
 
