@@ -6,6 +6,7 @@ import com.movie.recsys.dto.movie.MovieDetailsResponse;
 import com.movie.recsys.dto.movie.MovieRequest;
 import com.movie.recsys.dto.movie.MovieResponse;
 import com.movie.recsys.dto.movie.MovieSearchRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,12 +22,16 @@ public interface MovieService {
 
     List<MovieResponse> topRatedMovies();
 
-    ApiResponse<Void> addMovie(MovieRequest request);
+    ApiResponse<Void> addMovie(
+            MovieRequest request,
+            MultipartFile poster);
 
     ApiResponse<Void> updateMovie(
             Integer movieId,
-            MovieRequest request);
+            MovieRequest request,
+            MultipartFile poster);
 
     ApiResponse<Void> deleteMovie(Integer movieId);
+
 
 }

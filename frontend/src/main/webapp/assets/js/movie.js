@@ -63,10 +63,10 @@ function renderMovieCards(movies, containerId){
 
             <div class="card movie-card h-100">
 
-                <img
-                    src="${movie.posterUrl}"
-                    class="movie-poster card-img-top"
-                    alt="${movie.title}">
+			<img
+			    src="${API.BASE_URL}${movie.posterUrl}"
+			    class="movie-poster card-img-top"
+			    alt="${movie.title}">
 
                 <div class="card-body d-flex flex-column">
 
@@ -195,9 +195,9 @@ function renderLatestMovies(movies){
 
                 </div>
 
-                <img
-                    src="${movie.posterUrl}"
-                    alt="${movie.title}">
+				<img
+				    src="${API.BASE_URL}${movie.posterUrl}"
+				    alt="${movie.title}">
 
             </div>
 

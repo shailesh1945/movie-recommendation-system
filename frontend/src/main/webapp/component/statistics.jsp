@@ -8,29 +8,28 @@
 
 	<div class="row g-4">
 
-		<!-- Students -->
-
-		<div class="col-xl-3 col-lg-6 col-md-6">
+		<!-- Movies -->
+		<div class="col-xl-3 col-lg-6">
 
 			<div class="card bg-dark border-secondary text-white rounded-4">
 
 				<div class="card-body">
 
-					<div class="d-flex justify-content-between align-items-center">
+					<div class="d-flex justify-content-between">
 
 						<div>
 
-							<p class="text-secondary mb-2">Students</p>
+							<p class="text-secondary">Total Movies</p>
 
-							<h1 class="fw-bold mb-0">1,250</h1>
+							<h2 id="totalMovies">0</h2>
 
 						</div>
 
 						<div
 							class="bg-primary rounded-circle d-flex justify-content-center align-items-center"
-							style="width: 60px; height: 60px;">
+							style="width:60px;height:60px;">
 
-							<i class="bi bi-people-fill fs-3 text-white"></i>
+							<i class="bi bi-film fs-3"></i>
 
 						</div>
 
@@ -42,29 +41,28 @@
 
 		</div>
 
-		<!-- Events -->
-
-		<div class="col-xl-3 col-lg-6 col-md-6">
+		<!-- Users -->
+		<div class="col-xl-3 col-lg-6">
 
 			<div class="card bg-dark border-secondary text-white rounded-4">
 
 				<div class="card-body">
 
-					<div class="d-flex justify-content-between align-items-center">
+					<div class="d-flex justify-content-between">
 
 						<div>
 
-							<p class="text-secondary mb-2">Events</p>
+							<p class="text-secondary">Users</p>
 
-							<h1 class="fw-bold mb-0">84</h1>
+							<h2 id="totalUsers">0</h2>
 
 						</div>
 
 						<div
 							class="bg-success rounded-circle d-flex justify-content-center align-items-center"
-							style="width: 60px; height: 60px;">
+							style="width:60px;height:60px;">
 
-							<i class="bi bi-calendar-event-fill fs-3 text-white"></i>
+							<i class="bi bi-people-fill fs-3"></i>
 
 						</div>
 
@@ -76,29 +74,28 @@
 
 		</div>
 
-		<!-- Registrations -->
-
-		<div class="col-xl-3 col-lg-6 col-md-6">
+		<!-- Ratings -->
+		<div class="col-xl-3 col-lg-6">
 
 			<div class="card bg-dark border-secondary text-white rounded-4">
 
 				<div class="card-body">
 
-					<div class="d-flex justify-content-between align-items-center">
+					<div class="d-flex justify-content-between">
 
 						<div>
 
-							<p class="text-secondary mb-2">Registrations</p>
+							<p class="text-secondary">Ratings</p>
 
-							<h1 class="fw-bold mb-0">642</h1>
+							<h2 id="totalRatings">0</h2>
 
 						</div>
 
 						<div
 							class="bg-warning rounded-circle d-flex justify-content-center align-items-center"
-							style="width: 60px; height: 60px;">
+							style="width:60px;height:60px;">
 
-							<i class="bi bi-clipboard-check-fill fs-3 text-white"></i>
+							<i class="bi bi-star-fill fs-3"></i>
 
 						</div>
 
@@ -110,29 +107,28 @@
 
 		</div>
 
-		<!-- Announcements -->
-
-		<div class="col-xl-3 col-lg-6 col-md-6">
+		<!-- Average Rating -->
+		<div class="col-xl-3 col-lg-6">
 
 			<div class="card bg-dark border-secondary text-white rounded-4">
 
 				<div class="card-body">
 
-					<div class="d-flex justify-content-between align-items-center">
+					<div class="d-flex justify-content-between">
 
 						<div>
 
-							<p class="text-secondary mb-2">Announcements</p>
+							<p class="text-secondary">Average Rating</p>
 
-							<h1 class="fw-bold mb-0">26</h1>
+							<h2 id="averageRating">0.0</h2>
 
 						</div>
 
 						<div
 							class="bg-danger rounded-circle d-flex justify-content-center align-items-center"
-							style="width: 60px; height: 60px;">
+							style="width:60px;height:60px;">
 
-							<i class="bi bi-megaphone-fill fs-3 text-white"></i>
+							<i class="bi bi-graph-up-arrow fs-3"></i>
 
 						</div>
 

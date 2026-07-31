@@ -12,26 +12,34 @@
 
 			<div class="row align-items-center">
 
-				<!-- Left -->
 				<div class="col-lg-6">
 
-					<h1 class="fw-bold text-white mb-1">Admin Dashboard</h1>
+					<h2 class="fw-bold text-white mb-1">
+						Movie Recommendation Dashboard
+					</h2>
 
-					<p class="text-secondary mb-0">Welcome back, Admin</p>
+					<p class="text-secondary mb-0">
+						Manage movies, genres, languages and users.
+					</p>
 
 				</div>
 
-				<!-- Right -->
 				<div class="col-lg-6">
 
 					<div class="d-flex justify-content-end gap-3">
 
-						<button class="btn btn-primary">
-							<i class="bi bi-plus-circle me-2"></i> Add Event
-						</button>
+						<a href="addMovie.jsp" class="btn btn-primary">
 
-						<button class="btn btn-outline-secondary">
+							<i class="bi bi-plus-circle me-2"></i>
+
+							Add Movie
+
+						</a>
+
+						<button class="btn btn-outline-light">
+
 							<i class="bi bi-person-circle fs-5"></i>
+
 						</button>
 
 					</div>

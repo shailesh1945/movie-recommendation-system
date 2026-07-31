@@ -26,6 +26,8 @@ public class MovieRepositoryImpl implements MovieRepository {
         this.movieRowMapper = movieRowMapper;
     }
 
+
+
     @Override
     public List<Movie> findAll() {
 

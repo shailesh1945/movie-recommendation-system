@@ -1,6 +1,5 @@
 package com.movie.recsys.service.impl;
 
-
 import com.movie.recsys.dto.ApiResponse;
 import com.movie.recsys.dto.movie.MovieDetailsResponse;
 import com.movie.recsys.dto.movie.MovieRequest;
@@ -9,10 +8,12 @@ import com.movie.recsys.dto.movie.MovieSearchRequest;
 import com.movie.recsys.exception.ResourceNotFoundException;
 import com.movie.recsys.model.Movie;
 import com.movie.recsys.repository.MovieRepository;
+import com.movie.recsys.service.FileStorageService;
 import com.movie.recsys.service.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,8 +26,15 @@ public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
 
-    public MovieServiceImpl(MovieRepository movieRepository) {
+    private final FileStorageService fileStorageService;
+
+    public MovieServiceImpl(
+            MovieRepository movieRepository,
+            FileStorageService fileStorageService) {
+
         this.movieRepository = movieRepository;
+        this.fileStorageService = fileStorageService;
+
     }
 
     @Override
@@ -94,7 +102,18 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public ApiResponse<Void> addMovie(MovieRequest request) {
+    public ApiResponse<Void> addMovie(
+            MovieRequest request,
+            MultipartFile poster) {
+
+        if (poster != null && !poster.isEmpty()) {
+
+            String posterUrl =
+                    fileStorageService.savePoster(poster);
+
+            request.setPosterUrl(posterUrl);
+
+        }
 
         Movie movie = mapToMovie(request);
 
@@ -112,7 +131,8 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public ApiResponse<Void> updateMovie(
             Integer movieId,
-            MovieRequest request) {
+            MovieRequest request,
+            MultipartFile poster) {
 
         Movie existing =
                 movieRepository.findById(movieId);
@@ -122,6 +142,19 @@ public class MovieServiceImpl implements MovieService {
             throw new ResourceNotFoundException(
                     "Movie not found."
             );
+
+        }
+
+        if (poster != null && !poster.isEmpty()) {
+
+            String posterUrl =
+                    fileStorageService.savePoster(poster);
+
+            request.setPosterUrl(posterUrl);
+
+        } else {
+
+            request.setPosterUrl(existing.getPosterUrl());
 
         }
 

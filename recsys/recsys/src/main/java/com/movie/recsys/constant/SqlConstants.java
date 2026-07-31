@@ -50,10 +50,10 @@ public final class SqlConstants {
 
 
     public static final String GET_ALL_LANGUAGES = """
-        SELECT
-            language_id,
-            language_name
-        FROM language
-        ORDER BY language_name
-        """;
+    SELECT
+        language_id,
+        language_name
+    FROM languages
+    ORDER BY language_name
+    """;
 }

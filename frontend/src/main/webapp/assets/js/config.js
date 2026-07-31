@@ -33,6 +33,14 @@ const API = {
         LIST: "/recommendations"
 
     },
+	ADMIN_MOVIES: {
+	        ALL: "/api/admin/movies",
+	        ADD: "/api/admin/movies",
+	        DETAILS: "/api/admin/movies/",
+	        UPDATE: "/api/admin/movies/",
+	        DELETE: "/api/admin/movies/"
+	    },
+	
 	LANGUAGES: {
 
 	    ALL: "/api/languages"
