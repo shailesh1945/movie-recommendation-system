@@ -1,0 +1,36 @@
+/* ================= Layout ================= */
+
+.main-content {
+    margin-left: 260px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left .3s ease;
+}
+
+.page-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Tablet */
+@media (max-width:991.98px){
+
+    .main-content{
+        margin-left:0;
+    }
+
+    .page-content{
+        padding:15px;
+    }
+
+}
+
+/* Mobile */
+@media (max-width:576px){
+
+    .page-content{
+        padding:10px;
+    }
+
+}

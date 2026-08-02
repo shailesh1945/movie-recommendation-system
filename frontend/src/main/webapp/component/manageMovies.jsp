@@ -1,99 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<div class="container-fluid px-4 py-4">
+<div class="container-fluid">
 
-    <div class="card bg-dark border-secondary shadow rounded-4">
+	<div class="card bg-dark border-secondary shadow-lg rounded-4">
 
-        <div
-            class="card-header bg-dark border-secondary d-flex justify-content-between align-items-center">
+		<div class="card-header bg-dark border-secondary rounded-top-4 py-3">
 
-            <div>
+			<div
+				class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
-                <h3 class="text-white fw-bold mb-1">
+				<div>
 
-                    <i class="bi bi-film me-2 text-primary"></i>
+					<h3 class="text-white fw-bold mb-1">
 
-                    Manage Movies
+						<i class="bi bi-film text-primary me-2"></i> Manage Movies
 
-                </h3>
+					</h3>
 
-                <p class="text-secondary mb-0">
+					<p class="text-secondary mb-0">View, edit and delete movies.</p>
 
-                    View, edit and delete movies.
+				</div>
 
-                </p>
+				<a href="${pageContext.request.contextPath}/admin/addMovie.jsp"
+					class="btn btn-primary"> <i class="bi bi-plus-circle me-2"></i>
 
-            </div>
+					Add Movie
 
-            <a
-                href="${pageContext.request.contextPath}/frontend/admin/addMovie.jsp"
-                class="btn btn-primary">
+				</a>
 
-                <i class="bi bi-plus-circle me-2"></i>
+			</div>
 
-                Add Movie
+		</div>
 
-            </a>
+		<div class="card-body">
 
-        </div>
+			<div class="row g-3 mb-4">
 
-        <div class="card-body">
+				<div class="col-lg-4 col-md-6 col-12">
 
-            <div class="row mb-4">
+					<input type="text" id="searchMovie"
+						class="form-control bg-dark text-white border-secondary"
+						placeholder="Search movie...">
 
-                <div class="col-md-4">
+				</div>
 
-                    <input
-                        id="searchMovie"
-                        class="form-control bg-dark text-white border-secondary"
-                        placeholder="Search movie...">
+			</div>
 
-                </div>
+			<div class="table-responsive">
 
-            </div>
+				<table
+					class="table table-dark table-hover table-bordered align-middle mb-0">
 
-            <div class="table-responsive">
+					<thead class="table-secondary">
 
-                <table
-                    class="table table-dark table-hover align-middle">
+						<tr>
 
-                    <thead>
+							<th style="min-width: 100px;">Poster</th>
 
-                    <tr>
+							<th style="min-width: 180px;">Title</th>
 
-                        <th>Poster</th>
+							<th style="min-width: 170px;">Director</th>
 
-                        <th>Title</th>
+							<th style="min-width: 90px;">Year</th>
 
-                        <th>Director</th>
+							<th style="min-width: 120px;">Language</th>
 
-                        <th>Year</th>
+							<th style="min-width: 90px;">Rating</th>
 
-                        <th>Language</th>
+							<th class="text-center" style="min-width: 180px;">Actions</th>
 
-                        <th>Rating</th>
+						</tr>
 
-                        <th class="text-center">
+					</thead>
 
-                            Actions
+					<tbody id="movieTableBody">
 
-                        </th>
+					</tbody>
 
-                    </tr>
+				</table>
 
-                    </thead>
+			</div>
 
-                    <tbody id="movieTableBody">
+		</div>
 
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-
-    </div>
+	</div>
 
 </div>

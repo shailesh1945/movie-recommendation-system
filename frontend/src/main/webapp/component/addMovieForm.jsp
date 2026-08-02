@@ -1,198 +1,405 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div class="container-fluid px-4 py-4">
+<div class="container py-4">
 
-	<div class="card bg-dark border-secondary shadow rounded-4">
+	<div class="row justify-content-center">
 
-		<div class="card-header bg-dark border-secondary">
+		<div class="col-12 col-xl-9 col-lg-10 col-md-11">
 
-			<h3 class="text-white fw-bold mb-1">
-				<i class="bi bi-film me-2 text-primary"></i>
-				Add New Movie
-			</h3>
+			<div class="card bg-dark border-secondary shadow-lg rounded-4">
 
-			<p class="text-secondary mb-0">
-				Add a movie to the recommendation system.
-			</p>
+				<div class="card-header bg-dark border-secondary py-3">
 
-		</div>
+					<h3 class="text-white fw-bold mb-1">
+						<i class="bi bi-film text-primary me-2"></i>
+						Add New Movie
+					</h3>
 
-		<div class="card-body">
+					<p class="text-secondary mb-0">
+						Add a movie to the recommendation system.
+					</p>
 
-			<form id="addMovieForm" enctype="multipart/form-data">
+				</div>
 
-				<div class="row g-4">
+				<div class="card-body p-4">
 
-					<div class="col-md-6">
+					<form id="addMovieForm" enctype="multipart/form-data">
 
-						<label class="form-label text-light">
-							Movie Title
-						</label>
+						<div class="row g-4">
 
-						<input
-							type="text"
-							class="form-control bg-dark text-white border-secondary"
-							id="title"
-							required>
+							<!-- Movie Title -->
+							<div class="col-lg-6 col-md-6 col-12">
 
-					</div>
+								<label class="form-label text-light">
+									Movie Title
+								</label>
 
-					<div class="col-md-6">
+								<input
+									type="text"
+									id="title"
+									class="form-control bg-dark text-white border-secondary"
+									required>
 
-						<label class="form-label text-light">
-							Director
-						</label>
+							</div>
 
-						<input
-							type="text"
-							class="form-control bg-dark text-white border-secondary"
-							id="director"
-							required>
+							<!-- Director -->
+							<div class="col-lg-6 col-md-6 col-12">
 
-					</div>
+								<label class="form-label text-light">
+									Director
+								</label>
 
-					<div class="col-md-4">
+								<input
+									type="text"
+									id="director"
+									class="form-control bg-dark text-white border-secondary"
+									required>
 
-						<label class="form-label text-light">
-							Release Year
-						</label>
+							</div>
 
-						<input
-							type="number"
-							class="form-control bg-dark text-white border-secondary"
-							id="releaseYear"
-							required>
+							<!-- Release Year -->
+							<div class="col-lg-4 col-md-6 col-sm-6 col-12">
 
-					</div>
+								<label class="form-label text-light">
+									Release Year
+								</label>
 
-					<div class="col-md-4">
+								<input
+									type="number"
+									id="releaseYear"
+									class="form-control bg-dark text-white border-secondary"
+									required>
 
-						<label class="form-label text-light">
-							Duration (Minutes)
-						</label>
+							</div>
 
-						<input
-							type="number"
-							class="form-control bg-dark text-white border-secondary"
-							id="duration"
-							required>
+							<!-- Duration -->
+							<div class="col-lg-4 col-md-6 col-sm-6 col-12">
 
-					</div>
+								<label class="form-label text-light">
+									Duration (Minutes)
+								</label>
 
-					<div class="col-md-4">
+								<input
+									type="number"
+									id="duration"
+									class="form-control bg-dark text-white border-secondary"
+									required>
 
-						<label class="form-label text-light">
-							Language
-						</label>
+							</div>
 
-						<select
-							id="languageId"
-							class="form-select bg-dark text-white border-secondary"
-							required>
+							<!-- Language -->
+							<div class="col-lg-4 col-md-12 col-12">
 
-							<option value="">
-								Select Language
-							</option>
+								<label class="form-label text-light">
+									Language
+								</label>
 
-						</select>
+								<select
+									id="languageId"
+									class="form-select bg-dark text-white border-secondary"
+									required>
 
-					</div>
+									<option value="">
+										Select Language
+									</option>
 
-					<div class="col-md-5">
+								</select>
 
-						<label class="form-label text-light">
-							Movie Poster
-						</label>
+							</div>
 
-						<input
-							type="file"
-							id="poster"
-							class="form-control bg-dark text-white border-secondary"
-							accept="image/png,image/jpeg,image/webp">
+							<!-- Poster Upload -->
+							<div class="col-lg-5 col-md-12 col-12">
 
-						<small class="text-secondary">
-							JPG, PNG or WEBP
-						</small>
+								<label class="form-label text-light">
+									Movie Poster
+								</label>
 
-					</div>
+								<input
+									type="file"
+									id="poster"
+									class="form-control bg-dark text-white border-secondary"
+									accept="image/png,image/jpeg,image/webp">
 
-					<div class="col-md-7">
+								<small class="text-secondary">
+									JPG, PNG or WEBP
+								</small>
 
-						<label class="form-label text-light">
-							Poster Preview
-						</label>
+							</div>
 
-						<div
-							class="border border-secondary rounded text-center p-2">
+							<!-- Poster Preview -->
+							<div class="col-lg-7 col-md-12 col-12">
 
-							<img
-								id="posterPreview"
-								src="${pageContext.request.contextPath}/assets/images/no-poster.png"
-								class="img-fluid rounded"
-								style="max-height:300px; object-fit:contain;">
+								<label class="form-label text-light">
+									Poster Preview
+								</label>
+
+								<div
+									class="border border-secondary rounded text-center p-3 preview-box">
+
+									<img
+										id="posterPreview"
+										src="${pageContext.request.contextPath}/assets/images/no-poster.png"
+										class="img-fluid rounded">
+
+								</div>
+
+							</div>
+
+							<!-- Trailer -->
+							<div class="col-12">
+
+								<label class="form-label text-light">
+									Trailer URL
+								</label>
+
+								<input
+									type="url"
+									id="trailerUrl"
+									class="form-control bg-dark text-white border-secondary">
+
+							</div>
+
+							<!-- Description -->
+							<div class="col-12">
+
+								<label class="form-label text-light">
+									Description
+								</label>
+
+								<textarea
+									id="description"
+									rows="5"
+									class="form-control bg-dark text-white border-secondary"
+									required></textarea>
+
+							</div>
 
 						</div>
 
-					</div>
+						<hr class="border-secondary my-4">
 
-					<div class="col-12">
+						<div class="row g-3">
 
-						<label class="form-label text-light">
-							Trailer URL
-						</label>
+							<div class="col-md-6 col-12">
 
-						<input
-							type="url"
-							id="trailerUrl"
-							class="form-control bg-dark text-white border-secondary">
+								<button
+									type="reset"
+									class="btn btn-outline-light w-100">
 
-					</div>
+									Clear
 
-					<div class="col-12">
+								</button>
 
-						<label class="form-label text-light">
-							Description
-						</label>
+							</div>
 
-						<textarea
-							id="description"
-							rows="5"
-							class="form-control bg-dark text-white border-secondary"
-							required></textarea>
+							<div class="col-md-6 col-12">
 
-					</div>
+								<button
+									type="submit"
+									class="btn btn-primary w-100">
 
-				</div>
+									<i class="bi bi-plus-circle me-2"></i>
 
-				<hr class="border-secondary my-4">
+									Add Movie
 
-				<div class="text-end">
+								</button>
 
-					<button
-						type="reset"
-						class="btn btn-outline-light me-2">
+							</div>
 
-						Clear
+						</div>
 
-					</button>
-
-					<button
-						type="submit"
-						class="btn btn-primary">
-
-						<i class="bi bi-plus-circle me-2"></i>
-
-						Add Movie
-
-					</button>
+					</form>
 
 				</div>
 
-			</form>
+			</div>
 
 		</div>
 
 	</div>
 
 </div>
+
+<style>
+
+/* =======================
+   Layout
+======================= */
+
+.container{
+	max-width:1200px;
+}
+
+/* =======================
+   Card
+======================= */
+
+.card{
+	width:100%;
+	margin:auto;
+	border-radius:18px;
+	border:1px solid rgba(255,255,255,.12)!important;
+	overflow:hidden;
+}
+
+/* =======================
+   Header
+======================= */
+
+.card-header{
+	padding:1.5rem 2rem;
+}
+
+.card-body{
+	padding:2rem;
+}
+
+/* =======================
+   Labels
+======================= */
+
+.form-label{
+	font-weight:500;
+	margin-bottom:.45rem;
+}
+
+/* =======================
+   Inputs
+======================= */
+
+.form-control,
+.form-select{
+	background:#1f1f1f;
+	color:#fff;
+	border:1px solid #495057;
+	min-height:48px;
+	border-radius:10px;
+}
+
+.form-control:focus,
+.form-select:focus{
+	background:#1f1f1f;
+	color:#fff;
+	border-color:#0d6efd;
+	box-shadow:0 0 0 .15rem rgba(13,110,253,.25);
+}
+
+textarea.form-control{
+	min-height:150px;
+	resize:vertical;
+}
+
+/* =======================
+   Preview
+======================= */
+
+.preview-box{
+	height:300px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	border:1px solid #495057;
+	border-radius:12px;
+}
+
+#posterPreview{
+	max-height:250px;
+	max-width:100%;
+	object-fit:contain;
+}
+
+/* =======================
+   Buttons
+======================= */
+
+.btn{
+	height:46px;
+	border-radius:10px;
+	font-weight:500;
+}
+
+/* =======================
+   Responsive
+======================= */
+
+@media (max-width:992px){
+
+	.container{
+		max-width:100%;
+	}
+
+	.card-header{
+		padding:1.25rem;
+	}
+
+	.card-body{
+		padding:1.5rem;
+	}
+
+	.preview-box{
+		height:240px;
+	}
+
+}
+
+@media (max-width:768px){
+
+	.container{
+		padding-left:18px;
+		padding-right:18px;
+	}
+
+	.card{
+		border-radius:16px;
+	}
+
+	h3{
+		font-size:1.4rem;
+	}
+
+	.card-body{
+		padding:1.25rem;
+	}
+
+	.preview-box{
+		height:210px;
+	}
+
+	#posterPreview{
+		max-height:180px;
+	}
+
+}
+
+@media (max-width:576px){
+
+	.container{
+		padding-left:12px;
+		padding-right:12px;
+	}
+
+	.card-header,
+	.card-body{
+		padding:1rem;
+	}
+
+	h3{
+		font-size:1.2rem;
+	}
+
+	.form-control,
+	.form-select{
+		font-size:14px;
+	}
+
+	.preview-box{
+		height:180px;
+	}
+
+	#posterPreview{
+		max-height:150px;
+	}
+
+}
+</style>

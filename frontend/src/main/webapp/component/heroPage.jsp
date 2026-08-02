@@ -2,11 +2,14 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
 
-<title>Obsidian Cinema</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>MovieRcsys</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -15,56 +18,252 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+<style>
+
+/* ================= Hero Section ================= */
+
+.hero-section{
+
+	position:relative;
+
+	min-height:100vh;
+
+	overflow:hidden;
+
+}
+
+/* Background */
+
+.hero-bg{
+
+	position:absolute;
+
+	top:0;
+
+	left:0;
+
+	width:100%;
+
+	height:100%;
+
+	object-fit:cover;
+
+}
+
+/* Dark Overlay */
+
+.hero-overlay{
+
+	position:absolute;
+
+	inset:0;
+
+	background:rgba(0,0,0,.72);
+
+}
+
+/* Content */
+
+.hero-content{
+
+	position:relative;
+
+	z-index:2;
+
+	min-height:100vh;
+
+	display:flex;
+
+	align-items:center;
+
+	padding:80px 0;
+
+}
+
+/* Heading */
+
+.hero-title{
+
+	font-size:clamp(2.8rem,6vw,5.8rem);
+
+	font-weight:800;
+
+	line-height:1.1;
+
+}
+
+.hero-text{
+
+	font-size:1.15rem;
+
+	color:#d4d4d4;
+
+	max-width:620px;
+
+}
+
+/* Buttons */
+
+.hero-buttons .btn{
+
+	padding:14px 32px;
+
+	font-weight:600;
+
+	border-radius:10px;
+
+	transition:.3s;
+
+}
+
+.hero-buttons .btn:hover{
+
+	transform:translateY(-3px);
+
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width:992px){
+
+	.hero-content{
+
+		text-align:center;
+
+		justify-content:center;
+
+	}
+
+	.hero-text{
+
+		margin:auto;
+
+	}
+
+}
+
+@media (max-width:768px){
+
+	.hero-content{
+
+		padding:120px 0 60px;
+
+	}
+
+	.hero-buttons{
+
+		display:flex;
+
+		flex-direction:column;
+
+		gap:15px;
+
+	}
+
+	.hero-buttons .btn{
+
+		width:100%;
+
+	}
+
+}
+
+@media (max-width:576px){
+
+	.hero-title{
+
+		font-size:2.4rem;
+
+	}
+
+	.hero-text{
+
+		font-size:1rem;
+
+	}
+
+	.badge{
+
+		font-size:.75rem;
+
+	}
+
+}
+
+</style>
+
 </head>
 
 <body class="bg-dark">
 
+<section class="hero-section">
 
-	<section class="position-relative vh-100">
+	<!-- Background -->
 
-		<!-- Background Image -->
+	<img
+		src="assets/images/heropage.png"
+		alt="Hero"
+		class="hero-bg">
 
-		<img src="assets/images/heropage.png"
-			class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-			alt="Hero">
+	<!-- Overlay -->
 
-		<!-- Overlay -->
+	<div class="hero-overlay"></div>
 
-		<div
-			class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-75"></div>
+	<!-- Content -->
 
-		<!-- Content -->
+	<div class="container hero-content">
 
-		<div class="container position-relative h-100">
+		<div class="row w-100">
 
-			<div class="row h-100 align-items-center">
+			<div class="col-xl-7 col-lg-8 col-md-10 col-12 text-white">
 
-				<div class="col-lg-6 text-white">
+				<span class="badge border border-danger text-danger px-3 py-2 mb-4">
 
-					<span
-						class="badge border border-danger text-danger rounded-0 px-3 py-2 mb-4">
-						EXCLUSIVE PREMIERE </span>
+					EXCLUSIVE PREMIERE
 
-					<h1 class="display-1 fw-bold">
+				</span>
 
-						THE WORLD OF <span class="text-danger"> CINEMA, </span> <br>
+				<h1 class="hero-title mb-4">
 
-						<span class="text-danger"> REIMAGINED. </span>
+					THE WORLD OF
 
-					</h1>
+					<span class="text-danger">
 
-					<p class="lead my-4 text-light">Stream the latest blockbusters,
-						timeless classics, and exclusive originals in stunning 4K HDR. A
-						private screening room experience, anywhere.</p>
+						CINEMA
 
-					<div class="d-flex gap-3">
+					</span>
 
-						<a href="#" class="btn btn-danger btn-lg rounded-0 px-4">
-							START YOUR FREE TRIAL </a> <a href="#"
-							class="btn btn-outline-light btn-lg rounded-0 px-4"> VIEW
-							PRICING </a>
+					<br>
 
-					</div>
+					<span class="text-danger">
+
+						REIMAGINED.
+
+					</span>
+
+				</h1>
+
+				<p class="hero-text mb-5">
+
+					Stream the latest blockbusters, timeless classics and exclusive originals in stunning 4K HDR. Experience premium entertainment anytime, anywhere.
+
+				</p>
+
+				<div class="hero-buttons d-flex gap-3 flex-wrap">
+
+					<a href="#"
+						class="btn btn-danger">
+
+						START YOUR FREE TRIAL
+
+					</a>
+
+					<a href="#"
+						class="btn btn-outline-light">
+
+						VIEW PRICING
+
+					</a>
 
 				</div>
 
@@ -72,12 +271,12 @@
 
 		</div>
 
-	</section>
+	</div>
 
+</section>
 
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

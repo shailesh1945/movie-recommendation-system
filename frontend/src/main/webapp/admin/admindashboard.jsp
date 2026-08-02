@@ -17,34 +17,57 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+<style>
+
+/* Leave room for fixed sidebar */
+.main-content{
+	margin-left:260px;
+	min-height:100vh;
+	display:flex;
+	flex-direction:column;
+}
+
+/* Mobile */
+@media (max-width:991px){
+
+	.main-content{
+		margin-left:0;
+	}
+
+}
+
+</style>
+
 </head>
 
 <body class="bg-black">
 
-	<div class="d-flex">
+	<!-- Sidebar -->
+	<jsp:include page="../component/sidebar.jsp" />
 
-		<!-- Sidebar -->
-		<jsp:include page="../component/sidebar.jsp" />
+	<!-- Main Content -->
+	<div class="main-content">
 
-		<!-- Main Content -->
-		<div class="flex-grow-1 d-flex flex-column min-vh-100">
+		<%-- <jsp:include page="../component/topNavbar.jsp" /> --%>
 
-			<jsp:include page="../component/topNavbar.jsp" />
+		<div class="container-fluid py-4">
 
 			<jsp:include page="../component/statistics.jsp" />
 
-			<!-- Add other dashboard sections here -->
+			<!-- Other Dashboard Components -->
 
-			<div class="mt-auto">
-				<jsp:include page="../component/footer.jsp" />
-			</div>
+		</div>
 
+		<div class="mt-auto">
+			<jsp:include page="../component/footer.jsp" />
 		</div>
 
 	</div>
 
-	<script src="../assets/js/auth.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 	<script src="../assets/js/config.js"></script>
+	<script src="../assets/js/auth.js"></script>
 
 </body>
 
