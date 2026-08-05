@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <!-- Bootstrap Icons -->
 <link rel="stylesheet"
@@ -30,8 +32,7 @@
 	font-size: 16px;
 }
 
-.sidebar .nav-link:hover,
-.sidebar .nav-link.active {
+.sidebar .nav-link:hover, .sidebar .nav-link.active {
 	background: #0d6efd;
 	color: white;
 }
@@ -51,7 +52,7 @@
 }
 
 /* Mobile */
-@media (max-width:991px) {
+@media ( max-width :991px) {
 	.sidebar {
 		display: none;
 	}
@@ -62,7 +63,7 @@
 	display: none;
 }
 
-@media (max-width:991px) {
+@media ( max-width :991px) {
 	.mobile-header {
 		display: flex;
 		align-items: center;
@@ -74,7 +75,6 @@
 		top: 0;
 		z-index: 1050;
 	}
-
 	.mobile-header h5 {
 		margin: 0;
 		font-weight: bold;
@@ -95,8 +95,7 @@
 	transition: .3s;
 }
 
-.offcanvas .nav-link:hover,
-.offcanvas .nav-link.active {
+.offcanvas .nav-link:hover, .offcanvas .nav-link.active {
 	background: #0d6efd;
 	color: white;
 }
@@ -107,12 +106,10 @@
 <div class="mobile-header">
 
 	<h5>
-		<i class="bi bi-film text-primary"></i>
-		MovieRcsys
+		<i class="bi bi-film text-primary"></i> MovieRcsys
 	</h5>
 
-	<button class="btn btn-outline-light"
-		data-bs-toggle="offcanvas"
+	<button class="btn btn-outline-light" data-bs-toggle="offcanvas"
 		data-bs-target="#mobileSidebar">
 
 		<i class="bi bi-list fs-3"></i>
@@ -131,9 +128,7 @@
 
 			<i class="bi bi-film logo"></i>
 
-			<div class="sidebar-title mt-2">
-				MovieRcsys
-			</div>
+			<div class="sidebar-title mt-2">MovieRcsys</div>
 
 			<small>Admin Panel</small>
 
@@ -141,47 +136,30 @@
 
 		<ul class="nav flex-column gap-2">
 
-			<li class="nav-item">
-				<a href="admindashboard.jsp" class="nav-link active">
-					<i class="bi bi-speedometer2 me-2"></i>
+			<li class="nav-item"><a href="admindashboard.jsp"
+				class="nav-link active"> <i class="bi bi-speedometer2 me-2"></i>
 					Dashboard
-				</a>
-			</li>
+			</a></li>
 
-			<li>
-				<a href="manageMovies.jsp" class="nav-link">
-					<i class="bi bi-film me-2"></i>
-					Manage Movies
-				</a>
-			</li>
+			<li><a href="manageMovies.jsp" class="nav-link"> <i
+					class="bi bi-film me-2"></i> Manage Movies
+			</a></li>
 
-			<li>
-				<a href="addMovie.jsp" class="nav-link">
-					<i class="bi bi-plus-circle me-2"></i>
-					Add Movie
-				</a>
-			</li>
+			<li><a href="addMovie.jsp" class="nav-link"> <i
+					class="bi bi-plus-circle me-2"></i> Add Movie
+			</a></li>
 
-			<li>
-				<a href="manageGenres.jsp" class="nav-link">
-					<i class="bi bi-tags me-2"></i>
-					Genres
-				</a>
-			</li>
+			<li><a href="manageGenres.jsp" class="nav-link"> <i
+					class="bi bi-tags me-2"></i> Genres
+			</a></li>
 
-			<li>
-				<a href="manageLanguages.jsp" class="nav-link">
-					<i class="bi bi-translate me-2"></i>
-					Languages
-				</a>
-			</li>
+			<li><a href="manageLanguages.jsp" class="nav-link"> <i
+					class="bi bi-translate me-2"></i> Languages
+			</a></li>
 
-			<li>
-				<a href="manageUsers.jsp" class="nav-link">
-					<i class="bi bi-people me-2"></i>
-					Users
-				</a>
-			</li>
+			<li><a href="manageUsers.jsp" class="nav-link"> <i
+					class="bi bi-people me-2"></i> Users
+			</a></li>
 
 		</ul>
 
@@ -189,9 +167,8 @@
 
 	<div class="mt-auto p-4 border-top border-secondary">
 
-		<a href="#" id="logoutBtn" class="nav-link">
-			<i class="bi bi-box-arrow-right me-2"></i>
-			Logout
+		<a href="#" id="logoutBtn" class="nav-link"> <i
+			class="bi bi-box-arrow-right me-2"></i> Logout
 		</a>
 
 	</div>
@@ -200,25 +177,18 @@
 
 <!-- ================= MOBILE OFFCANVAS ================= -->
 
-<div class="offcanvas offcanvas-start"
-	tabindex="-1"
-	id="mobileSidebar">
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
 
 	<div class="offcanvas-header">
 
 		<h4 class="fw-bold">
 
-			<i class="bi bi-film text-primary"></i>
-
-			MovieRcsys
+			<i class="bi bi-film text-primary"></i> MovieRcsys
 
 		</h4>
 
-		<button
-			type="button"
-			class="btn-close btn-close-white"
-			data-bs-dismiss="offcanvas">
-		</button>
+		<button type="button" class="btn-close btn-close-white"
+			data-bs-dismiss="offcanvas"></button>
 
 	</div>
 
@@ -226,57 +196,36 @@
 
 		<ul class="nav flex-column gap-2">
 
-			<li>
-				<a href="admindashboard.jsp" class="nav-link active">
-					<i class="bi bi-speedometer2 me-2"></i>
-					Dashboard
-				</a>
-			</li>
+			<li><a href="admindashboard.jsp" class="nav-link active"> <i
+					class="bi bi-speedometer2 me-2"></i> Dashboard
+			</a></li>
 
-			<li>
-				<a href="manageMovies.jsp" class="nav-link">
-					<i class="bi bi-film me-2"></i>
-					Manage Movies
-				</a>
-			</li>
+			<li><a href="manageMovies.jsp" class="nav-link"> <i
+					class="bi bi-film me-2"></i> Manage Movies
+			</a></li>
 
-			<li>
-				<a href="addMovie.jsp" class="nav-link">
-					<i class="bi bi-plus-circle me-2"></i>
-					Add Movie
-				</a>
-			</li>
+			<li><a href="addMovie.jsp" class="nav-link"> <i
+					class="bi bi-plus-circle me-2"></i> Add Movie
+			</a></li>
 
-			<li>
-				<a href="manageGenres.jsp" class="nav-link">
-					<i class="bi bi-tags me-2"></i>
-					Genres
-				</a>
-			</li>
+			<li><a href="manageGenres.jsp" class="nav-link"> <i
+					class="bi bi-tags me-2"></i> Genres
+			</a></li>
 
-			<li>
-				<a href="manageLanguages.jsp" class="nav-link">
-					<i class="bi bi-translate me-2"></i>
-					Languages
-				</a>
-			</li>
+			<li><a href="manageLanguages.jsp" class="nav-link"> <i
+					class="bi bi-translate me-2"></i> Languages
+			</a></li>
 
-			<li>
-				<a href="manageUsers.jsp" class="nav-link">
-					<i class="bi bi-people me-2"></i>
-					Users
-				</a>
-			</li>
+			<li><a href="manageUsers.jsp" class="nav-link"> <i
+					class="bi bi-people me-2"></i> Users
+			</a></li>
 
 		</ul>
 
 		<div class="mt-auto pt-3 border-top border-secondary">
 
-			<a href="#" id="logoutBtnMobile" class="nav-link">
-
-				<i class="bi bi-box-arrow-right me-2"></i>
-
-				Logout
+			<a href="#" id="logoutBtn" class="nav-link"> <i
+				class="bi bi-box-arrow-right me-2"></i> Logout
 
 			</a>
 
@@ -287,4 +236,5 @@
 </div>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

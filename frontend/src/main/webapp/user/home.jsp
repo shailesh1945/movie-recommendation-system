@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>User Dashboard</title>
 </head>
 <body>
 <jsp:include page="../component/userNavbar.jsp"/>
