@@ -1,189 +1,189 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    loadAllMovies();
+	loadAllMovies();
 
 });
 
 async function loadAllMovies() {
 
-    try {
+	try {
 
-        const response = await fetch(
-            API.BASE_URL + API.MOVIES.ALL,
-            {
-                credentials: "include"
-            }
-        );
+		const response = await fetch(
+			API.BASE_URL + API.MOVIES.ALL,
+			{
+				credentials: "include"
+			}
+		);
 
-        if (!response.ok) {
+		if (!response.ok) {
 
-            throw new Error("Unable to load movies.");
+			throw new Error("Unable to load movies.");
 
-        }
+		}
 
-        const movies = await response.json();
+		const movies = await response.json();
 
-        renderMovieCards(
-            movies,
-            "recommendedMoviesContainer"
-        );
+		renderMovieCards(
+			movies,
+			"recommendedMoviesContainer"
+		);
 
-    }
-    catch(error){
+	}
+	catch (error) {
 
-        console.error(error);
+		console.error(error);
 
-    }
+	}
 
 }
 
-function renderMovieCards(movies, containerId){
+function renderMovieCards(movies, containerId) {
 
-    const container =
-        document.getElementById(containerId);
+	const container =
+		document.getElementById(containerId);
 
-    container.innerHTML = "";
+	container.innerHTML = "";
 
-    if(movies.length === 0){
+	if (movies.length === 0) {
 
-        container.innerHTML = `
+		container.innerHTML = `
             <div class="col-12 text-center text-white">
                 No movies available.
             </div>
         `;
 
-        return;
-    }
+		return;
+	}
 
-    movies.forEach(movie => {
+	movies.forEach(movie => {
 
-        container.innerHTML += `
+		container.innerHTML += `
 
-        <div class="col-lg-3 col-md-6 col-sm-6">
+		<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 
-            <div class="card movie-card h-100">
+		    <div class="card movie-card">
 
-			<img
-			    src="${API.BASE_URL}${movie.posterUrl}"
-			    class="movie-poster card-img-top"
-			    alt="${movie.title}">
+		        <img
+		            src="${API.BASE_URL}${movie.posterUrl}"
+		            class="movie-poster card-img-top"
+		            alt="${movie.title}">
 
-                <div class="card-body d-flex flex-column">
+		        <div class="card-body">
 
-                    <h5 class="movie-title">
+		            <h6 class="movie-title text-truncate">
 
-                        ${movie.title}
+		                ${movie.title}
 
-                    </h5>
+		            </h6>
 
-                    <div class="movie-info mb-2">
+		            <div class="movie-info">
 
-                        <i class="bi bi-calendar"></i>
+		                <i class="bi bi-calendar"></i>
 
-                        ${movie.releaseYear}
+		                ${movie.releaseYear}
 
-                    </div>
+		            </div>
 
-                    <div class="movie-info mb-2">
+		            <div class="movie-info">
 
-                        <i class="bi bi-clock"></i>
+		                <i class="bi bi-clock"></i>
 
-                        ${movie.duration} min
+		                ${movie.duration} min
 
-                    </div>
+		            </div>
 
-                    <div class="movie-info mb-2">
+		            <div class="movie-info">
 
-                        <i class="bi bi-person"></i>
+		                <i class="bi bi-person"></i>
 
-                        ${movie.director}
+		                ${movie.director}
 
-                    </div>
+		            </div>
 
-                    <div class="movie-info mb-3">
+		            <div class="movie-info">
 
-                        <i class="bi bi-translate"></i>
+		                <i class="bi bi-translate"></i>
 
-                        ${movie.language}
+		                ${movie.language}
 
-                    </div>
+		            </div>
 
-                    <div class="rating mb-3">
+		            <div class="rating">
 
-                        ⭐ ${movie.averageRating}
+		                ⭐ ${movie.averageRating}
 
-                    </div>
+		            </div>
 
-                    <button
-                        class="btn btn-danger mt-auto"
-                        onclick="viewMovie(${movie.movieId})">
+		            <button
+		                class="btn btn-danger btn-sm w-100 mt-2"
+		                onclick="viewMovie(${movie.movieId})">
 
-                        View Details
+		                View Details
 
-                    </button>
+		            </button>
 
-                </div>
+		        </div>
 
-            </div>
+		    </div>
 
-        </div>
+		</div>
 
-        `;
+		`;
 
-    });
-
-}
-
-function viewMovie(movieId){
-
-    window.location.href =
-        "movieDetails.jsp?id=" + movieId;
+	});
 
 }
 
-async function loadLatestMovies(){
+function viewMovie(movieId) {
 
-    try{
-
-        const response = await fetch(
-
-            API.BASE_URL + API.MOVIES.LATEST,
-
-            {
-                credentials:"include"
-            }
-
-        );
-
-        if(!response.ok){
-
-            throw new Error("Unable to load latest movies.");
-
-        }
-
-        const movies = await response.json();
-
-        renderLatestMovies(movies);
-
-    }
-    catch(error){
-
-        console.error(error);
-
-    }
+	window.location.href =
+		"movieDetails.jsp?id=" + movieId;
 
 }
 
-function renderLatestMovies(movies){
+async function loadLatestMovies() {
 
-    const container =
-        document.getElementById("latestMoviesContainer");
+	try {
 
-    container.innerHTML = "";
+		const response = await fetch(
 
-    movies.forEach((movie,index)=>{
+			API.BASE_URL + API.MOVIES.LATEST,
 
-        container.innerHTML += `
+			{
+				credentials: "include"
+			}
+
+		);
+
+		if (!response.ok) {
+
+			throw new Error("Unable to load latest movies.");
+
+		}
+
+		const movies = await response.json();
+
+		renderLatestMovies(movies);
+
+	}
+	catch (error) {
+
+		console.error(error);
+
+	}
+
+}
+
+function renderLatestMovies(movies) {
+
+	const container =
+		document.getElementById("latestMoviesContainer");
+
+	container.innerHTML = "";
+
+	movies.forEach((movie, index) => {
+
+		container.innerHTML += `
 
         <div class="trending-card">
 
@@ -191,7 +191,7 @@ function renderLatestMovies(movies){
 
                 <div class="rank">
 
-                    ${index+1}
+                    ${index + 1}
 
                 </div>
 
@@ -231,6 +231,6 @@ function renderLatestMovies(movies){
 
         `;
 
-    });
+	});
 
 }

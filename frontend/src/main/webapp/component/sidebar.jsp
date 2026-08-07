@@ -149,15 +149,15 @@
 					class="bi bi-plus-circle me-2"></i> Add Movie
 			</a></li>
 
-			<li><a href="manageGenres.jsp" class="nav-link"> <i
+			<!-- <li><a href="manageGenres.jsp" class="nav-link"> <i
 					class="bi bi-tags me-2"></i> Genres
 			</a></li>
 
 			<li><a href="manageLanguages.jsp" class="nav-link"> <i
 					class="bi bi-translate me-2"></i> Languages
 			</a></li>
-
-			<li><a href="manageUsers.jsp" class="nav-link"> <i
+ -->
+			<li><a href="viewUser.jsp" class="nav-link"> <i
 					class="bi bi-people me-2"></i> Users
 			</a></li>
 
@@ -208,15 +208,15 @@
 					class="bi bi-plus-circle me-2"></i> Add Movie
 			</a></li>
 
-			<li><a href="manageGenres.jsp" class="nav-link"> <i
+			<!-- <li><a href="manageGenres.jsp" class="nav-link"> <i
 					class="bi bi-tags me-2"></i> Genres
-			</a></li>
+			</a></li> -->
 
-			<li><a href="manageLanguages.jsp" class="nav-link"> <i
+			<!-- <li><a href="manageLanguages.jsp" class="nav-link"> <i
 					class="bi bi-translate me-2"></i> Languages
-			</a></li>
+			</a></li> -->
 
-			<li><a href="manageUsers.jsp" class="nav-link"> <i
+			<li><a href="viewUser.jsp" class="nav-link"> <i
 					class="bi bi-people me-2"></i> Users
 			</a></li>
 

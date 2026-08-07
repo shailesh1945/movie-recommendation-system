@@ -13,7 +13,19 @@
 	background: #0f1117;
 	border-bottom: 1px solid rgba(255, 255, 255, .08);
 }
+.navbar-nav .nav-link{
+    color:#ffffff;
+    transition:.3s;
+}
 
+.navbar-nav .nav-link:hover{
+    color:#dc3545;
+}
+
+.navbar-nav .active-nav{
+    color:#dc3545 !important;
+    font-weight:700;
+}
 .navbar-brand {
 	font-size: 32px;
 	font-weight: 700;
@@ -85,7 +97,7 @@
 
 			<ul class="navbar-nav mx-auto">
 
-				<li class="nav-item"><a class="nav-link active" href="#">
+				<li class="nav-item"><a class="nav-link active" href="home.jsp">
 
 						Home </a></li>
 
@@ -93,13 +105,8 @@
 
 				</li>
 
-				<li class="nav-item"><a class="nav-link" href="#"> TV Shows
-
-				</a></li>
-
-				<li class="nav-item"><a class="nav-link" href="#"> Genres </a>
-
-				</li>
+				<li class="nav-item"><a class="nav-link active-nav"
+					href="recommendationPage.jsp"> Recommendation </a></li>
 
 				<li class="nav-item"><a class="nav-link" href="#"> My List
 
@@ -126,13 +133,6 @@
 
 				</div>
 
-				<!-- Notification -->
-
-				<a href="#" class="text-white fs-5 notification"> <i
-					class="bi bi-bell"></i>
-
-				</a>
-
 				<!-- Profile -->
 
 				<div class="dropdown">
@@ -151,10 +151,6 @@
 						aria-labelledby="profileDropdown">
 
 						<li><a class="dropdown-item" href="#">My Profile</a></li>
-
-						<li><a class="dropdown-item" href="#">My Watchlist</a></li>
-
-						<li><hr class="dropdown-divider"></li>
 
 						<li><a class="dropdown-item text-danger" href="#"
 							id="logoutBtn">Logout</a></li>

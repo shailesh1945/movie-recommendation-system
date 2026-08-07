@@ -1,0 +1,468 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Movie Preferences</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+    margin:0;
+    padding:0;
+    background:#000 !important;
+    color:#fff;
+}
+
+/* Main Container */
+
+.preference-container{
+
+    max-width:850px;
+
+    margin:40px auto;
+
+    padding:40px 20px;
+
+    background:#0d0d0d;
+
+    border:1px solid #222;
+
+    border-radius:22px;
+
+}
+
+/* Heading */
+
+.page-title{
+	font-weight:700;
+	font-size:clamp(2rem,4vw,2.7rem);
+}
+
+.page-subtitle{
+	color:#adb5bd;
+	font-size:1rem;
+}
+
+/* Cards */
+
+.preference-card,
+.slider-card{
+
+    background:#171717 !important;
+
+    border:1px solid #2f2f2f;
+
+    border-radius:18px;
+
+    color:#fff;
+
+    transition:.3s ease;
+
+}
+
+.preference-card:hover,
+.slider-card:hover{
+
+    border-color:#dc3545;
+
+    transform:translateY(-3px);
+
+}
+
+/* Card Body */
+
+.card-body{
+
+    background:#171717;
+
+    padding:28px;
+
+}
+
+/* Chips */
+
+.preference-chip{
+
+    background:#252525;
+
+    border:1px solid #3b3b3b;
+
+    color:#fff;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    transition:.3s;
+
+}
+
+.preference-chip:hover{
+
+    background:#dc3545;
+
+    border-color:#dc3545;
+
+}
+
+.preference-chip.active{
+
+    background:#dc3545;
+
+    border-color:#dc3545;
+
+}
+/* Slider */
+
+.slider-value{
+
+	font-size:22px;
+
+	font-weight:700;
+
+	color:#dc3545;
+
+}
+
+.form-range::-webkit-slider-thumb{
+
+	background:#dc3545;
+
+}
+
+.form-range::-moz-range-thumb{
+
+	background:#dc3545;
+
+}
+
+/* Button */
+
+.save-btn{
+
+    background:#dc3545;
+
+    border:none;
+
+    border-radius:35px;
+
+    min-width:250px;
+
+    height:52px;
+
+    font-weight:600;
+
+}
+
+.save-btn:hover{
+
+    background:#bb2d3b;
+
+}
+footer{
+
+    background:#000 !important;
+
+    border-top:1px solid #222;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+	.preference-container{
+
+		padding:35px 15px;
+
+	}
+
+	.card-body{
+
+		padding:20px;
+
+	}
+
+	.preference-chip{
+
+		font-size:13px;
+
+		padding:8px 14px;
+
+	}
+
+	.save-btn{
+
+		width:100%;
+
+	}
+
+}
+
+@media(max-width:576px){
+
+	.preference-chip{
+
+		width:100%;
+
+		text-align:center;
+
+	}
+
+	h5{
+
+		font-size:18px;
+
+	}
+
+}
+
+</style>
+
+</head>
+
+<body>
+<jsp:include page="../component/userNavbar.jsp"/>
+<div class="preference-container">
+
+	<div class="text-center mb-5">
+
+		<h2 class="page-title text-danger" >
+
+			Personalize Your Recommendations
+
+		</h2>
+
+		<p class="page-subtitle">
+
+			Help our AI find the perfect movies for you.
+
+		</p>
+
+	</div>
+
+	<!-- Genres -->
+
+	<div class="card preference-card mb-4">
+
+		<div class="card-body">
+
+			<h5 class="mb-4 text-white">
+
+				<i class="bi bi-film text-danger me-2"></i>
+
+				Favorite Genres
+
+			</h5>
+
+			<div class="d-flex flex-wrap gap-2">
+
+				<button class="preference-chip active">Action</button>
+				<button class="preference-chip active">Thriller</button>
+				<button class="preference-chip">Comedy</button>
+				<button class="preference-chip">Horror</button>
+				<button class="preference-chip">Romance</button>
+				<button class="preference-chip">Crime</button>
+				<button class="preference-chip active">Sci-Fi</button>
+				<button class="preference-chip">Adventure</button>
+				<button class="preference-chip">Fantasy</button>
+				<button class="preference-chip">Drama</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- Languages -->
+
+	<div class="card preference-card mb-4">
+
+		<div class="card-body">
+
+			<h5 class="mb-4 text-white">
+
+				<i class="bi bi-globe text-danger me-2"></i>
+
+				Favorite Languages
+
+			</h5>
+
+			<div class="d-flex flex-wrap gap-2">
+
+				<button class="preference-chip active">English</button>
+				<button class="preference-chip">Hindi</button>
+				<button class="preference-chip">Marathi</button>
+				<button class="preference-chip">Tamil</button>
+				<button class="preference-chip">Telugu</button>
+				<button class="preference-chip active">Korean</button>
+				<button class="preference-chip active">Japanese</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- Sliders -->
+
+	<div class="row g-4">
+
+		<div class="col-md-6">
+
+			<div class="card slider-card">
+
+				<div class="card-body">
+
+					<div class="d-flex justify-content-between">
+
+						<h6 class="text-white">
+
+							<i class="bi bi-star-fill text-danger me-2"></i>
+
+							Minimum Rating
+
+						</h6>
+
+						<span id="ratingValue" class="slider-value">
+
+							7.5
+
+						</span>
+
+					</div>
+
+					<input
+						type="range"
+						class="form-range mt-4"
+						id="ratingSlider"
+						min="0"
+						max="10"
+						step="0.5"
+						value="7.5">
+
+					<div class="d-flex justify-content-between">
+
+						<small>0</small>
+
+						<small>10</small>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="col-md-6">
+
+			<div class="card slider-card">
+
+				<div class="card-body">
+
+					<div class="d-flex justify-content-between">
+
+						<h6 class="text-white">
+
+							<i class="bi bi-calendar-event text-danger me-2"></i>
+
+							Minimum Year
+
+						</h6>
+
+						<span id="yearValue" class="slider-value">
+
+							2010
+
+						</span>
+
+					</div>
+
+					<input
+						type="range"
+						class="form-range mt-4"
+						id="yearSlider"
+						min="1950"
+						max="2026"
+						value="2010">
+
+					<div class="d-flex justify-content-between">
+
+						<small>1950</small>
+
+						<small>2026</small>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="text-center mt-5">
+
+		<button class="save-btn text-white">
+
+			Save Preferences
+
+			<i class="bi bi-arrow-right ms-2"></i>
+
+		</button>
+
+	</div>
+
+</div>
+<jsp:include page="../component/footer.jsp"/>
+<script>
+
+document.querySelectorAll(".preference-chip").forEach(button=>{
+
+	button.addEventListener("click",()=>{
+
+		button.classList.toggle("active");
+
+	});
+
+});
+
+ratingSlider.oninput=function(){
+
+	ratingValue.innerHTML=this.value;
+
+}
+
+yearSlider.oninput=function(){
+
+	yearValue.innerHTML=this.value;
+
+}
+
+</script>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

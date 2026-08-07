@@ -13,7 +13,7 @@
 
 <jsp:include page="../component/recommendedMovies.jsp"/>
 
-<jsp:include page="../component/trendingMovies.jsp"/>
+<%-- <jsp:include page="../component/trendingMovies.jsp"/> --%>
 <jsp:include page="../component/footer.jsp"/>
 
 

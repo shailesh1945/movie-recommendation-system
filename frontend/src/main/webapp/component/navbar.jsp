@@ -168,18 +168,22 @@ body {
 
 						<div class="mb-4">
 
-							<label class="form-label text-secondary small fw-bold">
-								PASSWORD </label>
+							<div class="d-flex justify-content-between mb-2">
 
-							<div class="input-group">
+								<label class="form-label text-secondary fw-semibold small">
+									PASSWORD </label>
 
-								<input type="password"
+							</div>
+
+							<div class="input-group input-group-lg">
+
+								<input type="password" id="registerPassword"
 									class="form-control bg-dark text-white border-secondary"
-									id="registerPassword" placeholder="Create Password" required>
+									placeholder="Create Password" required> <span
+									class="input-group-text bg-dark border-secondary text-white"
+									id="toggleRegisterPassword" style="cursor: pointer;"> <i
+									class="bi bi-eye" id="registerEyeIcon"></i>
 
-								<span
-									class="input-group-text bg-dark border-secondary text-white">
-									<i class="bi bi-eye"></i>
 								</span>
 
 							</div>
@@ -244,9 +248,7 @@ body {
 							<div class="d-flex justify-content-between mb-2">
 
 								<label class="form-label text-secondary fw-semibold small">
-									PASSWORD </label> <a href="#"
-									class="text-danger text-decoration-none small fw-semibold">
-									FORGOT PASSWORD? </a>
+									PASSWORD </label>
 
 							</div>
 
@@ -255,20 +257,13 @@ body {
 								<input type="password" id="loginPassword"
 									class="form-control bg-dark text-white border-secondary"
 									placeholder="Password" required> <span
-									class="input-group-text bg-dark border-secondary text-white">
-									<i class="bi bi-eye"></i>
+									class="input-group-text bg-dark border-secondary text-white"
+									id="toggleLoginPassword" style="cursor: pointer;"> <i
+									class="bi bi-eye" id="loginEyeIcon"></i>
+
 								</span>
 
 							</div>
-
-						</div>
-
-						<div class="form-check mb-4">
-
-							<input class="form-check-input" type="checkbox" id="remember">
-
-							<label class="form-check-label text-secondary" for="remember">
-								Remember me </label>
 
 						</div>
 
@@ -302,6 +297,46 @@ body {
 	<script src="${pageContext.request.contextPath}/assets/js/auth.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		function setupPasswordToggle(passwordId, toggleId, iconId) {
 
+			const passwordField = document.getElementById(passwordId);
+			const toggleButton = document.getElementById(toggleId);
+			const eyeIcon = document.getElementById(iconId);
+
+			if (!passwordField || !toggleButton || !eyeIcon) {
+				return;
+			}
+
+			toggleButton.addEventListener("click", function() {
+
+				if (passwordField.type === "password") {
+
+					passwordField.type = "text";
+
+					eyeIcon.classList.remove("bi-eye");
+					eyeIcon.classList.add("bi-eye-slash");
+
+				} else {
+
+					passwordField.type = "password";
+
+					eyeIcon.classList.remove("bi-eye-slash");
+					eyeIcon.classList.add("bi-eye");
+
+				}
+
+			});
+
+		}
+
+		// Register Modal
+		setupPasswordToggle("registerPassword", "toggleRegisterPassword",
+				"registerEyeIcon");
+
+		// Login Modal
+		setupPasswordToggle("loginPassword", "toggleLoginPassword",
+				"loginEyeIcon");
+	</script>
 </body>
 </html>
