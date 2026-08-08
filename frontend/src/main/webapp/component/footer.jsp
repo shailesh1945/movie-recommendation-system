@@ -23,9 +23,9 @@
 
 				<div class="social-icons">
 
-					<a href="#"><i class="bi bi-facebook"></i></a> <a href="#"><i
+					<a href="https://www.facebook.com/hemanshukh"><i class="bi bi-facebook"></i></a> <a href="https://www.instagram.com/its__hemanshu__/"><i
 						class="bi bi-instagram"></i></a> <a href="#"><i
-						class="bi bi-twitter-x"></i></a> <a href="#"><i
+						class="bi bi-twitter-x"></i></a> <a href="https://www.youtube.com/@HKCreation512"><i
 						class="bi bi-youtube"></i></a>
 
 				</div>

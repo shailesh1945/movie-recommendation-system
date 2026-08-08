@@ -135,7 +135,7 @@
 		<ul class="nav flex-column gap-2">
 
 			<li class="nav-item"><a href="admindashboard.jsp"
-				class="nav-link active"> <i class="bi bi-speedometer2 me-2"></i>
+				class="nav-link"> <i class="bi bi-speedometer2 me-2"></i>
 					Dashboard
 			</a></li>
 
@@ -236,3 +236,5 @@
 <!-- Bootstrap JS -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	
+<script src="${pageContext.request.contextPath}/assets/js/movie.js"></script>

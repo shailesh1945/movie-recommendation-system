@@ -249,7 +249,7 @@
 
 				</p>
 
-				<div class="hero-buttons d-flex gap-3 flex-wrap">
+				<!-- <div class="hero-buttons d-flex gap-3 flex-wrap">
 
 					<a href="#"
 						class="btn btn-danger">
@@ -265,7 +265,7 @@
 
 					</a>
 
-				</div>
+				</div> -->
 
 			</div>
 

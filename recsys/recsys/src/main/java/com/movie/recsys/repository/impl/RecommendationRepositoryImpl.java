@@ -30,19 +30,16 @@ public class RecommendationRepositoryImpl
     }
 
     @Override
-    public List<RecommendationResponse>
-    getRecommendations(Integer userId) {
+    public List<RecommendationResponse> getRecommendations(Integer userId) {
 
         return jdbcTemplate.query(
-
                 SqlConstants.GET_RECOMMENDATIONS,
-
                 rowMapper,
-
+                userId,
+                userId,
+                userId,
                 userId
-
         );
-
     }
 
 }

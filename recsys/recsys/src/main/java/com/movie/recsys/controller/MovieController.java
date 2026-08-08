@@ -23,7 +23,7 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<List<MovieResponse>> getAllMovies() {
-
+        System.out.println("Api called successfully");
         return ResponseEntity.ok(
                 movieService.getAllMovies());
 

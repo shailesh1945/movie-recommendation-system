@@ -25,4 +25,5 @@ public class RecommendationResponse {
 
     private Integer score;
 
+    private String genre;
 }

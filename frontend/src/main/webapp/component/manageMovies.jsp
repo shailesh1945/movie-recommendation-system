@@ -56,8 +56,10 @@
 
 						<tr>
 
-							<th style="min-width: 100px;">Poster</th>
-
+							<!-- <th style="min-width: 100px;">Poster</th>-->
+							
+							<th style="min-width: 100px;">Id</th>
+							
 							<th style="min-width: 180px;">Title</th>
 
 							<th style="min-width: 170px;">Director</th>
@@ -66,7 +68,7 @@
 
 							<th style="min-width: 120px;">Language</th>
 
-							<th style="min-width: 90px;">Rating</th>
+							<!-- <th style="min-width: 90px;">Rating</th> -->
 
 							<th class="text-center" style="min-width: 180px;">Actions</th>
 
@@ -87,3 +89,5 @@
 	</div>
 
 </div>
+
+<script src="${pageContext.request.contextPath}/assets/js/movie.js"></script>

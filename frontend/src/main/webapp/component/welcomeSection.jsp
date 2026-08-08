@@ -78,14 +78,14 @@
 
 					<div class="mt-5">
 
-						<button class="btn btn-danger btn-lg px-5 me-3">
+					<a href="recommendationPage.jsp">	<button class="btn btn-danger btn-lg px-5 me-3">
 
 							<i class="bi bi-stars"></i> Get Recommendations
 
-						</button>
+						</button> </a>
 
-						<button class="btn btn-outline-light btn-lg px-5">Browse
-							Movies</button>
+						<!-- <button class="btn btn-outline-light btn-lg px-5">Browse
+							Movies</button> -->
 
 					</div>
 

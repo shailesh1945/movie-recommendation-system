@@ -161,148 +161,105 @@ public final class SqlConstants {
             """
                             SELECT
                     
-                                    m.movie_id,
+                                                m.movie_id,
                     
-                                    m.title,
+                                                m.title,
                     
-                                    m.director,
+                                                m.director,
                     
-                                    m.release_year,
+                                                m.release_year,
                     
-                                    m.average_rating,
+                                                m.average_rating,
                     
-                                    m.poster_url,
+                                                m.poster_url,
                     
-                                    l.language_name,
+                                                l.language_name,
                     
-                                    (
+                                                (
+                                                    SELECT GROUP_CONCAT(
+                                                        DISTINCT g.genre_name
+                                                        ORDER BY g.genre_name
+                                                        SEPARATOR ', '
+                                                    )
+                                                    FROM movie_genres mg2
+                                                    JOIN genres g
+                                                        ON g.genre_id = mg2.genre_id
+                                                    WHERE mg2.movie_id = m.movie_id
+                                                ) AS genre_name,
                     
-                                    CASE
+                                                (
+                                                    CASE
                     
-                                    WHEN EXISTS(
+                                                        WHEN EXISTS(
+                                                            SELECT 1
+                                                            FROM movie_genres mg
+                                                            JOIN user_preference_genres upg
+                                                                ON mg.genre_id = upg.genre_id
+                                                            JOIN user_preferences up
+                                                                ON up.preference_id = upg.preference_id
+                                                            WHERE mg.movie_id = m.movie_id
+                                                            AND up.user_id = ?
+                                                        )
+                                                        THEN 40
+                                                        ELSE 0
+                                                    END
                     
-                                    SELECT 1
+                                                    +
                     
-                                    FROM movie_genres mg
+                                                    CASE
                     
-                                    JOIN user_preference_genres upg
+                                                        WHEN EXISTS(
+                                                            SELECT 1
+                                                            FROM user_preference_languages upl
+                                                            JOIN user_preferences up
+                                                                ON up.preference_id = upl.preference_id
+                                                            WHERE up.user_id = ?
+                                                            AND upl.language_id = m.language_id
+                                                        )
+                                                        THEN 20
+                                                        ELSE 0
+                                                    END
                     
-                                    ON mg.genre_id=upg.genre_id
+                                                    +
                     
-                                    JOIN user_preferences up
+                                                    CASE
                     
-                                    ON up.preference_id=upg.preference_id
+                                                        WHEN m.average_rating >= (
+                                                            SELECT min_rating
+                                                            FROM user_preferences
+                                                            WHERE user_id = ?
+                                                        )
+                                                        THEN 20
+                                                        ELSE 0
+                                                    END
                     
-                                    WHERE
+                                                    +
                     
-                                    mg.movie_id=m.movie_id
+                                                    CASE
                     
-                                    AND
+                                                        WHEN m.release_year >= (
+                                                            SELECT min_release_year
+                                                            FROM user_preferences
+                                                            WHERE user_id = ?
+                                                        )
+                                                        THEN 10
+                                                        ELSE 0
+                                                    END
                     
-                                    up.user_id=?
+                                                    +
                     
-                                    )
+                                                    ROUND(m.average_rating)
                     
-                                    THEN 40
+                                                ) AS score
                     
-                                    ELSE 0
+                                            FROM movies m
                     
-                                    END
+                                            JOIN languages l
+                                                ON l.language_id = m.language_id
                     
-                                    +
+                                            ORDER BY score DESC,
+                                                     average_rating DESC
                     
-                                    CASE
-                    
-                                    WHEN EXISTS(
-                    
-                                    SELECT 1
-                    
-                                    FROM user_preference_languages upl
-                    
-                                    JOIN user_preferences up
-                    
-                                    ON up.preference_id=upl.preference_id
-                    
-                                    WHERE
-                    
-                                    up.user_id=?
-                    
-                                    AND
-                    
-                                    upl.language_id=m.language_id
-                    
-                                    )
-                    
-                                    THEN 20
-                    
-                                    ELSE 0
-                    
-                                    END
-                    
-                                    +
-                    
-                                    CASE
-                    
-                                    WHEN
-                    
-                                    m.average_rating>=
-                    
-                                    (
-                    
-                                    SELECT min_rating
-                    
-                                    FROM user_preferences
-                    
-                                    WHERE user_id=?
-                    
-                                    )
-                    
-                                    THEN 20
-                    
-                                    ELSE 0
-                    
-                                    END
-                    
-                                    +
-                    
-                                    CASE
-                    
-                                    WHEN
-                    
-                                    m.release_year>=
-                    
-                                    (
-                    
-                                    SELECT min_release_year
-                    
-                                    FROM user_preferences
-                    
-                                    WHERE user_id=?
-                    
-                                    )
-                    
-                                    THEN 10
-                    
-                                    ELSE 0
-                    
-                                    END
-                    
-                                    +
-                    
-                                    ROUND(m.average_rating)
-                    
-                                    ) AS score
-                    
-                                    FROM movies m
-                    
-                                    JOIN languages l
-                    
-                                    ON l.language_id=m.language_id
-                    
-                                    ORDER BY score DESC,
-                    
-                                    average_rating DESC
-                    
-                                    LIMIT 20
+                                            LIMIT 20
                     """;
 }

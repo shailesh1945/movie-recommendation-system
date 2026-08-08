@@ -177,16 +177,35 @@ footer {
 
 				<div class="d-flex flex-wrap gap-2">
 
-					<button class="preference-chip active">Action</button>
-					<button class="preference-chip active">Thriller</button>
-					<button class="preference-chip">Comedy</button>
-					<button class="preference-chip">Horror</button>
-					<button class="preference-chip">Romance</button>
-					<button class="preference-chip">Crime</button>
-					<button class="preference-chip active">Sci-Fi</button>
-					<button class="preference-chip">Adventure</button>
-					<button class="preference-chip">Fantasy</button>
-					<button class="preference-chip">Drama</button>
+					<button type="button" class="preference-chip" data-type="genre"
+						data-id="1">Action</button>
+
+					<button type="button" class="preference-chip" data-type="genre"
+						data-id="2">Thriller</button>
+
+					<button type="button" class="preference-chip" data-type="genre"
+						data-id="3">Comedy</button>
+
+					<button type="button" class="preference-chip" data-type="genre"
+						data-id="4">Horror</button>
+
+					<button type="button" class="preference-chip" data-type="genre"
+						data-id="5">Romance</button>
+
+					<button type="button" class="preference-chip" data-type="genre"
+						data-id="6">Crime</button>
+
+					<button type="button" class="preference-chip" data-type="genre"
+						data-id="7">Sci-Fi</button>
+
+					<button type="button" class="preference-chip" data-type="genre"
+						data-id="8">Adventure</button>
+
+					<button type="button" class="preference-chip" data-type="genre"
+						data-id="9">Fantasy</button>
+
+					<button type="button" class="preference-chip" data-type="genre"
+						data-id="10">Drama</button>
 
 				</div>
 
@@ -208,16 +227,28 @@ footer {
 
 				<div class="d-flex flex-wrap gap-2">
 
-					<button class="preference-chip active">English</button>
-					<button class="preference-chip">Hindi</button>
-					<button class="preference-chip">Marathi</button>
-					<button class="preference-chip">Tamil</button>
-					<button class="preference-chip">Telugu</button>
-					<button class="preference-chip active">Korean</button>
-					<button class="preference-chip active">Japanese</button>
+					<button type="button" class="preference-chip" data-type="language"
+						data-id="1">English</button>
+
+					<button type="button" class="preference-chip" data-type="language"
+						data-id="2">Hindi</button>
+
+					<button type="button" class="preference-chip" data-type="language"
+						data-id="3">Marathi</button>
+
+					<button type="button" class="preference-chip" data-type="language"
+						data-id="4">Tamil</button>
+
+					<button type="button" class="preference-chip" data-type="language"
+						data-id="5">Telugu</button>
+
+					<button type="button" class="preference-chip" data-type="language"
+						data-id="6">Korean</button>
+
+					<button type="button" class="preference-chip" data-type="language"
+						data-id="7">Japanese</button>
 
 				</div>
-
 			</div>
 
 		</div>
@@ -297,7 +328,8 @@ footer {
 
 		<div class="text-center mt-5">
 
-			<button class="save-btn text-white">
+			<button type="button" id="savePreferencesBtn"
+				class="save-btn text-white">
 
 				Save Preferences <i class="bi bi-arrow-right ms-2"></i>
 
@@ -307,34 +339,21 @@ footer {
 
 	</div>
 	<jsp:include page="../component/footer.jsp" />
+
 	<script>
+		const CONTEXT_PATH = "${pageContext.request.contextPath}";
+	</script>
 
-document.querySelectorAll(".preference-chip").forEach(button=>{
 
-	button.addEventListener("click",()=>{
-
-		button.classList.toggle("active");
-
-	});
-
-});
-
-ratingSlider.oninput=function(){
-
-	ratingValue.innerHTML=this.value;
-
-}
-
-yearSlider.oninput=function(){
-
-	yearValue.innerHTML=this.value;
-
-}
-
-</script>
 	<script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 
 	<script src="${pageContext.request.contextPath}/assets/js/auth.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/assets/js/preferences.js"></script>
+
+	<script
+		src="${pageContext.request.contextPath}/assets/js/recommendation.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

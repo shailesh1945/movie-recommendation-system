@@ -251,7 +251,7 @@
 
 		<!-- Dynamic Movies -->
 
-		<div class="row g-3" id="recommendedMoviesContainer">
+		<div class="row g-3" id="latestMoviesContainer">
 
 			<div class="col-12">
 

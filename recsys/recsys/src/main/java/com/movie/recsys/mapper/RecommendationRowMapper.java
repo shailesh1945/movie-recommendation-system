@@ -36,6 +36,10 @@ public class RecommendationRowMapper
 
                 .director(
                         rs.getString("director"))
+                .language(
+                        rs.getString("language_name"))
+                .genre(
+                        rs.getString("genre_name"))
                 .score(
 
                         rs.getInt("score")

@@ -101,16 +101,16 @@
 
 						Home </a></li>
 
-				<li class="nav-item"><a class="nav-link" href="#"> Movies </a>
+	<!-- 	<li class="nav-item"><a class="nav-link" href="../component/recommendedMovies.jsp"> Movies </a>  -->
 
 				</li>
 
 				<li class="nav-item"><a class="nav-link active-nav"
 					href="recommendationPage.jsp"> Recommendation </a></li>
 
-				<li class="nav-item"><a class="nav-link" href="#"> My List
+				<!-- <li class="nav-item"><a class="nav-link" href="#"> My List
 
-				</a></li>
+				</a></li> -->
 
 			</ul>
 
@@ -120,7 +120,7 @@
 
 				<!-- Search -->
 
-				<div class="input-group search-box">
+				<!-- <div class="input-group search-box">
 
 					<span
 						class="input-group-text bg-dark border-secondary text-secondary">
@@ -131,7 +131,7 @@
 						class="form-control bg-dark border-secondary text-white"
 						placeholder="Search movies...">
 
-				</div>
+				</div> -->
 
 				<!-- Profile -->
 

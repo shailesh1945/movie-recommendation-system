@@ -1,13 +1,13 @@
 package com.movie.recsys.controller;
 
 import com.movie.recsys.dto.ApiResponse;
-import com.movie.recsys.dto.preference.PreferenceResponse;
-import com.movie.recsys.dto.preference.SavePreferenceRequest;
 import com.movie.recsys.service.PreferenceService;
 import com.movie.recsys.util.SessionUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.movie.recsys.dto.preference.PreferenceResponse;
+import com.movie.recsys.dto.preference.SavePreferenceRequest;
 
 @RestController
 @RequestMapping("/api/preferences")
