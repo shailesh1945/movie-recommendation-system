@@ -1,20 +1,21 @@
-package com.movie.recsys.model;
+package com.movie.recsys.dto.preference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserPreference {
+public class PreferenceResponse {
 
-    private Integer preferenceId;
+    private List<Integer> genreIds;
 
-    private Integer userId;
+    private List<Integer> languageIds;
 
     private Double minRating;
 
