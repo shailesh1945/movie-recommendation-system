@@ -5,19 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserPreference {
+public class UserPreferenceGenre {
 
     private Integer preferenceId;
 
-    private Integer userId;
-
-    private Double minRating;
-
-    private Integer minReleaseYear;
+    private Integer genreId;
 
 }
