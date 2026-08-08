@@ -27,70 +27,54 @@
 /* ===========================
    Main Layout
 =========================== */
-
-.main-content{
-	margin-left:260px;
-	min-height:100vh;
-	display:flex;
-	flex-direction:column;
-	transition:margin-left .3s ease;
-	background:#000;
+.main-content {
+	margin-left: 260px;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	transition: margin-left .3s ease;
+	background: #000;
 }
 
 /* ===========================
    Page Content
 =========================== */
-
-.page-content{
-	flex:1;
-	padding:30px;
-	width:100%;
+.page-content {
+	flex: 1;
+	padding: 30px;
+	width: 100%;
 }
 
 /* Large Screens */
-
-@media (max-width:1200px){
-
-	.page-content{
-		padding:25px;
+@media ( max-width :1200px) {
+	.page-content {
+		padding: 25px;
 	}
-
 }
 
 /* Tablet */
-
-@media (max-width:992px){
-
-	.main-content{
-		margin-left:0;
+@media ( max-width :992px) {
+	.main-content {
+		margin-left: 0;
 	}
-
-	.page-content{
-		padding:20px;
+	.page-content {
+		padding: 20px;
 	}
-
 }
 
 /* Mobile */
-
-@media (max-width:768px){
-
-	.page-content{
-		padding:15px;
+@media ( max-width :768px) {
+	.page-content {
+		padding: 15px;
 	}
-
 }
 
 /* Small Mobile */
-
-@media (max-width:576px){
-
-	.page-content{
-		padding:12px;
+@media ( max-width :576px) {
+	.page-content {
+		padding: 12px;
 	}
-
 }
-
 </style>
 
 </head>
@@ -98,7 +82,7 @@
 <body class="bg-black">
 
 	<!-- Sidebar -->
-	<jsp:include page="../component/sidebar.jsp"/>
+	<jsp:include page="../component/sidebar.jsp" />
 
 	<!-- Main Content -->
 	<div class="main-content">
@@ -111,7 +95,7 @@
 
 			<div class="container-fluid px-0">
 
-				<jsp:include page="../component/addMovieForm.jsp"/>
+				<jsp:include page="../component/addMovieForm.jsp" />
 
 			</div>
 
@@ -120,13 +104,14 @@
 		<!-- Footer -->
 		<div class="mt-auto">
 
-			<jsp:include page="../component/footer.jsp"/>
+			<jsp:include page="../component/footer.jsp" />
 
 		</div>
 
 	</div>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script src="../assets/js/config.js"></script>
 	<script src="../assets/js/auth.js"></script>

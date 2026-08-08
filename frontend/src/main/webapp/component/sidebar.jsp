@@ -105,7 +105,7 @@
 
 <div class="mobile-header">
 
-	<h5>
+	<h5 class="text-white">
 		<i class="bi bi-film text-primary"></i> MovieRcsys
 	</h5>
 
@@ -128,9 +128,7 @@
 
 			<i class="bi bi-film logo"></i>
 
-			<div class="sidebar-title mt-2">MovieRcsys</div>
-
-			<small>Admin Panel</small>
+			<div class="sidebar-title mt-2 text-white">MovieRcsys</div>
 
 		</div>
 
@@ -181,7 +179,7 @@
 
 	<div class="offcanvas-header">
 
-		<h4 class="fw-bold">
+		<h4 class="fw-bold text-white">
 
 			<i class="bi bi-film text-primary"></i> MovieRcsys
 
