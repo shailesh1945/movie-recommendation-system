@@ -19,7 +19,7 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/movie.js"></script>
-
+<script src="${pageContext.request.contextPath}/assets/js/user.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/auth.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

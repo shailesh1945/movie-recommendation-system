@@ -12,4 +12,6 @@ public interface AdminService {
     Integer getMoviesCount();
 
     Integer getUserCount();
+
+    Integer getGenreCount();
 }

@@ -12,4 +12,6 @@ public interface AdminRepository {
     Integer getMoviesCount();
 
     Integer getUserCount();
+
+    Integer getGenreCount();
 }

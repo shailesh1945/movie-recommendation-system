@@ -34,4 +34,9 @@ public class AdminServiceImpl implements AdminService {
     public Integer getUserCount() {
         return adminRepository.getUserCount();
     }
+
+    @Override
+    public Integer getGenreCount()  {
+        return adminRepository.getGenreCount();
+    }
 }

@@ -1,11 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-	
-	console.log("adminrole.js loaded");
+
 	if (document.getElementById('userTableBody')) {
 	        loadUsers();
 	 }
-	 loadUserCount();
-	 loadMoviesCount();
 
 });
 
@@ -86,65 +83,5 @@ async function deleteUser(userId, userName) {
     } catch (error) {
         console.error("Error deleting user:", error);
         alert("Server error occurred while deleting user.");
-    }
-}
-
-
-async function loadMoviesCount() {
-
-    try {
-
-        const response = await fetch(
-            "http://localhost:8081/api/admin/moviescount"
-        );
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const count = await response.json();
-
-        console.log("Movies count:", count);
-
-        const element = document.getElementById("totalMovies");
-
-        if (element) {
-            element.textContent = count;
-        }
-
-    } catch (error) {
-
-        console.error("Error loading movies count:", error);
-
-    }
-}
-
-
-async function loadUserCount() {
-
-    try {
-
-        const response = await fetch(
-            "http://localhost:8081/api/admin/usercount"
-        );
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const count = await response.json();
-
-        console.log("Users count:", count);
-
-        const element = document.getElementById("totalUsers");
-
-        if (element) {
-            element.textContent = count;
-        }
-
-    } catch (error) {
-
-        console.error("Error loading users count:", error);
-
     }
 }

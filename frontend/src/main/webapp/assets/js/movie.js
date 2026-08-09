@@ -393,3 +393,7 @@ function renderLatestMovies(movies) {
     });
 
 }
+
+
+
+

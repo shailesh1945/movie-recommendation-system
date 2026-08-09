@@ -62,4 +62,14 @@ public class AdminRepositoryImpl implements AdminRepository {
 
         return count != null ? count.intValue() : 0;
     }
+
+    @Override
+    public Integer getGenreCount() {
+        Long count = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) from genres;",
+                Long.class
+        );
+
+        return count != null ? count.intValue() : 0;
+    }
 }

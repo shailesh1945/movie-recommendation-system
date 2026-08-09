@@ -50,4 +50,10 @@ public class AdminController {
         return ResponseEntity.ok(
                 adminService.getUserCount());
     }
+
+    @GetMapping("/genrecount")
+    public ResponseEntity<Integer> getGenreCount(){
+        return ResponseEntity.ok(
+                adminService.getGenreCount());
+    }
 }

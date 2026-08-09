@@ -101,7 +101,7 @@
 
 						<div class="feature-box text-center">
 
-							<div class="stat">5000+</div>
+							<div class="stat" id ="totalMovie">5000+</div>
 
 							Movies
 
@@ -113,7 +113,7 @@
 
 						<div class="feature-box text-center">
 
-							<div class="stat">25+</div>
+							<div class="stat" id ="totalGenres">25+</div>
 
 							Genres
 
