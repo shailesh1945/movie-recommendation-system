@@ -6,6 +6,8 @@ target/
 
 **/src/main/resources/application.properties
 
+recsys/uploads/
+
 # Allow the example configuration file to be tracked
 !**/src/main/resources/example_application.properties
 
