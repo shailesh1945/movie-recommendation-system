@@ -246,7 +246,10 @@ footer {
 						data-id="6">Korean</button>
 
 					<button type="button" class="preference-chip" data-type="language"
-						data-id="7">Japanese</button>
+						data-id="7">French</button>
+						
+					<button type="button" class="preference-chip" data-type="language"
+						data-id="8">Japanese</button>
 
 				</div>
 			</div>

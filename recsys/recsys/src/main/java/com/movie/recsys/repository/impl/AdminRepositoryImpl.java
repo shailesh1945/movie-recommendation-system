@@ -43,4 +43,23 @@ public class AdminRepositoryImpl implements AdminRepository {
         String sql = "DELETE FROM users WHERE user_id = ?";
         jdbcTemplate.update(sql,id);
     }
+
+    @Override
+    public Integer getMoviesCount() {
+        Long count = jdbcTemplate.queryForObject(
+                "Select count(*) from movies",
+                Long.class
+        );
+        return count != null ? count.intValue() : 0;
+    }
+
+    @Override
+    public Integer getUserCount() {
+        Long count = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM users where user_id != 1",
+                Long.class
+        );
+
+        return count != null ? count.intValue() : 0;
+    }
 }

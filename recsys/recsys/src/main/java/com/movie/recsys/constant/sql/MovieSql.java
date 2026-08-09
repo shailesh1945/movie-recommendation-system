@@ -85,7 +85,7 @@ public final class MovieSql {
             ON r.movie_id = m.movie_id
         GROUP BY m.movie_id
         ORDER BY m.release_year DESC
-        LIMIT 10
+        LIMIT 12
         """;
 
     public static final String TOP_RATED = """

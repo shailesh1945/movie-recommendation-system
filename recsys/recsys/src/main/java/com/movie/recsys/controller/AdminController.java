@@ -38,4 +38,16 @@ public class AdminController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/moviescount")
+    public ResponseEntity<Integer> getMoviesCount(){
+        return ResponseEntity.ok(
+                adminService.getMoviesCount());
+    }
+
+    @GetMapping("/usercount")
+    public ResponseEntity<Integer> getUserCount(){
+        return ResponseEntity.ok(
+                adminService.getUserCount());
+    }
 }

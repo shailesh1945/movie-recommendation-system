@@ -8,4 +8,8 @@ public interface AdminRepository {
     List<UserResponse> getAllUser();
 
     void deleteUser(Integer id);
+
+    Integer getMoviesCount();
+
+    Integer getUserCount();
 }

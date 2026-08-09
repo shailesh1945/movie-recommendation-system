@@ -4,6 +4,11 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+**/src/main/resources/application.properties
+
+# Allow the example configuration file to be tracked
+!**/src/main/resources/example_application.properties
+
 ### STS ###
 .apt_generated
 .classpath

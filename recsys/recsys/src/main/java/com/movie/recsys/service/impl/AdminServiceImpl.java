@@ -24,4 +24,14 @@ public class AdminServiceImpl implements AdminService {
     public void deleteUserById(Integer id) {
         adminRepository.deleteUser(id);
     }
+
+    @Override
+    public Integer getMoviesCount() {
+        return adminRepository.getMoviesCount();
+    }
+
+    @Override
+    public Integer getUserCount() {
+        return adminRepository.getUserCount();
+    }
 }

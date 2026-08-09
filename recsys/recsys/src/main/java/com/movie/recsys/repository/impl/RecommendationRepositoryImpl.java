@@ -38,6 +38,7 @@ public class RecommendationRepositoryImpl
                 userId,
                 userId,
                 userId,
+                userId,
                 userId
         );
     }

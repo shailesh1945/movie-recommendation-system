@@ -26,7 +26,26 @@
 
 </head>
 
+<style>
+/* Movie Card */
+.movie-card {
+	overflow: hidden;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.movie-card:hover {
+	transform: translateY(-5px);
+}
+
+/* Movie Poster */
+.movie-poster {
+	width: 100%;
+	height: 380px;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+}
+</style>
 <body class="bg-dark">
 
 	<jsp:include page="../component/userNavbar.jsp" />

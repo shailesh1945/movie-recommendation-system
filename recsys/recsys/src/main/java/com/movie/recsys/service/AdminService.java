@@ -8,4 +8,8 @@ public interface AdminService {
     List<UserResponse> getAllUsers();
 
     void deleteUserById(Integer id);
+
+    Integer getMoviesCount();
+
+    Integer getUserCount();
 }
