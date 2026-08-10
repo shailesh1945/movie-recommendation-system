@@ -37,11 +37,29 @@
 
 			<div class="row g-3 mb-4">
 
-				<div class="col-lg-4 col-md-6 col-12">
+				<div class="col-lg-6 col-md-8 col-12">
 
-					<input type="text" id="searchMovie"
-						class="form-control bg-dark text-white border-secondary"
-						placeholder="Search movie...">
+					<div class="input-group">
+
+						<input type="text" id="searchMovie"
+							class="form-control bg-dark text-white border-secondary"
+							placeholder="Search movie by title...">
+
+						<button type="button" class="btn btn-primary"
+							onclick="searchMovies()">
+
+							<i class="bi bi-search"></i> Search
+
+						</button>
+	
+						<button type="button" class="btn btn-secondary"
+							onclick="clearMovieSearch()">
+
+							<i class="bi bi-x-circle"></i> Clear
+
+						</button> 
+
+					</div>
 
 				</div>
 
@@ -57,9 +75,9 @@
 						<tr>
 
 							<!-- <th style="min-width: 100px;">Poster</th>-->
-							
+
 							<th style="min-width: 100px;">Id</th>
-							
+
 							<th style="min-width: 180px;">Title</th>
 
 							<th style="min-width: 170px;">Director</th>

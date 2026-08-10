@@ -233,29 +233,25 @@ async function loadRecommendations() {
 
 function displayRecommendations(movies) {
 
-	const container =
-		document.getElementById(
-			"recommendationContainer"
-		);
+    const container =
+        document.getElementById(
+            "recommendationContainer"
+        );
 
+    if (!container) {
+        return;
+    }
 
-	if (!container) {
+    // =============================================
+    // No Movies
+    // =============================================
 
-		return;
+    if (
+        !Array.isArray(movies) ||
+        movies.length === 0
+    ) {
 
-	}
-
-
-	// =============================================
-	// No Movies
-	// =============================================
-
-	if (
-		!Array.isArray(movies) ||
-		movies.length === 0
-	) {
-
-		container.innerHTML = `
+        container.innerHTML = `
 
             <div class="col-12 text-center py-5">
 
@@ -273,7 +269,7 @@ function displayRecommendations(movies) {
                 </p>
 
                 <a
-                    href="${CONTEXT_PATH}/preferences"
+                    href="${CONTEXT_PATH}/user/recommendationPage.jsp"
                     class="btn btn-danger mt-2">
 
                     Change Preferences
@@ -284,33 +280,28 @@ function displayRecommendations(movies) {
 
         `;
 
-		return;
+        return;
+    }
 
-	}
+    // =============================================
+    // Clear Container
+    // =============================================
 
+    container.innerHTML = "";
 
-	// =============================================
-	// Clear Container
-	// =============================================
+    // =============================================
+    // Create Movie Cards
+    // =============================================
 
-	container.innerHTML = "";
+    movies.forEach(function(movie) {
 
+        const card =
+            createMovieCard(movie);
 
-	// =============================================
-	// Create Movie Cards
-	// =============================================
+        container.appendChild(card);
 
-	movies.forEach(function(movie) {
-
-		const card =
-			createMovieCard(movie);
-
-		container.appendChild(card);
-
-	});
-
+    });
 }
-
 
 // =================================================
 // CREATE MOVIE CARD
