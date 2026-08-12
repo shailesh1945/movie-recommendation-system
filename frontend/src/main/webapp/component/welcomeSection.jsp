@@ -76,7 +76,7 @@
 						recommend movies you'll love. Browse thousands of movies and
 						discover hidden gems tailored just for you.</p>
 
-					<div class="mt-5">
+					<div class="mt-5 mb-2">
 
 					<a href="recommendationPage.jsp">	<button class="btn btn-danger btn-lg px-5 me-3">
 

@@ -13,19 +13,21 @@
 	background: #0f1117;
 	border-bottom: 1px solid rgba(255, 255, 255, .08);
 }
-.navbar-nav .nav-link{
-    color:#ffffff;
-    transition:.3s;
+
+.navbar-nav .nav-link {
+	color: #ffffff;
+	transition: .3s;
 }
 
-.navbar-nav .nav-link:hover{
-    color:#dc3545;
+.navbar-nav .nav-link:hover {
+	color: #dc3545;
 }
 
-.navbar-nav .active-nav{
-    color:#dc3545 !important;
-    font-weight:700;
+.navbar-nav .active-nav {
+	color: #dc3545 !important;
+	font-weight: 700;
 }
+
 .navbar-brand {
 	font-size: 32px;
 	font-weight: 700;
@@ -97,21 +99,23 @@
 
 			<ul class="navbar-nav mx-auto">
 
-				<li class="nav-item"><a class="nav-link active" href="home.jsp">
+				<li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/user/home.jsp">
 
 						Home </a></li>
 
-	<!-- 	<li class="nav-item"><a class="nav-link" href="../component/recommendedMovies.jsp"> Movies </a>  -->
-
-				</li>
+				<li class="nav-item"><a class="nav-link"
+					href="../component/recommendedMovies.jsp"> Movies </a></li>
 
 				<li class="nav-item"><a class="nav-link active-nav"
 					href="recommendationPage.jsp"> Recommendation </a></li>
 
-				<!-- <li class="nav-item"><a class="nav-link" href="#"> My List
+				<li class="nav-item"><a class="nav-link" href="#"> My List
 
-				</a></li> -->
+				</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${pageContext.request.contextPath}/component/aboutus.jsp"> About Us
 
+				</a></li>
 			</ul>
 
 			<!-- Right -->
@@ -150,7 +154,7 @@
 					<ul class="dropdown-menu dropdown-menu-end"
 						aria-labelledby="profileDropdown">
 
-						<li><a class="dropdown-item" href="#">My Profile</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/profile.jsp">My Profile</a></li>
 
 						<li><a class="dropdown-item text-danger" href="#"
 							id="logoutBtn">Logout</a></li>

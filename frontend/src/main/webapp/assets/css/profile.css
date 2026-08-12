@@ -1,0 +1,367 @@
+@charset "UTF-8";
+
+/* =========================================
+   PAGE
+========================================= */
+body {
+	margin: 0;
+	background: #000000 !important;
+	color: #ffffff;
+}
+
+/* =========================================
+   PROFILE PAGE
+========================================= */
+.profile-page {
+	min-height: calc(100vh - 80px);
+	background: #000000 !important;
+	padding: 45px 20px 60px;
+}
+
+.profile-container {
+	width: 100%;
+	max-width: 980px;
+	margin: 0 auto;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+.profile-page-header {
+	margin-bottom: 25px;
+}
+
+.profile-page-header h1 {
+	margin: 0;
+	color: #ffffff;
+	font-size: 32px;
+	font-weight: 700;
+	letter-spacing: -0.5px;
+}
+
+.profile-page-header p {
+	margin: 7px 0 0;
+	color: #8f939d;
+	font-size: 15px;
+}
+
+/* =========================================
+   PROFILE CARD
+========================================= */
+.profile-card {
+	width: 100%;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 30px;
+	background: #111318;
+	border: 1px solid #24262d;
+	border-radius: 16px;
+	box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================
+   PROFILE SUMMARY
+========================================= */
+.profile-summary {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+}
+
+.profile-avatar {
+	flex-shrink: 0;
+	width: 72px;
+	height: 72px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: #e50914;
+	color: #ffffff;
+	font-size: 25px;
+	font-weight: 700;
+	border: 3px solid #292c34;
+	box-shadow: 0 5px 20px rgba(229, 9, 20, 0.25);
+}
+
+.profile-user-info h2 {
+	margin: 0 0 5px;
+	color: #ffffff;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.profile-user-info p {
+	margin: 0;
+	color: #8f939d;
+	font-size: 14px;
+}
+
+/* =========================================
+   DIVIDER
+========================================= */
+.profile-divider {
+	height: 1px;
+	margin: 28px 0;
+	background: #272a31;
+}
+
+/* =========================================
+   LABELS
+========================================= */
+.form-label {
+	display: block;
+	margin-bottom: 7px;
+	color: #d9dbe0;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+/* =========================================
+   INPUTS
+========================================= */
+.profile-input {
+	width: 100%;
+	min-height: 46px;
+	padding: 10px 13px;
+	color: #f5f5f5;
+	background: #191b21;
+	border: 1px solid #30333b;
+	border-radius: 9px;
+	font-size: 14px;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease, background
+		0.2s ease;
+}
+
+/* Input placeholder */
+.profile-input::placeholder {
+	color: #696d76;
+}
+
+/* Disabled */
+.profile-input:disabled {
+	color: #a8abb3;
+	background: #16181d;
+	border-color: #272a31;
+	cursor: not-allowed;
+	opacity: 1;
+}
+
+/* Active / editable */
+.profile-input:not(:disabled) {
+	background: #1c1e24;
+	color: #ffffff;
+	border-color: #3a3d46;
+}
+
+/* Focus */
+.profile-input:not(:disabled):focus {
+	color: #ffffff;
+	background: #1d2026;
+	border-color: #e50914;
+	box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.12);
+	outline: none;
+}
+
+/* Select arrow area */
+select.profile-input {
+	cursor: pointer;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+.profile-actions {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 10px;
+	margin-top: 28px;
+	padding-top: 22px;
+	border-top: 1px solid #272a31;
+}
+
+.profile-actions .btn {
+	min-width: 125px;
+	min-height: 42px;
+	padding: 9px 18px;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s
+		ease;
+}
+
+/* Edit */
+.edit-btn {
+	color: #ffffff;
+	background: #e50914;
+	border: 1px solid #e50914;
+}
+
+.edit-btn:hover {
+	color: #ffffff;
+	background: #c90812;
+	border-color: #c90812;
+	transform: translateY(-1px);
+	box-shadow: 0 5px 15px rgba(229, 9, 20, 0.22);
+}
+
+/* Cancel */
+.cancel-btn {
+	color: #d7d9de;
+	background: #25282f;
+	border: 1px solid #353841;
+}
+
+.cancel-btn:hover {
+	color: #ffffff;
+	background: #30333b;
+	border-color: #42454f;
+}
+
+/* Save */
+.save-btn {
+	color: #ffffff;
+	background: #e50914;
+	border: 1px solid #e50914;
+}
+
+.save-btn:hover {
+	color: #ffffff;
+	background: #c90812;
+	border-color: #c90812;
+	transform: translateY(-1px);
+	box-shadow: 0 5px 15px rgba(229, 9, 20, 0.22);
+}
+
+/* =========================================
+   ALERT
+========================================= */
+#profileAlert {
+	max-width: 900px;
+	margin: 0 auto 20px;
+	border-radius: 9px;
+	border: 1px solid transparent;
+}
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
+@media ( max-width : 768px) {
+	.profile-page {
+		padding: 30px 15px 45px;
+	}
+	.profile-page-header {
+		margin-bottom: 20px;
+	}
+	.profile-page-header h1 {
+		font-size: 27px;
+	}
+	.profile-card {
+		padding: 24px;
+		border-radius: 14px;
+	}
+	.profile-summary {
+		gap: 14px;
+	}
+	.profile-avatar {
+		width: 64px;
+		height: 64px;
+		font-size: 22px;
+	}
+	.profile-user-info h2 {
+		font-size: 19px;
+	}
+	.profile-divider {
+		margin: 23px 0;
+	}
+	.profile-actions {
+		margin-top: 24px;
+		padding-top: 20px;
+	}
+}
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+@media ( max-width : 576px) {
+	.profile-page {
+		padding: 25px 12px 40px;
+	}
+	.profile-container {
+		max-width: 100%;
+	}
+	.profile-page-header h1 {
+		font-size: 24px;
+	}
+	.profile-page-header p {
+		font-size: 14px;
+	}
+	.profile-card {
+		padding: 20px 16px;
+		border-radius: 12px;
+	}
+	.profile-summary {
+		align-items: center;
+	}
+	.profile-avatar {
+		width: 58px;
+		height: 58px;
+		font-size: 20px;
+	}
+	.profile-user-info {
+		min-width: 0;
+	}
+	.profile-user-info h2 {
+		font-size: 17px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.profile-user-info p {
+		font-size: 13px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.profile-divider {
+		margin: 20px 0;
+	}
+	.form-label {
+		font-size: 13px;
+	}
+	.profile-input {
+		min-height: 44px;
+		font-size: 14px;
+	}
+	.profile-actions {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 9px;
+	}
+	.profile-actions .btn {
+		width: 100%;
+	}
+}
+
+/* =========================================
+   VERY SMALL DEVICES
+========================================= */
+@media ( max-width : 360px) {
+	.profile-page {
+		padding-left: 9px;
+		padding-right: 9px;
+	}
+	.profile-card {
+		padding: 17px 13px;
+	}
+	.profile-avatar {
+		width: 52px;
+		height: 52px;
+		font-size: 18px;
+	}
+	.profile-user-info h2 {
+		font-size: 16px;
+	}
+}

@@ -1,0 +1,252 @@
+@charset "UTF-8";
+/* =====================================================
+   GLOBAL
+===================================================== */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: #080808;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =====================================================
+   HERO SECTION
+===================================================== */
+.hero-section {
+	position: relative;
+	min-height: 470px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.48),
+		rgba(5, 7, 7, 0.92)),
+		url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=2000&q=80");
+	background-size: cover;
+	background-position: center;
+	overflow: hidden;
+}
+
+/* Dark overlay */
+.hero-overlay {
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle at center, rgba(100, 0, 0, 0.18),
+		rgba(0, 0, 0, 0.75) 70%);
+}
+
+/* Hero content */
+.hero-content {
+	position: relative;
+	z-index: 2;
+	max-width: 900px;
+	padding: 40px 20px;
+}
+
+.hero-content h1 {
+	font-size: clamp(2.2rem, 5vw, 4.3rem);
+	font-weight: 800;
+	line-height: 1.05;
+	letter-spacing: -1.5px;
+	margin-bottom: 25px;
+	text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.hero-content p {
+	color: #ff7777;
+	font-size: clamp(0.8rem, 1.5vw, 1rem);
+	line-height: 1.6;
+	font-weight: 500;
+}
+
+/* =====================================================
+   MISSION SECTION
+===================================================== */
+.mission-section {
+	background: #080808;
+	padding: 80px 0 70px;
+}
+
+.mission-content {
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.mission-content h2, .engine-section h2, .cta-section h2 {
+	font-size: 1.6rem;
+	font-weight: 700;
+	margin-bottom: 25px;
+}
+
+.mission-content h2 {
+	color: #ffffff;
+}
+
+.mission-content p {
+	color: #dddddd;
+	font-size: 0.9rem;
+	line-height: 1.8;
+	margin: 0;
+}
+
+/* =====================================================
+   ENGINE SECTION
+===================================================== */
+.engine-section {
+	margin-top: 75px;
+}
+
+.engine-section>h2 {
+	margin-bottom: 35px;
+}
+
+/* Feature cards */
+.feature-card {
+	height: 100%;
+	padding: 35px 25px;
+	background: rgba(10, 10, 10, 0.8);
+	border: 1px solid rgba(255, 255, 255, 0.04);
+	border-radius: 4px;
+	transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s
+		ease;
+}
+
+.feature-card:hover {
+	transform: translateY(-6px);
+	border-color: rgba(255, 0, 0, 0.25);
+	box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Icons */
+.feature-icon {
+	color: #ff1111;
+	font-size: 1.6rem;
+	margin-bottom: 20px;
+}
+
+.feature-card h3 {
+	color: #ffffff;
+	font-size: 1rem;
+	font-weight: 700;
+	margin-bottom: 14px;
+}
+
+.feature-card p {
+	color: #bdbdbd;
+	font-size: 0.75rem;
+	line-height: 1.7;
+	margin: 0;
+}
+
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+@media ( max-width : 991px) {
+	.hero-section {
+		min-height: 420px;
+	}
+	.mission-section {
+		padding: 65px 0;
+	}
+	.engine-section {
+		margin-top: 60px;
+	}
+	.feature-card {
+		padding: 30px 20px;
+	}
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+@media ( max-width : 767px) {
+	.hero-section {
+		min-height: 400px;
+		background-position: center;
+	}
+	.hero-content {
+		padding: 30px 20px;
+	}
+	.hero-content h1 {
+		font-size: 2.2rem;
+		line-height: 1.1;
+		letter-spacing: -0.8px;
+		margin-bottom: 18px;
+	}
+	.hero-content p {
+		font-size: 0.78rem;
+		line-height: 1.6;
+	}
+	.mission-section {
+		padding: 55px 20px;
+	}
+	.mission-content h2, .engine-section h2, .cta-section h2 {
+		font-size: 1.35rem;
+	}
+	.mission-content p {
+		font-size: 0.78rem;
+		line-height: 1.7;
+	}
+	.engine-section {
+		margin-top: 60px;
+	}
+	.engine-section .row {
+		margin-top: 10px !important;
+	}
+	.feature-card {
+		padding: 30px 25px;
+		min-height: auto;
+	}
+	.feature-icon {
+		font-size: 1.5rem;
+		margin-bottom: 15px;
+	}
+	.feature-card h3 {
+		font-size: 0.95rem;
+	}
+	.feature-card p {
+		font-size: 0.75rem;
+		max-width: 350px;
+		margin: auto;
+	}
+	.cta-section {
+		padding: 50px 20px 60px;
+	}
+	.cta-section p {
+		font-size: 0.78rem;
+	}
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+@media ( max-width : 400px) {
+	.hero-section {
+		min-height: 360px;
+	}
+	.hero-content h1 {
+		font-size: 1.8rem;
+	}
+	.hero-content p {
+		font-size: 0.7rem;
+	}
+	.mission-section {
+		padding: 45px 15px;
+	}
+	.feature-card {
+		padding: 25px 18px;
+	}
+	.cta-section {
+		padding: 45px 15px 50px;
+	}
+}
