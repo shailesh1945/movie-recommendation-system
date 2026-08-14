@@ -104,10 +104,10 @@
 						Home </a></li>
 
 				<li class="nav-item"><a class="nav-link"
-					href="../component/recommendedMovies.jsp"> Movies </a></li>
+					href="${pageContext.request.contextPath}/user/allmovies.jsp"> Movies </a></li>
 
 				<li class="nav-item"><a class="nav-link active-nav"
-					href="recommendationPage.jsp"> Recommendation </a></li>
+					href="${pageContext.request.contextPath}/user/recommendationPage.jsp"> Recommendation </a></li>
 
 				<li class="nav-item"><a class="nav-link" href="#"> My List
 
