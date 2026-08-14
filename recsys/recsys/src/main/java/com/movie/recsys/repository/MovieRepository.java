@@ -1,6 +1,7 @@
 package com.movie.recsys.repository;
 
 
+import com.movie.recsys.dto.genre.GenreResponse;
 import com.movie.recsys.dto.movie.MovieSearchRequest;
 import com.movie.recsys.model.Movie;
 
@@ -14,7 +15,7 @@ public interface MovieRepository {
 
     List<Movie> search(MovieSearchRequest request);
 
-    int save(Movie movie);
+    Integer save(Movie movie);
 
     int update(Movie movie);
 
@@ -23,5 +24,20 @@ public interface MovieRepository {
     List<Movie> latestMovies();
 
     List<Movie> topRatedMovies();
+
+    List<GenreResponse> findGenresByMovieId(
+            Integer movieId
+    );
+
+    void saveMovieGenre(
+            Integer movieId,
+            Integer genreId
+    );
+
+    void deleteMovieGenres(
+            Integer movieId
+    );
+
+
 
 }

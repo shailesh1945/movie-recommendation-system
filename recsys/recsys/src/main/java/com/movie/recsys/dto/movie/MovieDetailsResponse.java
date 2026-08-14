@@ -1,6 +1,8 @@
 package com.movie.recsys.dto.movie;
 
 
+import com.movie.recsys.dto.genre.GenreResponse;
+import com.movie.recsys.model.Genre;
 import lombok.Builder;
 import lombok.Data;
 
@@ -25,12 +27,14 @@ public class MovieDetailsResponse {
 
     private String language;
 
+    private Integer languageId;
+
     private BigDecimal averageRating;
 
     private String posterUrl;
 
     private String trailerUrl;
 
-    private List<String> genres;
+    private List<GenreResponse> genres;
 
 }

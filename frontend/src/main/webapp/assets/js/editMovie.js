@@ -183,7 +183,6 @@ async function loadMovie(movieId) {
                 }
             );
 
-
         if (!response.ok) {
 
             throw new Error(
@@ -192,33 +191,185 @@ async function loadMovie(movieId) {
 
         }
 
-
         const movie =
             await response.json();
-
 
         console.log(
             "Movie to edit:",
             movie
         );
 
-
+        // Populate normal movie fields
         populateMovieForm(movie);
 
+        // ==========================================
+        // LOAD GENRES WITH EXISTING GENRES SELECTED
+        // ==========================================
 
-    } catch (error) {
+        let selectedGenreIds = [];
+
+        /*
+         * Expected:
+         *
+         * genres: [
+         *   {
+         *      genreId: 1,
+         *      genreName: "Action"
+         *   },
+         *   {
+         *      genreId: 3,
+         *      genreName: "Comedy"
+         *   }
+         * ]
+         */
+
+        if (Array.isArray(movie.genres)) {
+
+            selectedGenreIds =
+                movie.genres.map(
+                    genre => Number(genre.genreId)
+                );
+
+        }
+
+        /*
+         * Also supports:
+         *
+         * genreIds: [1, 3]
+         */
+
+        else if (Array.isArray(movie.genreIds)) {
+
+            selectedGenreIds =
+                movie.genreIds.map(
+                    id => Number(id)
+                );
+
+        }
+
+        console.log(
+            "Selected genre IDs:",
+            selectedGenreIds
+        );
+
+        await loadGenres(
+            selectedGenreIds
+        );
+
+    }
+    catch (error) {
 
         console.error(
             "Error loading movie:",
             error
         );
 
-
         showError(
             error.message ||
             "Unable to load movie."
         );
 
+    }
+}
+
+async function loadGenres(selectedGenreIds = []) {
+
+    const container =
+        document.getElementById("genreContainer");
+
+    if (!container) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            API.BASE_URL + API.GENRES.ALL,
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load genres."
+            );
+
+        }
+
+        const result =
+            await response.json();
+
+        console.log("Genres:", result);
+
+        const genres =
+            Array.isArray(result)
+                ? result
+                : result.data;
+
+        container.innerHTML = "";
+
+        if (!genres || genres.length === 0) {
+
+            container.innerHTML = `
+                <div class="text-secondary">
+                    No genres available.
+                </div>
+            `;
+
+            return;
+        }
+
+        genres.forEach(genre => {
+
+            const wrapper =
+                document.createElement("div");
+
+            wrapper.className =
+                "form-check form-check-inline mb-2 me-3";
+
+            const isSelected =
+                selectedGenreIds.includes(
+                    Number(genre.genreId)
+                );
+
+            wrapper.innerHTML = `
+                <input
+                    class="form-check-input genre-checkbox"
+                    type="checkbox"
+                    value="${genre.genreId}"
+                    id="genre-${genre.genreId}"
+                    ${isSelected ? "checked" : ""}
+                >
+
+                <label
+                    class="form-check-label text-light"
+                    for="genre-${genre.genreId}"
+                >
+                    ${escapeHtml(genre.genreName)}
+                </label>
+            `;
+
+            container.appendChild(wrapper);
+
+        });
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error loading genres:",
+            error
+        );
+
+        container.innerHTML = `
+            <div class="text-danger">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                Unable to load genres.
+            </div>
+        `;
     }
 }
 
@@ -291,6 +442,7 @@ function populateMovieForm(movie) {
         .getElementById("description")
         .value =
         movie.description ?? "";
+		
 
 
     // Existing poster
@@ -473,6 +625,42 @@ async function updateMovie(event) {
             "description",
             document.getElementById("description").value.trim()
         );
+		
+		// ==============================================
+		// GENRES
+		// ==============================================
+
+		const selectedGenres =
+		    document.querySelectorAll(
+		        ".genre-checkbox:checked"
+		    );
+
+		if (selectedGenres.length === 0) {
+
+		    alert(
+		        "Please select at least one genre."
+		    );
+
+		    updateButton.disabled = false;
+
+		    updateButton.innerHTML = `
+		        <i class="bi bi-save me-2"></i>
+		        Update Movie
+		    `;
+
+		    return;
+		}
+
+		selectedGenres.forEach(
+		    checkbox => {
+
+		        formData.append(
+		            "genreIds",
+		            checkbox.value
+		        );
+
+		    }
+		);
 
 
         // ==============================================
@@ -649,6 +837,12 @@ function showSuccess(message) {
 
 }
 
+
+function escapeHtml(value) {
+    const div = document.createElement("div");
+    div.textContent = value ?? "";
+    return div.innerHTML;
+}
 
 // ======================================================
 // BACK

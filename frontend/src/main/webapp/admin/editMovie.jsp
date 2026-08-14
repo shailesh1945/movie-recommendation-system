@@ -24,6 +24,37 @@
 
 <style>
 
+
+/* =======================
+   Genre Container
+======================= */
+
+.genre-container {
+    background: #1f1f1f;
+    min-height: 60px;
+}
+
+.genre-container .form-check {
+    background: #292929;
+    border: 1px solid #495057;
+    border-radius: 8px;
+    padding: 8px 14px 8px 36px;
+    transition: 0.2s ease;
+}
+
+.genre-container .form-check:hover {
+    border-color: #0d6efd;
+}
+
+.genre-container .form-check-input {
+    cursor: pointer;
+}
+
+.genre-container .form-check-label {
+    cursor: pointer;
+    user-select: none;
+}
+
 /* ===========================
    Main Layout
 =========================== */
@@ -117,7 +148,7 @@
 	<script src="../assets/js/auth.js"></script>
 	<script src="../assets/js/adminMovie.js"></script>
 	<script src="../assets/js/editMovie.js"></script>
-	<script src="../assets/movie.js"></script>
+	<!-- <script src="../assets/movie.js"></script>  -->
 </body>
 
 </html>

@@ -80,21 +80,20 @@
 
 							</div>
 
-							<!-- Genre -->
-							<!-- 
+							<!-- GENRES -->
 							<div class="col-12">
 
 								<label class="form-label text-light"> Genres </label>
 
 								<div id="genreContainer"
-									class="border border-secondary rounded p-3">
+									class="genre-container border border-secondary rounded p-3">
 
 									<div class="text-secondary">Loading genres...</div>
 
 								</div>
 
-								<small class="text-secondary"> Select one or more
-									genres. </small>
+								<small class="text-secondary"> Select one or more genres
+									for this movie. </small>
 
 							</div>
 
@@ -261,6 +260,36 @@ textarea.form-control {
 	max-height: 250px;
 	max-width: 100%;
 	object-fit: contain;
+}
+
+/* =======================
+   Genre Container
+======================= */
+
+.genre-container {
+    background: #1f1f1f;
+    min-height: 60px;
+}
+
+.genre-container .form-check {
+    background: #292929;
+    border: 1px solid #495057;
+    border-radius: 8px;
+    padding: 8px 14px 8px 36px;
+    transition: 0.2s ease;
+}
+
+.genre-container .form-check:hover {
+    border-color: #0d6efd;
+}
+
+.genre-container .form-check-input {
+    cursor: pointer;
+}
+
+.genre-container .form-check-label {
+    cursor: pointer;
+    user-select: none;
 }
 
 /* =======================

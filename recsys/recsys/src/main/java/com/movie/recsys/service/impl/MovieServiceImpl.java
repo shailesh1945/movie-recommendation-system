@@ -1,6 +1,7 @@
 package com.movie.recsys.service.impl;
 
 import com.movie.recsys.dto.ApiResponse;
+import com.movie.recsys.dto.genre.GenreResponse;
 import com.movie.recsys.dto.movie.MovieDetailsResponse;
 import com.movie.recsys.dto.movie.MovieRequest;
 import com.movie.recsys.dto.movie.MovieResponse;
@@ -106,6 +107,10 @@ public class MovieServiceImpl implements MovieService {
             MovieRequest request,
             MultipartFile poster) {
 
+        // -----------------------------------------------------
+        // Save poster
+        // -----------------------------------------------------
+
         if (poster != null && !poster.isEmpty()) {
 
             String posterUrl =
@@ -115,24 +120,65 @@ public class MovieServiceImpl implements MovieService {
 
         }
 
-        Movie movie = mapToMovie(request);
 
-        movieRepository.save(movie);
+        // -----------------------------------------------------
+        // Convert request to Movie
+        // -----------------------------------------------------
 
-        logger.info("Movie added successfully");
+        Movie movie =
+                mapToMovie(request);
+
+
+        // -----------------------------------------------------
+        // Save movie and get generated movie ID
+        // -----------------------------------------------------
+
+        Integer movieId =
+                movieRepository.save(movie);
+
+
+        // -----------------------------------------------------
+        // Save movie genres
+        // -----------------------------------------------------
+
+        saveMovieGenres(
+                movieId,
+                request.getGenreIds()
+        );
+
+
+        logger.info(
+                "Movie added successfully. Movie ID: {}",
+                movieId
+        );
+
 
         return ApiResponse.<Void>builder()
+
                 .success(true)
-                .message("Movie added successfully.")
+
+                .message(
+                        "Movie added successfully."
+                )
+
                 .build();
 
     }
+
+
+    // =========================================================
+    // UPDATE MOVIE
+    // =========================================================
 
     @Override
     public ApiResponse<Void> updateMovie(
             Integer movieId,
             MovieRequest request,
             MultipartFile poster) {
+
+        // -----------------------------------------------------
+        // Check movie exists
+        // -----------------------------------------------------
 
         Movie existing =
                 movieRepository.findById(movieId);
@@ -145,6 +191,11 @@ public class MovieServiceImpl implements MovieService {
 
         }
 
+
+        // -----------------------------------------------------
+        // Save new poster if provided
+        // -----------------------------------------------------
+
         if (poster != null && !poster.isEmpty()) {
 
             String posterUrl =
@@ -154,21 +205,56 @@ public class MovieServiceImpl implements MovieService {
 
         } else {
 
-            request.setPosterUrl(existing.getPosterUrl());
+            request.setPosterUrl(
+                    existing.getPosterUrl()
+            );
 
         }
 
-        Movie movie = mapToMovie(request);
+
+        // -----------------------------------------------------
+        // Update movie
+        // -----------------------------------------------------
+
+        Movie movie =
+                mapToMovie(request);
 
         movie.setMovieId(movieId);
 
         movieRepository.update(movie);
 
-        logger.info("Movie updated successfully");
+
+        // -----------------------------------------------------
+        // Update movie genres
+        //
+        // Delete old genres first, then insert new ones.
+        // -----------------------------------------------------
+
+        movieRepository.deleteMovieGenres(
+                movieId
+        );
+
+
+        saveMovieGenres(
+                movieId,
+                request.getGenreIds()
+        );
+
+
+        logger.info(
+                "Movie updated successfully. Movie ID: {}",
+                movieId
+        );
+
 
         return ApiResponse.<Void>builder()
+
                 .success(true)
-                .message("Movie updated successfully.")
+
+                .message(
+                        "Movie updated successfully."
+                )
+
                 .build();
 
     }
@@ -188,6 +274,8 @@ public class MovieServiceImpl implements MovieService {
 
         }
 
+        movieRepository.deleteMovieGenres(movieId);
+
         movieRepository.delete(movieId);
 
         logger.info("Movie deleted successfully");
@@ -198,6 +286,47 @@ public class MovieServiceImpl implements MovieService {
                 .build();
 
     }
+
+    @Override
+    public List<GenreResponse> findGenresByMovieId(Integer movieId) {
+        return List.of();
+    }
+
+
+    // =========================================================
+    // SAVE MOVIE GENRES
+    // =========================================================
+
+    private void saveMovieGenres(
+            Integer movieId,
+            List<Integer> genreIds) {
+
+        if (genreIds == null ||
+                genreIds.isEmpty()) {
+
+            return;
+
+        }
+
+
+        for (Integer genreId : genreIds) {
+
+            if (genreId == null) {
+
+                continue;
+
+            }
+
+            movieRepository.saveMovieGenre(
+                    movieId,
+                    genreId
+            );
+
+        }
+
+    }
+
+
 
     // ==========================================
     // Private Mapping Methods
@@ -237,6 +366,11 @@ public class MovieServiceImpl implements MovieService {
     private MovieDetailsResponse mapToMovieDetails(
             Movie movie) {
 
+        List<GenreResponse> genres =
+                movieRepository.findGenresByMovieId(
+                        movie.getMovieId()
+                );
+
         return MovieDetailsResponse.builder()
                 .movieId(movie.getMovieId())
                 .title(movie.getTitle())
@@ -245,10 +379,11 @@ public class MovieServiceImpl implements MovieService {
                 .duration(movie.getDuration())
                 .director(movie.getDirector())
                 .language(movie.getLanguageName())
+                .languageId(movie.getLanguageId())
                 .averageRating(movie.getAverageRating())
                 .posterUrl(movie.getPosterUrl())
                 .trailerUrl(movie.getTrailerUrl())
-                .genres(Collections.emptyList())
+                .genres(genres)
                 .build();
 
     }

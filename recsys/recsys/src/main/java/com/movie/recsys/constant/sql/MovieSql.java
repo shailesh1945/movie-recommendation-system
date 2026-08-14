@@ -103,4 +103,30 @@ public final class MovieSql {
         LIMIT 10
         """;
 
+    public static final String INSERT_MOVIE_GENRE = """
+        INSERT INTO movie_genres (
+            movie_id,
+            genre_id
+        )
+        VALUES (?, ?)
+        """;
+
+    public static final String DELETE_MOVIE_GENRES = """
+        DELETE FROM movie_genres
+        WHERE movie_id = ?
+        """;
+
+    public static final String FIND_GENRES_BY_MOVIE_ID = """
+        SELECT
+            g.genre_id,
+            g.genre_name
+        FROM genres g
+        INNER JOIN movie_genres mg
+            ON mg.genre_id = g.genre_id
+        WHERE mg.movie_id = ?
+        ORDER BY g.genre_name
+        """;
+
+
+
 }

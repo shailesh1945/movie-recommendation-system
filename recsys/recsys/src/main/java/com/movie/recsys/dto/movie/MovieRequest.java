@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class MovieRequest {
 
@@ -29,6 +31,8 @@ public class MovieRequest {
     private Integer languageId;
 
     private String posterUrl;
+
+    private List<Integer> genreIds;
 
     private String trailerUrl;
 

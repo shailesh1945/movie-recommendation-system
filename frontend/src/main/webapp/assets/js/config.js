@@ -48,6 +48,11 @@ const API = {
 
 		ALL: "/api/languages"
 
+	},
+	GENRES: {
+
+	    ALL: "/api/genres"
+
 	}
 
 };

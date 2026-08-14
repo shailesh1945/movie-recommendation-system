@@ -322,4 +322,15 @@ public final class SqlConstants {
 
     LIMIT 20
     """;
+
+
+    public static final String GET_ALL_GENRES = """
+        SELECT
+            genre_id,
+            genre_name
+        FROM genres
+        ORDER BY genre_name
+        """;
+
+
 }

@@ -1,9 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-	loadAllMovies();
-	loadLatestMovies();
+    const movieTableBody =
+        document.getElementById("movieTableBody");
+
+    const latestMoviesContainer =
+        document.getElementById("latestMoviesContainer");
+
+
+    // ==========================================
+    // MANAGE MOVIES PAGE
+    // ==========================================
+
+    if (movieTableBody) {
+
+        console.log("Manage Movies page detected.");
+
+        loadAllMovies();
+
+    }
+
+
+    // ==========================================
+    // HOME PAGE - LATEST MOVIES
+    // ==========================================
+
+    if (latestMoviesContainer) {
+
+        console.log("Home page detected.");
+
+        loadLatestMovies();
+
+    }
 
 });
+
+
 /*
 async function loadAllMovies() {
 
@@ -428,34 +459,103 @@ function editMovie(movieId) {
 
 async function loadLatestMovies() {
 
-	try {
+    const container =
+        document.getElementById("latestMoviesContainer");
 
-		const response = await fetch(
+    if (!container) {
+        console.log("latestMoviesContainer not found.");
+        return;
+    }
 
-			API.BASE_URL + API.MOVIES.LATEST,
+    try {
 
-			{
-				credentials: "include"
-			}
+        console.log(
+            "Fetching latest movies:",
+            API.BASE_URL + API.MOVIES.LATEST
+        );
 
-		);
+        const response = await fetch(
+            API.BASE_URL + API.MOVIES.LATEST,
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
 
-		if (!response.ok) {
+        console.log(
+            "Latest movies response status:",
+            response.status
+        );
 
-			throw new Error("Unable to load latest movies.");
+        if (!response.ok) {
 
-		}
+            throw new Error(
+                "Unable to load latest movies. HTTP " +
+                response.status
+            );
 
-		const movies = await response.json();
+        }
 
-		renderLatestMovies(movies);
+        const result =
+            await response.json();
 
-	}
-	catch (error) {
+        console.log(
+            "Latest movies API response:",
+            result
+        );
 
-		console.error(error);
 
-	}
+        // Supports either:
+        //
+        // [
+        //   {...},
+        //   {...}
+        // ]
+        //
+        // OR:
+        //
+        // {
+        //   data: [...]
+        // }
+
+        const movies =
+            Array.isArray(result)
+                ? result
+                : result.data;
+
+
+        if (!Array.isArray(movies)) {
+
+            throw new Error(
+                "Invalid latest movies response."
+            );
+
+        }
+
+
+        renderLatestMovies(movies);
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error loading latest movies:",
+            error
+        );
+
+        container.innerHTML = `
+            <div class="col-12 text-center text-danger py-5">
+
+                <i class="bi bi-exclamation-triangle fs-1"></i>
+
+                <p class="mt-3">
+                    Unable to load latest movies.
+                </p>
+
+            </div>
+        `;
+
+    }
 
 }
 

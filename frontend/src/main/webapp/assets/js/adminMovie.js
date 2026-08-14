@@ -1,18 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const form =
+        document.getElementById("addMovieForm");
+
+    if (!form) {
+        return;
+    }
+
     loadLanguages();
+
+    loadGenres();
 
     setupPosterPreview();
 
-    const form = document.getElementById("addMovieForm");
+    setupAddMovieForm();
 
-    if (form) {
-
-        form.addEventListener("submit", addMovie);
-
-    }
 
 });
+
+
+// INITIALIZE FORM
+
+function setupAddMovieForm() {
+
+    const form =
+        document.getElementById("addMovieForm");
+
+    if (!form) {
+        return;
+    }
+
+    form.addEventListener(
+        "submit",
+        addMovie
+    );
+}
+
+
+/***  LOAD LANGUAGES ***/
 
 async function loadLanguages() {
 
@@ -60,6 +85,129 @@ async function loadLanguages() {
 
 }
 
+
+// ==========================================================
+// LOAD GENRES
+// ==========================================================
+
+async function loadGenres() {
+
+    const container =
+        document.getElementById("genreContainer");
+
+    if (!container) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            API.BASE_URL + API.GENRES.ALL,
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load genres."
+            );
+        }
+
+        const result =
+            await response.json();
+
+        console.log(
+            "Genres:",
+            result
+        );
+
+        /*
+         * Supports:
+         *
+         * [
+         *   {
+         *      genreId: 1,
+         *      genreName: "Action"
+         *   }
+         * ]
+         *
+         * OR:
+         *
+         * {
+         *   success: true,
+         *   data: [...]
+         * }
+         */
+
+        const genres =
+            Array.isArray(result)
+                ? result
+                : result.data;
+
+        container.innerHTML = "";
+
+        if (!genres || genres.length === 0) {
+
+            container.innerHTML = `
+                <div class="text-secondary">
+                    No genres available.
+                </div>
+            `;
+
+            return;
+        }
+
+        genres.forEach(genre => {
+
+            const wrapper =
+                document.createElement("div");
+
+            wrapper.className =
+                "form-check form-check-inline mb-2 me-3";
+
+            wrapper.innerHTML = `
+                <input
+                    class="form-check-input genre-checkbox"
+                    type="checkbox"
+                    value="${genre.genreId}"
+                    id="genre-${genre.genreId}"
+                >
+
+                <label
+                    class="form-check-label text-light"
+                    for="genre-${genre.genreId}"
+                >
+                    ${escapeHtml(genre.genreName)}
+                </label>
+            `;
+
+            container.appendChild(wrapper);
+
+        });
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error loading genres:",
+            error
+        );
+
+        container.innerHTML = `
+            <div class="text-danger">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                Unable to load genres.
+            </div>
+        `;
+    }
+}
+
+
+/*** Poster Preview ***/
+
 function setupPosterPreview() {
 
     const posterInput = document.getElementById("poster");
@@ -72,7 +220,7 @@ function setupPosterPreview() {
 
     }
 
-    posterInput.addEventListener("change", function () {
+    posterInput.addEventListener("change", function() {
 
         const file = this.files[0];
 
@@ -129,6 +277,31 @@ async function addMovie(event) {
     formData.append(
         "trailerUrl",
         document.getElementById("trailerUrl").value.trim()
+    );
+
+    const selectedGenres =
+        document.querySelectorAll(
+            ".genre-checkbox:checked"
+        );
+
+    if (selectedGenres.length === 0) {
+
+        alert(
+            "Please select at least one genre."
+        );
+
+        return;
+    }
+
+    selectedGenres.forEach(
+        checkbox => {
+
+            formData.append(
+                "genreIds",
+                checkbox.value
+            );
+
+        }
     );
 
     const poster = document.getElementById("poster").files[0];
@@ -190,3 +363,4 @@ async function addMovie(event) {
     }
 
 }
+

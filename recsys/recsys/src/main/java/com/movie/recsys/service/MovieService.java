@@ -2,6 +2,7 @@ package com.movie.recsys.service;
 
 
 import com.movie.recsys.dto.ApiResponse;
+import com.movie.recsys.dto.genre.GenreResponse;
 import com.movie.recsys.dto.movie.MovieDetailsResponse;
 import com.movie.recsys.dto.movie.MovieRequest;
 import com.movie.recsys.dto.movie.MovieResponse;
@@ -33,5 +34,8 @@ public interface MovieService {
 
     ApiResponse<Void> deleteMovie(Integer movieId);
 
+    List<GenreResponse> findGenresByMovieId(
+            Integer movieId
+    );
 
 }
