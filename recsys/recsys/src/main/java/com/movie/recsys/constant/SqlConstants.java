@@ -157,6 +157,48 @@ public final class SqlConstants {
                     WHERE preference_id=?
                     """;
 
+    //====================================
+    // GET ALL MOVIES FOR USER
+    //====================================
+    public static final String GET_ALL_MOVIES =
+            """
+            SELECT
+                m.movie_id,
+                m.title,
+                m.director,
+                m.release_year,
+                m.average_rating,
+                m.poster_url,
+                l.language_name,
+    
+                (
+                    SELECT GROUP_CONCAT(
+                        DISTINCT g.genre_name
+                        ORDER BY g.genre_name
+                        SEPARATOR ', '
+                    )
+                    FROM movie_genres mg
+                    JOIN genres g
+                        ON g.genre_id = mg.genre_id
+                    WHERE mg.movie_id = m.movie_id
+                ) AS genre_name,
+    
+                0 AS score
+    
+            FROM movies m
+    
+            LEFT JOIN languages l
+                ON l.language_id = m.language_id
+    
+            ORDER BY
+                m.average_rating DESC,
+                m.release_year DESC
+            """;
+
+
+
+
+
     public static final String GET_RECOMMENDATIONS =
             """
                             SELECT

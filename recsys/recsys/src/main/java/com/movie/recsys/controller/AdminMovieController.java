@@ -48,6 +48,14 @@ public class AdminMovieController {
                 movieService.getAllMovies());
 
     }
+    /*
+    @GetMapping
+    public ResponseEntity<List<MovieResponse>> getAllMovies() {
+
+        return ResponseEntity.ok(
+                movieService.getAllMovies());
+
+    }*/
 
     @GetMapping("/{movieId}")
     public ResponseEntity<MovieDetailsResponse> getMovie(

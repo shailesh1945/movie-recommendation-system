@@ -1,7 +1,10 @@
 package com.movie.recsys.repository;
 
+import com.movie.recsys.dto.movie.UserMovieResponse;
 import com.movie.recsys.dto.user.ProfileResponse;
 import com.movie.recsys.dto.user.ProfileUpdateRequest;
+
+import java.util.List;
 
 public interface UserRepository {
     ProfileResponse getProfile(
@@ -16,4 +19,6 @@ public interface UserRepository {
             String email,
             Integer userId
     );
+
+    List<UserMovieResponse> getAllMovies();
 }

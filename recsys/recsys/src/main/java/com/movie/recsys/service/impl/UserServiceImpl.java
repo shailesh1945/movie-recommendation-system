@@ -1,6 +1,7 @@
 package com.movie.recsys.service.impl;
 
 import com.movie.recsys.dto.ApiResponse;
+import com.movie.recsys.dto.movie.UserMovieResponse;
 import com.movie.recsys.dto.user.ProfileResponse;
 import com.movie.recsys.dto.user.ProfileUpdateRequest;
 import com.movie.recsys.exception.EmailAlreadyExistsException;
@@ -12,6 +13,8 @@ import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl
@@ -182,5 +185,12 @@ public class UserServiceImpl
                         "Profile updated successfully."
                 )
                 .build();
+    }
+    //  all movies logic
+
+
+    @Override
+    public List<UserMovieResponse> getAllMovies() {
+        return profileRepository.getAllMovies();
     }
 }

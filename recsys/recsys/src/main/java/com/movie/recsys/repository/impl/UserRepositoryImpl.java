@@ -1,9 +1,12 @@
 package com.movie.recsys.repository.impl;
 
 
+import com.movie.recsys.constant.SqlConstants;
 import com.movie.recsys.constant.UserSqlConstant;
+import com.movie.recsys.dto.movie.UserMovieResponse;
 import com.movie.recsys.dto.user.ProfileResponse;
 import com.movie.recsys.dto.user.ProfileUpdateRequest;
+import com.movie.recsys.mapper.UserMovieRowMapper;
 import com.movie.recsys.repository.UserRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,11 +18,13 @@ import java.util.List;
 public class UserRepositoryImpl implements UserRepository {
 
     private final JdbcTemplate jdbcTemplate;
+    private final UserMovieRowMapper rowMapper;
 
     public UserRepositoryImpl(
-            JdbcTemplate jdbcTemplate) {
+            JdbcTemplate jdbcTemplate, UserMovieRowMapper rowMapper) {
 
         this.jdbcTemplate = jdbcTemplate;
+        this.rowMapper = rowMapper;
     }
 
     @Override
@@ -42,6 +47,15 @@ public class UserRepositoryImpl implements UserRepository {
         );
 
         return count != null && count > 0;
+    }
+    // logic for all movies
+
+
+    @Override
+    public List<UserMovieResponse> getAllMovies() {
+        return jdbcTemplate.query(
+                SqlConstants.GET_ALL_MOVIES,
+                rowMapper);
     }
 
     @Override
