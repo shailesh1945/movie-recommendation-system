@@ -195,14 +195,15 @@
 
 	<jsp:include page="../component/footer.jsp" />
 
+	<!-- Bootstrap JavaScript -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-	<script src="${pageContext.request.contextPath}/assets/js/config.js">
-		
-	</script>
+	<!-- Application JavaScript -->
+	<script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/profile.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/auth.js"></script>
 
-	<script src="${pageContext.request.contextPath}/assets/js/profile.js">
-		
-	</script>
 
 </body>
 

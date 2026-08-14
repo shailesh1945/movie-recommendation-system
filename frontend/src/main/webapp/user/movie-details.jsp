@@ -136,7 +136,7 @@ body {
 					<h1 id="movieTitle" class="movie-title">-</h1>
 
 
-					<div class="movie-info">
+					<div class="movie-info d-none">
 
 						<span class="movie-label"> Movie ID: </span> <span id="movieId">
 							- </span>
