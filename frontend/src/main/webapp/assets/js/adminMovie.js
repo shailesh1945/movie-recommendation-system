@@ -91,7 +91,7 @@ async function loadLanguages() {
 // ==========================================================
 
 async function loadGenres() {
-
+	//alert("genre api called");
     const container =
         document.getElementById("genreContainer");
 

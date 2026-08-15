@@ -24,7 +24,7 @@ async function loadEveryMovies() {
 
 		console.error(
 			"recommendationContainer not found."
-		);
+		);  
 
 		return;
 
