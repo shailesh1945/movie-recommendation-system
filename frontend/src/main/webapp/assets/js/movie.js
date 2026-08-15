@@ -38,132 +38,132 @@ document.addEventListener("DOMContentLoaded", () => {
 /*
 async function loadAllMovies() {
 
-	try {
+    try {
 
-		const response = await fetch(
-			API.BASE_URL + API.MOVIES.ALL,
-			{
-				credentials: "include"
-			}
-		);
+        const response = await fetch(
+            API.BASE_URL + API.MOVIES.ALL,
+            {
+                credentials: "include"
+            }
+        );
 
-		if (!response.ok) {
+        if (!response.ok) {
 
-			throw new Error("Unable to load movies.");
+            throw new Error("Unable to load movies.");
 
-		}
+        }
 
-		const movies = await response.json();
+        const movies = await response.json();
 
-		renderMovieCards(
-			movies,
-			"recommendedMoviesContainer"
-		);
+        renderMovieCards(
+            movies,
+            "recommendedMoviesContainer"
+        );
 
-	}
-	catch (error) {
+    }
+    catch (error) {
 
-		console.error(error);
+        console.error(error);
 
-	}
+    }
 
 }
 
 function renderMovieCards(movies, containerId) {
 
-	const container =
-		document.getElementById(containerId);
+    const container =
+        document.getElementById(containerId);
 
-	container.innerHTML = "";
+    container.innerHTML = "";
 
-	if (movies.length === 0) {
+    if (movies.length === 0) {
 
-		container.innerHTML = `
+        container.innerHTML = `
             <div class="col-12 text-center text-white">
                 No movies available.
             </div>
         `;
 
-		return;
-	}
+        return;
+    }
 
-	movies.forEach(movie => {
+    movies.forEach(movie => {
 
-		container.innerHTML += `
+        container.innerHTML += `
 
-		<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
 
-		    <div class="card movie-card">
-				<!--
-		        <img
-		            src="${API.BASE_URL}${movie.posterUrl}"
-		            class="movie-poster card-img-top"
-		            alt="${movie.title}">
-				-->
+            <div class="card movie-card">
+                <!--
+                <img
+                    src="${API.BASE_URL}${movie.posterUrl}"
+                    class="movie-poster card-img-top"
+                    alt="${movie.title}">
+                -->
 
-		        <div class="card-body">
+                <div class="card-body">
 
-		            <h6 class="movie-title text-truncate">
+                    <h6 class="movie-title text-truncate">
 
-		                ${movie.title}
+                        ${movie.title}
 
-		            </h6>
+                    </h6>
 
-		            <div class="movie-info">
+                    <div class="movie-info">
 
-		                <i class="bi bi-calendar"></i>
+                        <i class="bi bi-calendar"></i>
 
-		                ${movie.releaseYear}
+                        ${movie.releaseYear}
 
-		            </div>
+                    </div>
 
-		            <div class="movie-info">
+                    <div class="movie-info">
 
-		                <i class="bi bi-clock"></i>
+                        <i class="bi bi-clock"></i>
 
-		                ${movie.duration} min
+                        ${movie.duration} min
 
-		            </div>
+                    </div>
 
-		            <div class="movie-info">
+                    <div class="movie-info">
 
-		                <i class="bi bi-person"></i>
+                        <i class="bi bi-person"></i>
 
-		                ${movie.director}
+                        ${movie.director}
 
-		            </div>
+                    </div>
 
-		            <div class="movie-info">
+                    <div class="movie-info">
 
-		                <i class="bi bi-translate"></i>
+                        <i class="bi bi-translate"></i>
 
-		                ${movie.language}
+                        ${movie.language}
 
-		            </div>
+                    </div>
 
-		            <div class="rating">
+                    <div class="rating">
 
-		                ⭐ ${movie.averageRating}
+                        ⭐ ${movie.averageRating}
 
-		            </div>
+                    </div>
 
-		            <button
-		                class="btn btn-danger btn-sm w-100 mt-2"
-		                onclick="viewMovie(${movie.movieId})">
+                    <button
+                        class="btn btn-danger btn-sm w-100 mt-2"
+                        onclick="viewMovie(${movie.movieId})">
 
-		                View Details
+                        View Details
 
-		            </button>
+                    </button>
 
-		        </div>
+                </div>
 
-		    </div>
+            </div>
 
-		</div>
+        </div>
 
-		`;
+        `;
 
-	});
+    });
 
 }
 */
@@ -172,11 +172,10 @@ async function loadAllMovies() {
 
     try {
 
-        const response = await fetch(
+        const response = await apiFetch(
             API.BASE_URL + API.MOVIES.ALL,
             {
-                method: "GET",
-                credentials: "include"
+                method: "GET"
             }
         );
 
@@ -313,11 +312,10 @@ async function deleteMovie(movieId) {
 
     try {
 
-        const response = await fetch(
+        const response = await apiFetch(
             API.BASE_URL + API.ADMIN_MOVIES.DELETE + movieId,
             {
-                method: "DELETE",
-                credentials: "include"
+                method: "DELETE"
             }
         );
 
@@ -474,11 +472,11 @@ async function loadLatestMovies() {
             API.BASE_URL + API.MOVIES.LATEST
         );
 
-        const response = await fetch(
+
+        const response = await apiFetch(
             API.BASE_URL + API.MOVIES.LATEST,
             {
-                method: "GET",
-                credentials: "include"
+                method: "GET"
             }
         );
 
@@ -665,25 +663,15 @@ async function searchMovies() {
         console.log("Search request:", request);
 
 
-        const response = await fetch(
-
-            API.BASE_URL +
-            API.MOVIES.SEARCH,
-
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                credentials: "include",
-
-                body: JSON.stringify(request)
-            }
-
-        );
-
+        const response = await apiFetch(
+			
+			API.BASE_URL +
+			            API.MOVIES.SEARCH, {
+            
+				method: "POST",
+            
+				body: formData
+        });
 
         if (!response.ok) {
 

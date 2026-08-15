@@ -267,18 +267,18 @@ async function loadMovieDetails(movieId) {
 
     try {
 
-        const response = await fetch(
+        
+        const response = await apiFetch(
 
-            API.BASE_URL +
-            API.ADMIN_MOVIES.DETAILS +
-            movieId,
+        		API.BASE_URL +
+                API.ADMIN_MOVIES.DETAILS +
+                movieId,
 
-            {
-                method: "GET",
-                credentials: "include"
-            }
+			    {
+			        method: "GET"
+			    }
 
-        );
+			);
 
 
         if (!response.ok) {

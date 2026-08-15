@@ -1,10 +1,11 @@
 package com.movie.recsys.controller;
 
 import com.movie.recsys.dto.recommendation.RecommendationResponse;
+import com.movie.recsys.security.SecurityUtil;
 import com.movie.recsys.service.RecommendationService;
-import com.movie.recsys.util.SessionUtil;
-import jakarta.servlet.http.HttpSession;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,27 +16,30 @@ public class RecommendationController {
 
     private final RecommendationService recommendationService;
 
+
     public RecommendationController(
-            RecommendationService recommendationService) {
+            RecommendationService recommendationService
+    ) {
 
-        this.recommendationService = recommendationService;
-
+        this.recommendationService =
+                recommendationService;
     }
+
 
     @GetMapping
     public ResponseEntity<List<RecommendationResponse>>
-    getRecommendations(HttpSession session){
+    getRecommendations(
+            Authentication authentication
+    ) {
 
         Integer userId =
-                SessionUtil.getUserId(session);
+                SecurityUtil.getUserId(authentication);
+
 
         return ResponseEntity.ok(
 
-                recommendationService.getRecommendations(
-                        userId)
-
+                recommendationService
+                        .getRecommendations(userId)
         );
-
     }
-
 }

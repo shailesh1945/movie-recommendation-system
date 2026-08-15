@@ -59,27 +59,14 @@ async function loadRecommendations() {
 		// GET /api/recommendations
 		// =========================================
 
-		const response = await fetch(
-
+		
+		const response = await apiFetch(		
 			API.BASE_URL +
-			API.RECOMMENDATIONS.LIST,
-
-			{
-
-				method: "GET",
-
-				headers: {
-
-					"Content-Type":
-						"application/json"
-
-				},
-
-				credentials: "include"
-
-			}
-
-		);
+					API.RECOMMENDATIONS.LIST, {
+		  
+						method: "GET",
+		 
+		});
 
 
 		// =========================================

@@ -212,9 +212,15 @@ async function loginUser(event) {
 
     event.preventDefault();
 
-    const email = document.getElementById("loginEmail").value.trim();
+    const email =
+        document.getElementById("loginEmail")
+            .value
+            .trim();
 
-    const password = document.getElementById("loginPassword").value;
+    const password =
+        document.getElementById("loginPassword")
+            .value;
+
 
     try {
 
@@ -226,42 +232,66 @@ async function loginUser(event) {
 
                 method: "POST",
 
-                credentials: "include",
-
                 headers: {
-
                     "Content-Type": "application/json"
-
                 },
 
                 body: JSON.stringify({
-
                     email,
                     password
-
                 })
 
             }
-
         );
 
-        const result = await response.json();
+
+        const result =
+            await response.json();
+
 
         if (response.ok && result.success) {
 
-            showAlert("alertBox", result.message, "success");
+            // ===================================
+            // SAVE JWT
+            // ===================================
+
+            const token =
+                result.data.token;
+
+
+            localStorage.setItem(
+                "token",
+                token
+            );
+
+
+            // Optional: save user information
+            localStorage.setItem(
+                "user",
+                JSON.stringify(result.data)
+            );
+
+
+            showAlert(
+                "alertBox",
+                result.message,
+                "success"
+            );
+
 
             setTimeout(() => {
 
-                if (result.data.role === "ADMIN") {
+                if (
+                    result.data.role === "ADMIN"
+                ) {
 
-                    window.location.href = "/frontend/admin/admindashboard.jsp";
+                    window.location.href =
+                        "/frontend/admin/admindashboard.jsp";
 
-                }
+                } else {
 
-                else {
-
-                    window.location.href = "/frontend/user/home.jsp";
+                    window.location.href =
+                        "/frontend/user/home.jsp";
 
                 }
 
@@ -271,60 +301,38 @@ async function loginUser(event) {
 
         else {
 
-            showAlert("alertBox", result.message, "danger");
-
+            showAlert(
+                "alertBox",
+                result.message ||
+                    "Invalid email or password.",
+                "danger"
+            );
         }
 
-    }
 
-    catch (error) {
+    } catch (error) {
 
         console.error(error);
 
-        showAlert("alertBox", "Unable to connect to server.", "danger");
-
+        showAlert(
+            "alertBox",
+            "Unable to connect to server.",
+            "danger"
+        );
     }
-
 }
-
 // ===============================
 // LOGOUT
 // ===============================
 
-async function logoutUser(event) {
+function logoutUser(event) {
 
     event.preventDefault();
 
-    try {
+    localStorage.removeItem("token");
 
-        const response = await fetch(
+    localStorage.removeItem("user");
 
-            API.BASE_URL + API.AUTH.LOGOUT,
-
-            {
-
-                method: "POST",
-
-                credentials: "include"
-
-            }
-
-        );
-
-        const result = await response.json();
-
-        if (response.ok && result.success) {
-
-            window.location.href = "/frontend/index.jsp";
-
-        }
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-    }
-
+    window.location.href =
+        "/frontend/index.jsp";
 }

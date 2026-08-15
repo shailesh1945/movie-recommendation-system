@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-	loadProfile();
+    loadProfile();
 
-	setupProfileForm();
+    setupProfileForm();
 
 });
 
@@ -16,63 +16,64 @@ let currentProfile = null;
 
 async function loadProfile() {
 
-	try {
+    try {
 
-		const response = await fetch(
-			API.BASE_URL + "/api/profile",
-			{
+
+
+        const response = await apiFetch(
+			API.BASE_URL + API.ADMIN_MOVIES.ADD, {
+            
 				method: "GET",
-				credentials: "include"
-			}
-		);
 
-		console.log(
-			"GET profile status:",
-			response.status
-		);
+        });
 
-
-		const result =
-			await response.json();
+        console.log(
+            "GET profile status:",
+            response.status
+        );
 
 
-		console.log(
-			"GET profile response:",
-			result
-		);
+        const result =
+            await response.json();
 
 
-		if (!response.ok ||
-			!result.success) {
-
-			throw new Error(
-				result.message ||
-				"Failed to load profile."
-			);
-		}
+        console.log(
+            "GET profile response:",
+            result
+        );
 
 
-		currentProfile =
-			result.data;
+        if (!response.ok ||
+            !result.success) {
+
+            throw new Error(
+                result.message ||
+                "Failed to load profile."
+            );
+        }
 
 
-		displayProfile(
-			currentProfile
-		);
+        currentProfile =
+            result.data;
 
 
-	} catch (error) {
+        displayProfile(
+            currentProfile
+        );
 
-		console.error(
-			"Profile loading error:",
-			error
-		);
 
-		showAlert(
-			error.message,
-			"danger"
-		);
-	}
+    } catch (error) {
+
+        console.error(
+            "Profile loading error:",
+            error
+        );
+
+        showAlert(
+            error.message,
+            "danger"
+        );
+    }
 }
 
 
@@ -82,87 +83,87 @@ async function loadProfile() {
 
 function displayProfile(profile) {
 
-	document.getElementById(
-		"firstName"
-	).value =
-		profile.firstName || "";
+    document.getElementById(
+        "firstName"
+    ).value =
+        profile.firstName || "";
 
 
-	document.getElementById(
-		"lastName"
-	).value =
-		profile.lastName || "";
+    document.getElementById(
+        "lastName"
+    ).value =
+        profile.lastName || "";
 
 
-	document.getElementById(
-		"email"
-	).value =
-		profile.email || "";
+    document.getElementById(
+        "email"
+    ).value =
+        profile.email || "";
 
 
-	document.getElementById(
-		"phoneNumber"
-	).value =
-		profile.phoneNumber || "";
+    document.getElementById(
+        "phoneNumber"
+    ).value =
+        profile.phoneNumber || "";
 
 
-	document.getElementById(
-		"gender"
-	).value =
-		profile.gender || "";
+    document.getElementById(
+        "gender"
+    ).value =
+        profile.gender || "";
 
 
-	/*
-	 * Never load password
-	 * from backend.
-	 */
+    /*
+     * Never load password
+     * from backend.
+     */
 
-	document.getElementById(
-		"password"
-	).value = "";
-
-
-	const fullName =
-		`${profile.firstName || ""} ${profile.lastName || ""}`
-			.trim();
+    document.getElementById(
+        "password"
+    ).value = "";
 
 
-	document.getElementById(
-		"profileFullName"
-	).textContent =
-		fullName || "User";
+    const fullName =
+        `${profile.firstName || ""} ${profile.lastName || ""}`
+            .trim();
 
 
-	document.getElementById(
-		"profileEmail"
-	).textContent =
-		profile.email || "";
+    document.getElementById(
+        "profileFullName"
+    ).textContent =
+        fullName || "User";
 
 
-	/*
-	 * Avatar initials
-	 */
-
-	const firstInitial =
-		profile.firstName
-			? profile.firstName
-				.charAt(0)
-				.toUpperCase()
-			: "";
+    document.getElementById(
+        "profileEmail"
+    ).textContent =
+        profile.email || "";
 
 
-	const lastInitial =
-		profile.lastName
-			? profile.lastName
-				.charAt(0)
-				.toUpperCase()
-			: "";
+    /*
+     * Avatar initials
+     */
+
+    const firstInitial =
+        profile.firstName
+            ? profile.firstName
+                .charAt(0)
+                .toUpperCase()
+            : "";
 
 
-	document.getElementById(
-		"profileAvatar"
-	).textContent =
-		firstInitial + lastInitial;
+    const lastInitial =
+        profile.lastName
+            ? profile.lastName
+                .charAt(0)
+                .toUpperCase()
+            : "";
+
+
+    document.getElementById(
+        "profileAvatar"
+    ).textContent =
+        firstInitial + lastInitial;
 }
 
 
@@ -172,40 +173,40 @@ function displayProfile(profile) {
 
 function setupProfileForm() {
 
-	const form =
-		document.getElementById(
-			"profileForm"
-		);
+    const form =
+        document.getElementById(
+            "profileForm"
+        );
 
 
-	const editBtn =
-		document.getElementById(
-			"editBtn"
-		);
+    const editBtn =
+        document.getElementById(
+            "editBtn"
+        );
 
 
-	const cancelBtn =
-		document.getElementById(
-			"cancelBtn"
-		);
+    const cancelBtn =
+        document.getElementById(
+            "cancelBtn"
+        );
 
 
-	editBtn.addEventListener(
-		"click",
-		enableEditing
-	);
+    editBtn.addEventListener(
+        "click",
+        enableEditing
+    );
 
 
-	cancelBtn.addEventListener(
-		"click",
-		cancelEditing
-	);
+    cancelBtn.addEventListener(
+        "click",
+        cancelEditing
+    );
 
 
-	form.addEventListener(
-		"submit",
-		updateProfile
-	);
+    form.addEventListener(
+        "submit",
+        updateProfile
+    );
 }
 
 
@@ -215,28 +216,28 @@ function setupProfileForm() {
 
 function enableEditing() {
 
-	document.querySelectorAll(
-		".profile-input"
-	).forEach(input => {
+    document.querySelectorAll(
+        ".profile-input"
+    ).forEach(input => {
 
-		input.disabled = false;
+        input.disabled = false;
 
-	});
-
-
-	document.getElementById(
-		"editBtn"
-	).classList.add("d-none");
+    });
 
 
-	document.getElementById(
-		"cancelBtn"
-	).classList.remove("d-none");
+    document.getElementById(
+        "editBtn"
+    ).classList.add("d-none");
 
 
-	document.getElementById(
-		"saveBtn"
-	).classList.remove("d-none");
+    document.getElementById(
+        "cancelBtn"
+    ).classList.remove("d-none");
+
+
+    document.getElementById(
+        "saveBtn"
+    ).classList.remove("d-none");
 }
 
 
@@ -246,17 +247,17 @@ function enableEditing() {
 
 function cancelEditing() {
 
-	if (currentProfile) {
+    if (currentProfile) {
 
-		displayProfile(
-			currentProfile
-		);
-	}
+        displayProfile(
+            currentProfile
+        );
+    }
 
 
-	disableEditing();
+    disableEditing();
 
-	hideAlert();
+    hideAlert();
 }
 
 
@@ -266,28 +267,28 @@ function cancelEditing() {
 
 function disableEditing() {
 
-	document.querySelectorAll(
-		".profile-input"
-	).forEach(input => {
+    document.querySelectorAll(
+        ".profile-input"
+    ).forEach(input => {
 
-		input.disabled = true;
+        input.disabled = true;
 
-	});
-
-
-	document.getElementById(
-		"editBtn"
-	).classList.remove("d-none");
+    });
 
 
-	document.getElementById(
-		"cancelBtn"
-	).classList.add("d-none");
+    document.getElementById(
+        "editBtn"
+    ).classList.remove("d-none");
 
 
-	document.getElementById(
-		"saveBtn"
-	).classList.add("d-none");
+    document.getElementById(
+        "cancelBtn"
+    ).classList.add("d-none");
+
+
+    document.getElementById(
+        "saveBtn"
+    ).classList.add("d-none");
 }
 
 
@@ -297,136 +298,148 @@ function disableEditing() {
 
 async function updateProfile(event) {
 
-	event.preventDefault();
+    event.preventDefault();
 
 
-	const requestData = {
+    const requestData = {
 
-		firstName:
-			document.getElementById(
-				"firstName"
-			).value.trim(),
+        firstName:
+            document.getElementById(
+                "firstName"
+            ).value.trim(),
 
-		lastName:
-			document.getElementById(
-				"lastName"
-			).value.trim(),
+        lastName:
+            document.getElementById(
+                "lastName"
+            ).value.trim(),
 
-		email:
-			document.getElementById(
-				"email"
-			).value.trim(),
+        email:
+            document.getElementById(
+                "email"
+            ).value.trim(),
 
-		phoneNumber:
-			document.getElementById(
-				"phoneNumber"
-			).value.trim(),
+        phoneNumber:
+            document.getElementById(
+                "phoneNumber"
+            ).value.trim(),
 
-		gender:
-			document.getElementById(
-				"gender"
-			).value,
+        gender:
+            document.getElementById(
+                "gender"
+            ).value,
 
-		password:
-			document.getElementById(
-				"password"
-			).value.trim()
-	};
-
-
-	/*
-	 * Don't send empty password.
-	 */
-
-	if (!requestData.password) {
-
-		delete requestData.password;
-	}
+        password:
+            document.getElementById(
+                "password"
+            ).value.trim()
+    };
 
 
-	console.log(
-		"Updating profile:",
-		requestData
-	);
+    /*
+     * Don't send empty password.
+     */
+
+    if (!requestData.password) {
+
+        delete requestData.password;
+    }
 
 
-	try {
-
-		/*
-		 * IMPORTANT:
-		 * Use API.BASE_URL here too.
-		 */
-
-		const response =
-			await fetch(
-				API.BASE_URL + "/api/profile",
-				{
-					method: "PUT",
-
-					headers: {
-						"Content-Type":
-							"application/json"
-					},
-
-					credentials: "include",
-
-					body: JSON.stringify(
-						requestData
-					)
-				}
-			);
+    console.log(
+        "Updating profile:",
+        requestData
+    );
 
 
-		console.log(
-			"PUT profile status:",
-			response.status
-		);
+    try {
+
+        /*
+         * IMPORTANT:
+         * Use API.BASE_URL here too.
+         */
+
+        /*const response =
+            await fetch(
+                API.BASE_URL + "/api/profile",
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    credentials: "include",
+
+                    body: JSON.stringify(
+                        requestData
+                    )
+                }
+            );*/
+
+			
+			const response = await apiFetch(
+
+						      API.BASE_URL + "/api/profile",
+
+						    {
+						        method: "PUT",
+						        body: formData
+						    }
+
+						);
 
 
-		const result =
-			await response.json();
+        console.log(
+            "PUT profile status:",
+            response.status
+        );
 
 
-		console.log(
-			"PUT profile response:",
-			result
-		);
+        const result =
+            await response.json();
 
 
-		if (!response.ok ||
-			!result.success) {
-
-			throw new Error(
-				result.message ||
-				"Profile update failed."
-			);
-		}
+        console.log(
+            "PUT profile response:",
+            result
+        );
 
 
-		showAlert(
-			"Profile updated successfully!",
-			"success"
-		);
+        if (!response.ok ||
+            !result.success) {
+
+            throw new Error(
+                result.message ||
+                "Profile update failed."
+            );
+        }
 
 
-		await loadProfile();
+        showAlert(
+            "Profile updated successfully!",
+            "success"
+        );
 
 
-		disableEditing();
+        await loadProfile();
 
 
-	} catch (error) {
+        disableEditing();
 
-		console.error(
-			"Profile update error:",
-			error
-		);
 
-		showAlert(
-			error.message,
-			"danger"
-		);
-	}
+    } catch (error) {
+
+        console.error(
+            "Profile update error:",
+            error
+        );
+
+        showAlert(
+            error.message,
+            "danger"
+        );
+    }
 }
 
 
@@ -435,36 +448,36 @@ async function updateProfile(event) {
 ========================= */
 
 function showAlert(
-	message,
-	type
+    message,
+    type
 ) {
 
-	const alert =
-		document.getElementById(
-			"profileAlert"
-		);
+    const alert =
+        document.getElementById(
+            "profileAlert"
+        );
 
 
-	alert.className =
-		`alert alert-${type}`;
+    alert.className =
+        `alert alert-${type}`;
 
 
-	alert.textContent =
-		message;
+    alert.textContent =
+        message;
 }
 
 
 function hideAlert() {
 
-	const alert =
-		document.getElementById(
-			"profileAlert"
-		);
+    const alert =
+        document.getElementById(
+            "profileAlert"
+        );
 
 
-	alert.className =
-		"alert d-none";
+    alert.className =
+        "alert d-none";
 
 
-	alert.textContent = "";
+    alert.textContent = "";
 }

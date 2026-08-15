@@ -89,17 +89,12 @@ async function loadLanguages() {
         document.getElementById("languageId");
 
     try {
-
-        const response =
-            await fetch(
-                API.BASE_URL +
-                API.LANGUAGES.ALL,
-                {
-                    method: "GET",
-                    credentials: "include"
-                }
-            );
-
+			const response = await apiFetch(
+			    API.BASE_URL + API.LANGUAGES.ALL,
+			    {
+			        method: "GET"
+			    }
+			);
 
         if (!response.ok) {
 
@@ -172,16 +167,15 @@ async function loadMovie(movieId) {
 
     try {
 
-        const response =
-            await fetch(
-                API.BASE_URL +
-                API.ADMIN_MOVIES.DETAILS +
-                movieId,
-                {
-                    method: "GET",
-                    credentials: "include"
-                }
-            );
+      
+			
+			const response = await apiFetch(
+				API.BASE_URL + API.ADMIN_MOVIES.DETAILS + movieId,
+			    {
+			        method: "GET"
+			    }
+			);
+			
 
         if (!response.ok) {
 
@@ -283,14 +277,18 @@ async function loadGenres(selectedGenreIds = []) {
 
     try {
 
-        const response = await fetch(
-            API.BASE_URL + API.GENRES.ALL,
-            {
-                method: "GET",
-                credentials: "include"
-            }
-        );
+       
 
+		const response = await apiFetch(
+
+		      API.BASE_URL + API.GENRES.ALL,
+
+		    {
+		        method: "GET"
+		    }
+
+		);
+		
         if (!response.ok) {
 
             throw new Error(
@@ -694,19 +692,17 @@ async function updateMovie(event) {
         // PUT REQUEST
         // ==============================================
 
-        const response =
-            await fetch(
-                API.BASE_URL +
-                API.ADMIN_MOVIES.UPDATE +
-                movieId,
-                {
-                    method: "PUT",
+			
+			const response = await apiFetch(
 
-                    credentials: "include",
+			    API.BASE_URL + API.ADMIN_MOVIES.UPDATE + movieId,
 
-                    body: formData
-                }
-            );
+			    {
+			        method: "PUT",
+			        body: formData
+			    }
+
+			);
 
 
         if (!response.ok) {

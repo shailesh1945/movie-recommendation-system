@@ -8,12 +8,14 @@ import jakarta.servlet.http.HttpSession;
 
 public interface AuthService {
 
-    ApiResponse<Void> register(RegisterRequest request);
+    ApiResponse<Void> register(
+            RegisterRequest request
+    );
 
     ApiResponse<LoginResponse> login(
-            LoginRequest request,
-            HttpSession session);
+            LoginRequest request
+    );
 
-    ApiResponse<Void> logout(HttpSession session);
 
+    ApiResponse<Void> logout();
 }
