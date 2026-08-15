@@ -229,13 +229,24 @@ async function savePreferences() {
 
 
 
-        const response = await apiFetch(
+       /* const response = await apiFetch(
 			API.BASE_URL + API.PREFERENCES.ADD, {
             
 				method: "POST",
             
 				body: formData
-        });
+        });*/
+		
+		const response = await apiFetch(
+		    API.BASE_URL + API.PREFERENCES.ADD,
+		    {
+		        method: "POST",
+		        headers: {
+		            "Content-Type": "application/json"
+		        },
+		        body: JSON.stringify(requestData)
+		    }
+		);
 
 
         // =========================================

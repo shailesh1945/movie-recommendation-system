@@ -28,12 +28,12 @@
 
 <style>
 /* Movie Card */
-.trending-card {
+.movie-card {
 	overflow: hidden;
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.trending-card:hover {
+.movie-card:hover {
 	transform: translateY(-5px);
 }
 

@@ -21,7 +21,7 @@ async function loadProfile() {
 
 
         const response = await apiFetch(
-			API.BASE_URL + API.ADMIN_MOVIES.ADD, {
+			API.BASE_URL + API.PROFILE.USER_PROFILE, {
             
 				method: "GET",
 

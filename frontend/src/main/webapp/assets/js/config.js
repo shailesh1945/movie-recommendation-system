@@ -13,6 +13,7 @@ const API = {
 		ME: "/api/auth/me"
 
 	},
+	
 
 	MOVIES: {
 
@@ -23,8 +24,16 @@ const API = {
 		SEARCH: "/api/movies/search",
 
 		LATEST: "/api/movies/latest",
+		
+		COUNT_MOVIES: "/api/movies/moviescount",
 
-		TOP_RATED: "/api/movies/top-rated"
+		TOP_RATED: "/api/movies/top-rated",
+		
+		COUNT_GENRE: "/api/movies/genrecount",
+		
+		COUNT_USER: "/api/movies/usercount",
+		
+		USER_MOVIES: "/api/usermovies" 
 
 	},
 
@@ -53,6 +62,10 @@ const API = {
 
 	    ALL: "/api/genres"
 
+	},
+	
+	PROFILE: {
+		USER_PROFILE: "/api/profile"
 	},
 	
 	ADMIN: {

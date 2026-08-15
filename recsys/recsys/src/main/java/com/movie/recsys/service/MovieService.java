@@ -38,4 +38,10 @@ public interface MovieService {
             Integer movieId
     );
 
+
+    Integer getMoviesCount();
+
+    Integer getUserCount();
+
+    Integer getGenreCount();
 }

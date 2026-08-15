@@ -12,7 +12,7 @@ async function loadMovieCount() {
 
 		const response = await apiFetch(
 		            API.BASE_URL +
-		            API.ADMIN.MOVIES_COUNT
+		            API.MOVIES.COUNT_MOVIES
 		        );
 
         if (!response.ok) {
@@ -43,7 +43,7 @@ async function loadGenreCount() {
 
 		const response = await apiFetch(
 		            API.BASE_URL +
-		            API.ADMIN.GENRE_COUNT
+		            API.MOVIES.COUNT_GENRE
 		        );
 
         if (!response.ok) {

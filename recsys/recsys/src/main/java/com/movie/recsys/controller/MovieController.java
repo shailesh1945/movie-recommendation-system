@@ -63,4 +63,23 @@ public class MovieController {
 
     }
 
+    @GetMapping("/moviescount")
+    public ResponseEntity<Integer> getMoviesCount(){
+        return ResponseEntity.ok(
+                movieService.getMoviesCount());
+    }
+
+    @GetMapping("/usercount")
+    public ResponseEntity<Integer> getUserCount(){
+        return ResponseEntity.ok(
+                movieService.getUserCount());
+    }
+
+    @GetMapping("/genrecount")
+    public ResponseEntity<Integer> getGenreCount(){
+        return ResponseEntity.ok(
+                movieService.getGenreCount());
+    }
+
+
 }

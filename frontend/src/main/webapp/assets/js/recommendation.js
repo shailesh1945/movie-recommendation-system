@@ -64,7 +64,7 @@ async function loadRecommendations() {
 			API.BASE_URL +
 					API.RECOMMENDATIONS.LIST, {
 		  
-						method: "GET",
+						method: "GET"
 		 
 		});
 

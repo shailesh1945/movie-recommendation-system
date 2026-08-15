@@ -49,6 +49,10 @@ body {
 	background-color: #374151;
 }
 
+.movie-card:hover {
+	transform: translateY(-5px);
+}
+
 .movie-title {
 	font-size: 32px;
 	font-weight: 700;
@@ -225,7 +229,7 @@ const API = {
     BASE_URL: "http://localhost:8081",
 
     ADMIN_MOVIES: {
-        DETAILS: "/api/admin/movies/"
+        DETAILS: "/api/movies/"
     }
 
 };
@@ -514,7 +518,7 @@ function goBack() {
 
 </script>
 
+<script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
 
 </body>
-
 </html>

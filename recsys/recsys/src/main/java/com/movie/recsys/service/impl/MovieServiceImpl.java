@@ -8,6 +8,7 @@ import com.movie.recsys.dto.movie.MovieResponse;
 import com.movie.recsys.dto.movie.MovieSearchRequest;
 import com.movie.recsys.exception.ResourceNotFoundException;
 import com.movie.recsys.model.Movie;
+import com.movie.recsys.repository.AdminRepository;
 import com.movie.recsys.repository.MovieRepository;
 import com.movie.recsys.service.FileStorageService;
 import com.movie.recsys.service.MovieService;
@@ -16,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -29,12 +29,16 @@ public class MovieServiceImpl implements MovieService {
 
     private final FileStorageService fileStorageService;
 
+    private final AdminRepository adminRepository;
+
     public MovieServiceImpl(
             MovieRepository movieRepository,
-            FileStorageService fileStorageService) {
+            FileStorageService fileStorageService,
+            AdminRepository adminRepository) {
 
         this.movieRepository = movieRepository;
         this.fileStorageService = fileStorageService;
+        this.adminRepository = adminRepository;
 
     }
 
@@ -292,6 +296,21 @@ public class MovieServiceImpl implements MovieService {
         return List.of();
     }
 
+
+    @Override
+    public Integer getMoviesCount() {
+        return adminRepository.getMoviesCount();
+    }
+
+    @Override
+    public Integer getUserCount() {
+        return adminRepository.getUserCount();
+    }
+
+    @Override
+    public Integer getGenreCount()  {
+        return adminRepository.getGenreCount();
+    }
 
     // =========================================================
     // SAVE MOVIE GENRES

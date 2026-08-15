@@ -83,6 +83,7 @@ public class SecurityConfig {
                         // PUBLIC AUTH APIs
                         // ==========================
 
+                        .requestMatchers("/uploads/**").permitAll()
                         .requestMatchers(
                                 "/api/auth/login",
                                 "/api/auth/register"
@@ -95,6 +96,7 @@ public class SecurityConfig {
 
                         .requestMatchers(
                                 "/frontend/**",
+                                "/assets/**",
                                 "/assets/**"
                         ).permitAll()
 
