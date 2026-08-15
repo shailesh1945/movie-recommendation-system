@@ -43,8 +43,15 @@ async function loadLanguages() {
 
     try {
 
-        const response = await fetch(
+        /* const response = await fetch(
+             API.BASE_URL + API.LANGUAGES.ALL
+         );*/
+
+        const response = await apiFetch(
             API.BASE_URL + API.LANGUAGES.ALL
+            /*{
+                method: "GET"
+            }*/
         );
 
         if (!response.ok) {
@@ -101,11 +108,10 @@ async function loadGenres() {
 
     try {
 
-        const response = await fetch(
+        const response = await apiFetch(
             API.BASE_URL + API.GENRES.ALL,
             {
-                method: "GET",
-                credentials: "include"
+                method: "GET"
             }
         );
 
@@ -314,19 +320,18 @@ async function addMovie(event) {
 
     try {
 
-        const response = await fetch(
+   
 
-            API.BASE_URL + API.ADMIN_MOVIES.ADD,
+        const response = await apiFetch(
+			
+			API.BASE_URL + API.ADMIN_MOVIES.ADD, {
+            
+				method: "POST",
+            
+				body: formData
+        });
 
-            {
-
-                method: "POST",
-
-                body: formData
-
-            }
-
-        );
+     
 
         const result = await response.json();
 

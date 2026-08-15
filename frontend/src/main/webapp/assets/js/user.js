@@ -10,9 +10,10 @@ async function loadMovieCount() {
 
     try {
 
-        const response = await fetch(
-            "http://localhost:8081/api/admin/moviescount"
-        );
+		const response = await apiFetch(
+		            API.BASE_URL +
+		            API.ADMIN.MOVIES_COUNT
+		        );
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -40,9 +41,10 @@ async function loadGenreCount() {
 
     try {
 
-        const response = await fetch(
-            "http://localhost:8081/api/admin/genrecount"
-        );
+		const response = await apiFetch(
+		            API.BASE_URL +
+		            API.ADMIN.GENRE_COUNT
+		        );
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);

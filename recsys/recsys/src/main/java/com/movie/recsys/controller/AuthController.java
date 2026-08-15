@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,13 +21,19 @@ public class AuthController {
 
     private final AuthService authService;
 
-    public AuthController(AuthService authService) {
+
+    public AuthController(
+            AuthService authService
+    ) {
+
         this.authService = authService;
     }
 
+
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<Void>> register(
-            @Valid @RequestBody RegisterRequest request) {
+            @Valid @RequestBody RegisterRequest request
+    ) {
 
         ApiResponse<Void> response =
                 authService.register(request);
@@ -34,67 +41,67 @@ public class AuthController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
-
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<LoginResponse>> login(
-            @Valid @RequestBody LoginRequest request,
-            HttpSession session) {
+            @Valid @RequestBody LoginRequest request
+    ) {
 
         ApiResponse<LoginResponse> response =
-                authService.login(request, session);
+                authService.login(request);
 
         return ResponseEntity.ok(response);
-
-    }
-
-    @PostMapping("/logout")
-    public ResponseEntity<ApiResponse<Void>> logout(
-            HttpSession session) {
-
-        ApiResponse<Void> response =
-                authService.logout(session);
-
-        return ResponseEntity.ok(response);
-
     }
 
 
     @GetMapping("/me")
     public ResponseEntity<ApiResponse<LoginResponse>> currentUser(
-            HttpSession session) {
+            Authentication authentication
+    ) {
 
-        Integer userId = (Integer) session.getAttribute(
-                AppConstants.SESSION_USER_ID);
+        if (authentication == null ||
+                !authentication.isAuthenticated()) {
 
-        if (userId == null) {
-            throw new UnauthorizedException("Please login first.");
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .build();
         }
 
-        String name = (String) session.getAttribute(
-                AppConstants.SESSION_USER_NAME);
 
-        String role = (String) session.getAttribute(
-                AppConstants.SESSION_ROLE);
+        Integer userId =
+                (Integer) authentication.getPrincipal();
+
 
         LoginResponse response =
                 LoginResponse.builder()
+
                         .userId(userId)
-                        .firstName(name)
-                        .role(role)
+
                         .build();
+
 
         return ResponseEntity.ok(
 
                 ApiResponse.<LoginResponse>builder()
+
                         .success(true)
+
                         .message("User Details")
+
                         .data(response)
+
                         .build()
-
         );
+    }
 
+    @PostMapping("/logout")
+    public ResponseEntity<ApiResponse<Void>> logout() {
+
+        return ResponseEntity.ok(
+                authService.logout()
+        );
     }
 
 }

@@ -14,17 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
 async function checkAdminSession() {
 
     try {
-
-        const response = await fetch(
-
-            API.BASE_URL + API.AUTH.ME,
-
-            {
-                method: "GET",
-                credentials: "include"
-            }
-
-        );
+		
+		const response = await apiFetch(
+					     API.BASE_URL + API.AUTH.ME,
+					    {
+					        method: "GET"
+					    }
+					);
 
 
         if (!response.ok) {
@@ -148,20 +144,14 @@ async function checkAdminSession() {
 async function loadDashboardStats() {
 
     try {
-
-        const response = await fetch(
-
-            API.BASE_URL +
-            API.ADMIN_DASHBOARD.STATS,
-
-            {
-                method: "GET",
-
-                credentials: "include"
-
-            }
-
-        );
+		
+		const response = await apiFetch(
+			API.BASE_URL +
+			            API.ADMIN_DASHBOARD.STATS,
+					    {
+					        method: "GET"
+					    }
+					);
 
 
         console.log(

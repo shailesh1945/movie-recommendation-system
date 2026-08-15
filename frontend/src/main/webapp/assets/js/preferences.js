@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
 
     // ==========================================
     // Preference Chips
@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const chips =
         document.querySelectorAll(".preference-chip");
 
-    chips.forEach(function (chip) {
+    chips.forEach(function(chip) {
 
-        chip.addEventListener("click", function () {
+        chip.addEventListener("click", function() {
 
             this.classList.toggle("active");
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (ratingSlider && ratingValue) {
 
-        ratingSlider.addEventListener("input", function () {
+        ratingSlider.addEventListener("input", function() {
 
             ratingValue.textContent = this.value;
 
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (yearSlider && yearValue) {
 
-        yearSlider.addEventListener("input", function () {
+        yearSlider.addEventListener("input", function() {
 
             yearValue.textContent = this.value;
 
@@ -104,7 +104,7 @@ async function savePreferences() {
             .querySelectorAll(
                 '.preference-chip[data-type="genre"].active'
             )
-            .forEach(function (chip) {
+            .forEach(function(chip) {
 
                 const id =
                     parseInt(
@@ -126,7 +126,7 @@ async function savePreferences() {
             .querySelectorAll(
                 '.preference-chip[data-type="language"].active'
             )
-            .forEach(function (chip) {
+            .forEach(function(chip) {
 
                 const id =
                     parseInt(
@@ -227,32 +227,15 @@ async function savePreferences() {
         // POST /api/preferences
         // =========================================
 
-        const response = await fetch(
 
-            API.BASE_URL +
-            API.PREFERENCES.ADD,
 
-            {
-
-                method: "POST",
-
-                headers: {
-
-                    "Content-Type":
-                        "application/json"
-
-                },
-
-                credentials: "include",
-
-                body:
-                    JSON.stringify(
-                        requestData
-                    )
-
-            }
-
-        );
+        const response = await apiFetch(
+			API.BASE_URL + API.PREFERENCES.ADD, {
+            
+				method: "POST",
+            
+				body: formData
+        });
 
 
         // =========================================

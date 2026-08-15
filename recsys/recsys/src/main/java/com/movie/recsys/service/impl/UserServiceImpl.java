@@ -8,8 +8,7 @@ import com.movie.recsys.exception.EmailAlreadyExistsException;
 import com.movie.recsys.repository.UserRepository;
 import com.movie.recsys.service.UserService;
 import com.movie.recsys.util.PasswordUtil;
-import com.movie.recsys.util.SessionUtil;
-import jakarta.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -27,38 +26,48 @@ public class UserServiceImpl
 
     private final UserRepository profileRepository;
 
+
     public UserServiceImpl(
-            UserRepository profileRepository) {
+            UserRepository profileRepository
+    ) {
 
         this.profileRepository =
                 profileRepository;
     }
 
-    @Override
-    public ApiResponse<ProfileResponse> getProfile(HttpSession session) {
-        logger.info("Get profile request received.");
 
-        Integer userId =
-                SessionUtil.getUserId(session);
+    @Override
+    public ApiResponse<ProfileResponse> getProfile(
+            Integer userId
+    ) {
+
+        logger.info(
+                "Get profile request for userId: {}",
+                userId
+        );
+
 
         if (userId == null) {
 
             logger.warn(
-                    "Profile requested without login."
+                    "Profile requested without authenticated user."
             );
 
             throw new RuntimeException(
-                    "User is not logged in."
+                    "User is not authenticated."
             );
         }
+
 
         logger.info(
                 "Fetching profile for userId: {}",
                 userId
         );
 
+
         ProfileResponse profile =
                 profileRepository.getProfile(userId);
+
 
         if (profile == null) {
 
@@ -72,47 +81,46 @@ public class UserServiceImpl
             );
         }
 
+
         return ApiResponse.<ProfileResponse>builder()
                 .success(true)
-                .message("Profile fetched successfully.")
+                .message(
+                        "Profile fetched successfully."
+                )
                 .data(profile)
                 .build();
     }
 
+
     @Override
     public ApiResponse<Void> updateProfile(
-            ProfileUpdateRequest request,
-            HttpSession session) {
+            Integer userId,
+            ProfileUpdateRequest request
+    ) {
 
         logger.info(
-                "Profile update request received."
+                "Profile update request for userId: {}",
+                userId
         );
 
-        /*
-         * Get logged-in user's ID
-         * from HttpSession.
-         */
-        Integer userId =
-                SessionUtil.getUserId(session);
 
-        /*
-         * User is not logged in.
-         */
         if (userId == null) {
 
             logger.warn(
-                    "Profile update attempted without login."
+                    "Profile update attempted without authenticated user."
             );
 
             throw new RuntimeException(
-                    "User is not logged in."
+                    "User is not authenticated."
             );
         }
+
 
         logger.info(
                 "Updating profile for userId: {}",
                 userId
         );
+
 
         /*
          * Check email only if user
@@ -126,6 +134,7 @@ public class UserServiceImpl
                             userId
                     );
 
+
             if (emailExists) {
 
                 logger.warn(
@@ -138,6 +147,7 @@ public class UserServiceImpl
                 );
             }
         }
+
 
         /*
          * Hash password only if a new
@@ -153,6 +163,7 @@ public class UserServiceImpl
             );
         }
 
+
         /*
          * Update profile.
          */
@@ -161,6 +172,7 @@ public class UserServiceImpl
                         userId,
                         request
                 );
+
 
         if (rowsUpdated == 0) {
 
@@ -174,10 +186,12 @@ public class UserServiceImpl
             );
         }
 
+
         logger.info(
                 "Profile updated successfully for userId: {}",
                 userId
         );
+
 
         return ApiResponse.<Void>builder()
                 .success(true)
@@ -186,11 +200,13 @@ public class UserServiceImpl
                 )
                 .build();
     }
-    //  all movies logic
 
+
+    // All movies logic
 
     @Override
     public List<UserMovieResponse> getAllMovies() {
+
         return profileRepository.getAllMovies();
     }
 }

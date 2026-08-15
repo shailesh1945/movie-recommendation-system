@@ -53,6 +53,14 @@ const API = {
 
 	    ALL: "/api/genres"
 
-	}
+	},
+	
+	ADMIN: {
+	      USERS: "/api/admin/users",
+	      USER_DETAILS: "/api/admin/users/",
+	      USER_COUNT: "/api/admin/usercount",
+	      MOVIES_COUNT: "/api/admin/moviescount",
+		  GENRE_COUNT: "/api/admin/genrecount"
+	  },
 
 };

@@ -59,9 +59,9 @@ async function loadEveryMovies() {
 		// GET /api/recommendations
 		// =========================================
 
-		const response = await fetch("http://localhost:8081/api/usermovies");
-
-
+		const response = await apiFetch(
+		    API.BASE_URL + API.MOVIES.USER_MOVIES
+		);
 		// =========================================
 		// HTTP Error
 		// =========================================

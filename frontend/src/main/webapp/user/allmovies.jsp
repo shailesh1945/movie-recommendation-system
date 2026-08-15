@@ -85,9 +85,9 @@
 
 	<!-- API -->
 
-	<script src="${pageContext.request.contextPath}/assets/js/config.js">
-		
-	</script>
+	<script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
+	
+	<script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
 
 	<script src="${pageContext.request.contextPath}/assets/js/auth.js">
 		
