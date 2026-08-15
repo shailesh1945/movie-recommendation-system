@@ -379,15 +379,15 @@ async function updateProfile(event) {
 
 			
 			const response = await apiFetch(
-
-						      API.BASE_URL + "/api/profile",
-
-						    {
-						        method: "PUT",
-						        body: formData
-						    }
-
-						);
+			    API.BASE_URL + "/api/profile",
+			    {
+			        method: "PUT",
+			        headers: {
+			            "Content-Type": "application/json"
+			        },
+			        body: JSON.stringify(requestData)
+			    }
+			);
 
 
         console.log(
