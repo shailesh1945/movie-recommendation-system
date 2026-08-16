@@ -99,23 +99,24 @@
 
 			<ul class="navbar-nav mx-auto">
 
-				<li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/user/home.jsp">
-
-						Home </a></li>
+				<li class="nav-item"><a class="nav-link active"
+					href="${pageContext.request.contextPath}/user/home.jsp"> Home </a></li>
 
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/user/allmovies.jsp"> Movies </a></li>
+					href="${pageContext.request.contextPath}/user/allmovies.jsp">
+						Movies </a></li>
 
 				<li class="nav-item"><a class="nav-link active-nav"
-					href="${pageContext.request.contextPath}/user/recommendationPage.jsp"> Recommendation </a></li>
+					href="${pageContext.request.contextPath}/user/recommendationPage.jsp">
+						Recommendation </a></li>
 
-				<li class="nav-item"><a class="nav-link" href="#"> My List
-
+				<li class="nav-item"><a class="nav-link"
+					href="${pageContext.request.contextPath}/user/my-list.jsp"> <i
+						class="bi bi-bookmark-heart"></i> My List
 				</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/component/aboutus.jsp"> About Us
-
-				</a></li>
+					href="${pageContext.request.contextPath}/component/aboutus.jsp">
+						About Us </a></li>
 			</ul>
 
 			<!-- Right -->
@@ -154,7 +155,9 @@
 					<ul class="dropdown-menu dropdown-menu-end"
 						aria-labelledby="profileDropdown">
 
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/user/profile.jsp">My Profile</a></li>
+						<li><a class="dropdown-item"
+							href="${pageContext.request.contextPath}/user/profile.jsp">My
+								Profile</a></li>
 
 						<li><a class="dropdown-item text-danger" href="#"
 							id="logoutBtn">Logout</a></li>

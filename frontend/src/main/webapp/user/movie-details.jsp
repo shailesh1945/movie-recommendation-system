@@ -77,12 +77,32 @@ body {
 	color: #d1d5db;
 	line-height: 1.7;
 }
+
+#watchlistButton {
+	min-width: 190px;
+	transition: all 0.2s ease;
+}
+
+#watchlistButton:hover {
+	transform: translateY(-2px);
+}
+
+#watchlistButton.added {
+	background-color: #f59e0b;
+	border-color: #f59e0b;
+	color: #111827;
+}
+
+#watchlistButton.loading {
+	pointer-events: none;
+	opacity: 0.7;
+}
 </style>
 
 </head>
 
 <body class="bg-dark">
-	<jsp:include page="../component/userNavbar.jsp"/>
+	<jsp:include page="../component/userNavbar.jsp" />
 	<div class="container movie-container">
 
 		<div class="mb-4">
@@ -213,6 +233,19 @@ body {
 
 					</div>
 
+					<!-- Watchlist -->
+					<div class="mt-3">
+
+						<button id="watchlistButton" type="button"
+							class="btn btn-outline-warning">
+
+							<i id="watchlistIcon" class="bi bi-bookmark-plus"></i> <span
+								id="watchlistText"> Add to My List </span>
+
+						</button>
+
+					</div>
+
 				</div>
 
 			</div>
@@ -220,7 +253,7 @@ body {
 		</div>
 
 	</div>
-	<jsp:include page="../component/footer.jsp"/>
+	<jsp:include page="../component/footer.jsp" />
 
 	<script>
 
@@ -518,7 +551,10 @@ function goBack() {
 
 </script>
 
-<script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
+
+	<script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
+
+<script src="${pageContext.request.contextPath}/assets/js/watchlist.js"></script>
 
 </body>
 </html>

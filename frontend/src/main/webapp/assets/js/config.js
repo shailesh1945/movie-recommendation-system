@@ -13,7 +13,7 @@ const API = {
 		ME: "/api/auth/me"
 
 	},
-	
+
 
 	MOVIES: {
 
@@ -24,16 +24,29 @@ const API = {
 		SEARCH: "/api/movies/search",
 
 		LATEST: "/api/movies/latest",
-		
+
 		COUNT_MOVIES: "/api/movies/moviescount",
 
 		TOP_RATED: "/api/movies/top-rated",
-		
+
 		COUNT_GENRE: "/api/movies/genrecount",
-		
+
 		COUNT_USER: "/api/movies/usercount",
-		
-		USER_MOVIES: "/api/usermovies" 
+
+		USER_MOVIES: "/api/usermovies"
+
+	},
+	// ==========================
+	// WATCHLIST
+	// ==========================
+
+	WATCHLIST: {
+
+		ADD: "/api/watchlist/",
+
+		REMOVE: "/api/watchlist/",
+
+		CHECK: "/api/watchlist/check/"
 
 	},
 
@@ -60,20 +73,20 @@ const API = {
 	},
 	GENRES: {
 
-	    ALL: "/api/genres"
+		ALL: "/api/genres"
 
 	},
-	
+
 	PROFILE: {
 		USER_PROFILE: "/api/profile"
 	},
-	
+
 	ADMIN: {
-	      USERS: "/api/admin/users",
-	      USER_DETAILS: "/api/admin/users/",
-	      USER_COUNT: "/api/admin/usercount",
-	      MOVIES_COUNT: "/api/admin/moviescount",
-		  GENRE_COUNT: "/api/admin/genrecount"
-	  },
+		USERS: "/api/admin/users",
+		USER_DETAILS: "/api/admin/users/",
+		USER_COUNT: "/api/admin/usercount",
+		MOVIES_COUNT: "/api/admin/moviescount",
+		GENRE_COUNT: "/api/admin/genrecount"
+	},
 
 };
