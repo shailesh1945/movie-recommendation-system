@@ -20,15 +20,6 @@
  */
 
 
-/*
- * ============================================================
- * API CONFIGURATION
- * ============================================================
- */
-
-const WATCHLIST_API_BASE_URL =
-	"http://localhost:8081";
-
 
 /*
  * ============================================================
@@ -151,28 +142,18 @@ async function checkWatchlist(movieId) {
 
 	try {
 
-		/*
-		 * Disable button while checking
-		 */
+		
 		setLoading(true);
 
-
-		/*
-		 * Call backend
-		 *
-		 * IMPORTANT:
-		 * Use localhost:8081 because
-		 * your Spring Boot backend
-		 * is running on port 8081.
-		 */
 		const response =
-			await apiFetch(
-				WATCHLIST_API_BASE_URL +
-				`/api/watchlist/check/${movieId}`,
-				{
-					method: "GET"
-				}
-			);
+		    await apiFetch(
+		        API.BASE_URL +
+		        API.WATCHLIST.CHECK +
+		        movieId,
+		        {
+		            method: "GET"
+		        }
+		    );
 
 
 		/*
@@ -351,21 +332,20 @@ async function toggleWatchlist(movieId) {
 			movieId
 		);
 
+		const endpoint =
+		    isAdded
+		        ? API.WATCHLIST.REMOVE
+		        : API.WATCHLIST.ADD;
 
-		/*
-		 * Call Spring Boot backend
-		 *
-		 * IMPORTANT:
-		 * Backend runs on port 8081.
-		 */
 		const response =
-			await apiFetch(
-				WATCHLIST_API_BASE_URL +
-				`/api/watchlist/${movieId}`,
-				{
-					method: method
-				}
-			);
+		    await apiFetch(
+		        API.BASE_URL +
+		        endpoint +
+		        movieId,
+		        {
+		            method: method
+		        }
+		    );
 
 
 		/*
