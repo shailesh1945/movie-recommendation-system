@@ -340,7 +340,7 @@ body {
 
 let selectedRating = 0;
 
-const API = {
+/* const API = {
 
     BASE_URL: "http://localhost:8081",
 
@@ -353,7 +353,7 @@ const API = {
         SAVE: "/api/ratings/movie/"
     }
 
-};
+}; */
 
 
 // =================================================
@@ -1144,7 +1144,6 @@ function goBack() {
 
 </script>
 
-	<<<<<<< HEAD
 
 	<script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
@@ -1153,9 +1152,7 @@ function goBack() {
 	<script src="${pageContext.request.contextPath}/assets/js/auth.js"></script>
 
 	<script src="${pageContext.request.contextPath}/assets/js/watchlist.js"></script>
-	=======
-	<script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
-	>>>>>>> e3af109 (solve issue of rating module)
+
 
 </body>
 </html>

@@ -89,9 +89,14 @@ const API = {
 	    GENRE_COUNT: "/api/admin/genrecount"
 	},
 
-	RATINGS: {
+	/*RATINGS: {
 	    MOVIE: "/api/ratings/movie/",
 	    SAVE: "/api/ratings"
-	}
+	}*/
+	
+	RATINGS: {
+	       MY_RATING: "/api/ratings/movie/",
+	       SAVE: "/api/ratings/movie/"
+	   }
 
 };
