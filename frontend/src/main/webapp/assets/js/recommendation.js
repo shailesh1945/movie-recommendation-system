@@ -460,10 +460,10 @@ function createMovieCard(movie) {
 			function() {
 
 				window.location.href =
-					"./movie-details.jsp?movieId=" +
-					encodeURIComponent(
-						movieId
-					);
+				    "../movie-details.jsp?movieId=" +
+				    encodeURIComponent(
+				        movieId
+				    );
 
 
 			}

@@ -247,7 +247,7 @@ footer {
 
 					<button type="button" class="preference-chip" data-type="language"
 						data-id="7">French</button>
-						
+
 					<button type="button" class="preference-chip" data-type="language"
 						data-id="8">Japanese</button>
 
@@ -274,16 +274,16 @@ footer {
 
 							</h6>
 
-							<span id="ratingValue" class="slider-value"> 7.5 </span>
+							<span id="ratingValue" class="slider-value"> 3.5 </span>
 
 						</div>
 
 						<input type="range" class="form-range mt-4" id="ratingSlider"
-							min="0" max="10" step="0.5" value="7.5">
+							min="0" max="5" step="0.5" value="3.5">
 
 						<div class="d-flex justify-content-between">
 
-							<small>0</small> <small>10</small>
+							<small>0</small> <small>5</small>
 
 						</div>
 
@@ -349,7 +349,7 @@ footer {
 
 
 	<script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
-	
+
 	<script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
 
 	<script src="${pageContext.request.contextPath}/assets/js/auth.js"></script>

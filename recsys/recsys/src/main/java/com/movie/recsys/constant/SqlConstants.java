@@ -167,9 +167,15 @@ public final class SqlConstants {
                 m.title,
                 m.director,
                 m.release_year,
-                m.average_rating,
+                m.duration,
+                m.description,
                 m.poster_url,
+                m.trailer_url,
+                m.language_id,
+    
                 l.language_name,
+    
+                COALESCE(r.average_rating, 0) AS average_rating,
     
                 (
                     SELECT GROUP_CONCAT(
@@ -190,8 +196,17 @@ public final class SqlConstants {
             LEFT JOIN languages l
                 ON l.language_id = m.language_id
     
+            LEFT JOIN (
+                SELECT
+                    movie_id,
+                    ROUND(AVG(rating), 1) AS average_rating
+                FROM ratings
+                GROUP BY movie_id
+            ) r
+                ON r.movie_id = m.movie_id
+    
             ORDER BY
-                m.average_rating DESC,
+                COALESCE(r.average_rating, 0) DESC,
                 m.release_year DESC
             """;
 
@@ -199,22 +214,26 @@ public final class SqlConstants {
 
 
 
-    public static final String GET_RECOMMENDATIONS =
-            """
-                            SELECT
-
+    public static final String GET_RECOMMENDATIONS = """
+    SELECT
         m.movie_id,
-
         m.title,
-
         m.director,
-
         m.release_year,
 
-        m.average_rating,
+        ROUND(
+            IFNULL(
+                (
+                    SELECT AVG(r.rating)
+                    FROM ratings r
+                    WHERE r.movie_id = m.movie_id
+                ),
+                0
+            ),
+            1
+        ) AS average_rating,
 
         m.poster_url,
-
         l.language_name,
 
         (
@@ -231,8 +250,7 @@ public final class SqlConstants {
 
         (
             CASE
-
-                WHEN EXISTS(
+                WHEN EXISTS (
                     SELECT 1
                     FROM movie_genres mg
                     JOIN user_preference_genres upg
@@ -244,14 +262,12 @@ public final class SqlConstants {
                 )
                 THEN 40
                 ELSE 0
-
             END
 
             +
 
             CASE
-
-                WHEN EXISTS(
+                WHEN EXISTS (
                     SELECT 1
                     FROM user_preference_languages upl
                     JOIN user_preferences up
@@ -261,27 +277,27 @@ public final class SqlConstants {
                 )
                 THEN 20
                 ELSE 0
-
             END
 
             +
 
             CASE
-
-                WHEN m.average_rating >= (
+                WHEN (
+                    SELECT IFNULL(AVG(r.rating), 0)
+                    FROM ratings r
+                    WHERE r.movie_id = m.movie_id
+                ) >= (
                     SELECT min_rating
                     FROM user_preferences
                     WHERE user_id = ?
                 )
                 THEN 20
                 ELSE 0
-
             END
 
             +
 
             CASE
-
                 WHEN m.release_year >= (
                     SELECT min_release_year
                     FROM user_preferences
@@ -289,12 +305,20 @@ public final class SqlConstants {
                 )
                 THEN 10
                 ELSE 0
-
             END
 
             +
 
-            ROUND(m.average_rating)
+            ROUND(
+                IFNULL(
+                    (
+                        SELECT AVG(r.rating)
+                        FROM ratings r
+                        WHERE r.movie_id = m.movie_id
+                    ),
+                    0
+                )
+            )
 
         ) AS score
 
@@ -304,25 +328,20 @@ public final class SqlConstants {
         ON l.language_id = m.language_id
 
     WHERE EXISTS (
-
         SELECT 1
-
         FROM user_preference_languages upl
-
         JOIN user_preferences up
             ON up.preference_id = upl.preference_id
-
         WHERE up.user_id = ?
         AND upl.language_id = m.language_id
-
     )
 
-    ORDER BY score DESC,
-             average_rating DESC
+    ORDER BY
+        score DESC,
+        average_rating DESC
 
     LIMIT 20
     """;
-
 
     public static final String GET_ALL_GENRES = """
         SELECT

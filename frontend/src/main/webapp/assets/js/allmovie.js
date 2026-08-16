@@ -1,11 +1,35 @@
-document.addEventListener(
-	"DOMContentLoaded",
-	function() {
+document.addEventListener("DOMContentLoaded", function () {
 
-		loadEveryMovies();
+    loadEveryMovies();
 
-	}
-);
+});
+
+
+// =================================================
+// REFRESH WHEN RETURNING FROM MOVIE DETAILS
+// =================================================
+
+window.addEventListener("pageshow", function () {
+
+    const updatedMovieId =
+        sessionStorage.getItem("movieRatingUpdated");
+
+    if (updatedMovieId) {
+
+        console.log(
+            "Rating updated for movie:",
+            updatedMovieId
+        );
+
+        sessionStorage.removeItem(
+            "movieRatingUpdated"
+        );
+
+        loadEveryMovies();
+
+    }
+
+});
 
 
 // =================================================
@@ -14,29 +38,26 @@ document.addEventListener(
 
 async function loadEveryMovies() {
 
-	const container =
-		document.getElementById(
-			"allmoviecontainer"
-		);
+    const container =
+        document.getElementById(
+            "allmoviecontainer"
+        );
+
+    if (!container) {
+
+        console.error(
+            "allmoviecontainer not found."
+        );
+
+        return;
+    }
 
 
-	if (!container) {
+    // =============================================
+    // Loading UI
+    // =============================================
 
-		console.error(
-			"recommendationContainer not found."
-		);  
-
-		return;
-
-	}
-
-
-	// =============================================
-	// Loading UI
-	// =============================================
-
-	container.innerHTML = `
-
+    container.innerHTML = `
         <div class="col-12 text-center py-5">
 
             <div
@@ -45,170 +66,143 @@ async function loadEveryMovies() {
             </div>
 
             <p class="text-white mt-3">
-                Finding movies for you...
+                Loading movies...
             </p>
 
         </div>
-
     `;
 
 
-	try {
+    try {
 
-		// =========================================
-		// GET /api/recommendations
-		// =========================================
+        // =========================================
+        // GET ALL MOVIES
+        // =========================================
 
-		const response = await apiFetch(
-		    API.BASE_URL + API.MOVIES.USER_MOVIES
-		);
-		// =========================================
-		// HTTP Error
-		// =========================================
-
-		if (!response.ok) {
-
-			let message =
-				"Unable to load movies.";
-
-			try {
-
-				const error =
-					await response.json();
-
-				if (error.message) {
-
-					message =
-						error.message;
-
-				}
-
-			} catch (e) {
-
-				console.error(
-					"Could not parse error response:",
-					e
-				);
-
-			}
-
-			throw new Error(message);
-
-		}
+        const response =
+            await apiFetch(
+                API.BASE_URL +
+                API.MOVIES.USER_MOVIES,
+                {
+                    method: "GET"
+                }
+            );
 
 
-		// =========================================
-		// Read Response
-		// =========================================
+        // =========================================
+        // HTTP ERROR
+        // =========================================
 
-		const result =
-			await response.json();
+        if (!response.ok) {
 
+            let message =
+                "Unable to load movies.";
 
-		console.log(
-			"Movie API response:",
-			result
-		);
+            try {
 
+                const error =
+                    await response.json();
 
-		// =========================================
-		// Extract Movies
-		// =========================================
+                if (error.message) {
 
-		let movies;
+                    message =
+                        error.message;
 
+                }
 
-		/*
-		 * Case 1:
-		 *
-		 * [
-		 *    {...},
-		 *    {...}
-		 * ]
-		 */
+            } catch (e) {
 
-		if (Array.isArray(result)) {
+                console.error(
+                    "Unable to parse error response:",
+                    e
+                );
 
-			movies = result;
+            }
 
-		}
+            throw new Error(message);
+
+        }
 
 
-		/*
-		 * Case 2:
-		 *
-		 * {
-		 *     "data": [...]
-		 * }
-		 */
+        // =========================================
+        // RESPONSE
+        // =========================================
 
-		else if (
-			result &&
-			Array.isArray(result.data)
-		) {
-
-			movies = result.data;
-
-		}
+        const result =
+            await response.json();
 
 
-		/*
-		 * Case 3:
-		 *
-		 * {
-		 *     "content": [...]
-		 * }
-		 */
-
-		else if (
-			result &&
-			Array.isArray(result.content)
-		) {
-
-			movies = result.content;
-
-		}
+        console.log(
+            "All movies response:",
+            result
+        );
 
 
-		/*
-		 * Unknown response
-		 */
+        // =========================================
+        // EXTRACT MOVIES
+        // =========================================
 
-		else {
-
-			movies = [];
-
-		}
+        let movies = [];
 
 
-		// =========================================
-		// Display Movies
-		// =========================================
+        if (Array.isArray(result)) {
 
-		displayMovies(
-			movies
-		);
+            movies = result;
+
+        }
+
+        else if (
+            result &&
+            Array.isArray(result.data)
+        ) {
+
+            movies = result.data;
+
+        }
+
+        else if (
+            result &&
+            Array.isArray(result.content)
+        ) {
+
+            movies = result.content;
+
+        }
 
 
-	} catch (error) {
-
-		console.error(
-			"movies error:",
-			error
-		);
+        console.log(
+            "Movies:",
+            movies
+        );
 
 
-		showMoviesError(
-			error.message
-		);
+        // =========================================
+        // DISPLAY
+        // =========================================
 
-	}
+        displayMovies(movies);
+
+
+    } catch (error) {
+
+        console.error(
+            "Load movies error:",
+            error
+        );
+
+
+        showMoviesError(
+            error.message ||
+            "Unable to load movies."
+        );
+
+    }
 
 }
 
 
 // =================================================
-// DISPLAY RECOMMENDATIONS
+// DISPLAY MOVIES
 // =================================================
 
 function displayMovies(movies) {
@@ -218,12 +212,16 @@ function displayMovies(movies) {
             "allmoviecontainer"
         );
 
+
     if (!container) {
+
         return;
+
     }
 
+
     // =============================================
-    // No Movies
+    // NO MOVIES
     // =============================================
 
     if (
@@ -241,30 +239,34 @@ function displayMovies(movies) {
                 </i>
 
                 <h4 class="text-white mt-3">
-                    No Movies found
+                    No Movies Found
                 </h4>
 
                 <p class="text-secondary">
-                    Try changing your preferences.
+                    There are no movies available.
                 </p>
+
             </div>
 
         `;
 
         return;
+
     }
 
+
     // =============================================
-    // Clear Container
+    // CLEAR CONTAINER
     // =============================================
 
     container.innerHTML = "";
 
+
     // =============================================
-    // Create Movie Cards
+    // CREATE CARDS
     // =============================================
 
-    movies.forEach(function(movie) {
+    movies.forEach(function (movie) {
 
         const card =
             createMovieCard(movie);
@@ -272,7 +274,9 @@ function displayMovies(movies) {
         container.appendChild(card);
 
     });
+
 }
+
 
 // =================================================
 // CREATE MOVIE CARD
@@ -280,271 +284,320 @@ function displayMovies(movies) {
 
 function createMovieCard(movie) {
 
-	const col =
-		document.createElement("div");
+    const col =
+        document.createElement("div");
 
-	col.className =
-		"col-xl-3 col-lg-4 col-md-6 col-sm-6";
 
+    col.className =
+        "col-xl-3 col-lg-4 col-md-6 col-sm-6";
 
-	// =============================================
-	// Movie Data
-	// =============================================
 
-	const movieId =
-		movie.id ??
-		movie.movieId;
+    // =============================================
+    // MOVIE ID
+    // =============================================
 
+    const movieId =
+        movie.movieId ??
+        movie.id;
 
-	const title =
-		movie.title ||
-		"Unknown Movie";
 
+    // =============================================
+    // TITLE
+    // =============================================
 
-	const rating =
-		movie.rating ??
-		movie.averageRating ??
-		"N/A";
+    const title =
+        movie.title ||
+        "Unknown Movie";
 
 
-	const releaseYear =
-		movie.releaseYear ??
-		movie.year ??
-		"";
+    // =============================================
+    // AVERAGE RATING
+    // =============================================
 
+    let averageRating =
+        movie.averageRating;
 
-	const poster = movie.posterUrl
-		? (
-			movie.posterUrl.startsWith("http")
-				? movie.posterUrl
-				: API.BASE_URL + movie.posterUrl
-		)
-		: CONTEXT_PATH + "/assets/images/default-movie.jpg";
 
+    /*
+     * Convert null / undefined / empty
+     * values to 0.
+     */
 
-	const genre =
-		movie.genre ||
-		movie.genres ||
-		"";
+    if (
+        averageRating === null ||
+        averageRating === undefined ||
+        averageRating === ""
+    ) {
 
+        averageRating = 0;
 
-	const language =
-		movie.language ||
-		movie.languages ||
-		"";
+    }
 
 
-	// =============================================
-	// Movie Card
-	// =============================================
+    /*
+     * Make sure rating is numeric.
+     */
 
-	col.innerHTML = `
-	
+    averageRating =
+        Number(averageRating);
 
-	    <div class="card movie-card h-100 bg-dark rounded shadow">
 
-	        <div class="position-relative">
+    if (Number.isNaN(averageRating)) {
 
-	            <img
-	                src="${escapeHtml(poster)}"
-	                class="card-img-top movie-poster"
-	                alt="${escapeHtml(title)}"
-	                onerror="this.onerror=null; this.src='${CONTEXT_PATH}/assets/images/default-movie.png';"
-	            >
+        averageRating = 0;
 
-	            <span
-	                class="
-	                    position-absolute
-	                    top-0
-	                    end-0
-	                    badge
-	                    bg-danger
-	                    m-2
-	                ">
+    }
 
-	                ⭐ ${escapeHtml(rating)}
 
-	            </span>
+    /*
+     * Display one decimal place.
+     *
+     * Example:
+     *
+     * 0   -> 0.0
+     * 3   -> 3.0
+     * 3.5 -> 3.5
+     */
 
-	        </div>
+    averageRating =
+        averageRating.toFixed(1);
 
-	        <div class="card-body">
 
-	            <h5 class="card-title text-white">
+    // =============================================
+    // RELEASE YEAR
+    // =============================================
 
-	                ${escapeHtml(title)}
+    const releaseYear =
+        movie.releaseYear ??
+        movie.year ??
+        "";
 
-	            </h5>
 
-	            ${genre
-	                ? `
-	                    <p class="card-text  mb-1 text-white">
+    // =============================================
+    // POSTER
+    // =============================================
 
-	                        <i class="bi bi-film me-1"></i>
+    const poster =
+        movie.posterUrl
+            ? (
+                movie.posterUrl.startsWith("http")
+                    ? movie.posterUrl
+                    : API.BASE_URL +
+                      movie.posterUrl
+              )
+            : CONTEXT_PATH +
+              "/assets/images/default-movie.jpg";
 
-	                        ${escapeHtml(
-	                            formatValue(genre)
-	                        )}
 
-	                    </p>
-	                  `
-	                : ""
-	            }
+    // =============================================
+    // GENRE
+    // =============================================
 
-	            ${language
-	                ? `
-	                    <p class="card-text  mb-1 text-white">
+    const genre =
+        movie.genreName ??
+        movie.genre ??
+        movie.genres ??
+        "";
 
-	                        <i class="bi bi-globe me-1"></i>
 
-	                        ${escapeHtml(
-	                            formatValue(language)
-	                        )}
+    // =============================================
+    // LANGUAGE
+    // =============================================
 
-	                    </p>
-	                  `
-	                : ""
-	            }
+    const language =
+        movie.languageName ??
+        movie.language ??
+        movie.languages ??
+        "";
 
-	            ${releaseYear
-	                ? `
-	                    <p class="card-text text-light">
 
-	                        <i class="bi bi-calendar me-1"></i>
+    // =============================================
+    // CARD HTML
+    // =============================================
 
-	                        ${escapeHtml(releaseYear)}
+    col.innerHTML = `
 
-	                    </p>
-	                  `
-	                : ""
-	            }
+        <div
+            class="card movie-card h-100 bg-dark rounded shadow"
+            data-movie-id="${escapeHtml(movieId)}"
+        >
 
-	        </div>
+            <!-- Poster -->
 
-	    </div>
+            <div class="position-relative">
 
-	`;
+                <img
+                    src="${escapeHtml(poster)}"
+                    class="card-img-top movie-poster"
+                    alt="${escapeHtml(title)}"
 
+                    onerror="
+                        this.onerror=null;
+                        this.src='${CONTEXT_PATH}/assets/images/default-movie.png';
+                    "
+                >
 
-	// =============================================
-	// Click Movie Card
-	// =============================================
 
-	if (movieId !== undefined && movieId !== null) {
+                <!-- Average Rating -->
 
-		const movieCard =
-			col.querySelector(".movie-card");
+                <span
+                    class="
+                        position-absolute
+                        top-0
+                        end-0
+                        badge
+                        bg-danger
+                        m-2
+                    "
+                >
 
-		movieCard.style.cursor =
-			"pointer";
+                    <i class="bi bi-star-fill text-warning"></i>
 
+                    ${escapeHtml(averageRating)}
 
-		movieCard.addEventListener(
-			"click",
-			function() {
+                </span>
 
-				window.location.href =
-					"./movie-details.jsp?movieId=" +
-					encodeURIComponent(
-						movieId
-					);
+            </div>
 
-			}
-		);
 
-	}
+            <!-- Card Body -->
 
+            <div class="card-body">
 
-	return col;
+                <h5 class="card-title text-white">
 
-}
+                    ${escapeHtml(title)}
 
+                </h5>
 
-// =================================================
-// FORMAT ARRAY / VALUE
-// =================================================
 
-function formatValue(value) {
+                ${
+                    genre
+                        ? `
 
-	if (Array.isArray(value)) {
+                            <p class="card-text mb-1 text-white">
 
-		return value.join(", ");
+                                <i class="bi bi-film me-1"></i>
 
-	}
+                                ${escapeHtml(
+                                    formatValue(genre)
+                                )}
 
-	return value;
+                            </p>
 
-}
+                          `
+                        : ""
+                }
 
 
-// =================================================
-// ERROR UI
-// =================================================
+                ${
+                    language
+                        ? `
 
-function showMoviesError(message) {
+                            <p class="card-text mb-1 text-white">
 
-	const container =
-		document.getElementById(
-			"recommendationContainer"
-		);
+                                <i class="bi bi-globe me-1"></i>
 
+                                ${escapeHtml(
+                                    formatValue(language)
+                                )}
 
-	if (!container) {
+                            </p>
 
-		return;
+                          `
+                        : ""
+                }
 
-	}
 
+                ${
+                    releaseYear
+                        ? `
 
-	container.innerHTML = `
+                            <p class="card-text text-light">
 
-        <div class="col-12 text-center py-5">
+                                <i class="bi bi-calendar me-1"></i>
 
-            <i
-                class="
-                    bi
-                    bi-exclamation-circle
-                    text-danger
-                "
-                style="font-size: 3rem;">
-            </i>
+                                ${escapeHtml(
+                                    releaseYear
+                                )}
 
+                            </p>
 
-            <h4
-                class="text-white mt-3">
+                          `
+                        : ""
+                }
 
-                Unable to load recommendations
-
-            </h4>
-
-
-            <p
-                class="text-secondary">
-
-                ${escapeHtml(
-		message ||
-		"Something went wrong."
-	)}
-
-            </p>
-
-
-            <button
-                type="button"
-                class="btn btn-danger"
-                onclick="loadRecommendations()">
-
-                <i
-                    class="bi bi-arrow-clockwise me-1">
-                </i>
-
-                Try Again
-
-            </button>
+            </div>
 
         </div>
 
     `;
+
+
+    // =============================================
+    // MOVIE CARD CLICK
+    // =============================================
+
+    if (
+        movieId !== undefined &&
+        movieId !== null
+    ) {
+
+        const movieCard =
+            col.querySelector(
+                ".movie-card"
+            );
+
+
+        movieCard.style.cursor =
+            "pointer";
+
+
+        movieCard.addEventListener(
+            "click",
+            function () {
+
+                window.location.href =
+                    "./movie-details.jsp?movieId=" +
+                    encodeURIComponent(
+                        movieId
+                    );
+
+            }
+        );
+
+    }
+
+
+    return col;
+
+}
+
+
+// =================================================
+// FORMAT VALUE
+// =================================================
+
+function formatValue(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    if (Array.isArray(value)) {
+
+        return value.join(", ");
+
+    }
+
+
+    return String(value);
 
 }
 
@@ -555,36 +608,62 @@ function showMoviesError(message) {
 
 function escapeHtml(value) {
 
-	if (
-		value === null ||
-		value === undefined
-	) {
+    if (
+        value === null ||
+        value === undefined
+    ) {
 
-		return "";
+        return "";
 
-	}
+    }
 
 
-	return String(value)
-		.replace(
-			/&/g,
-			"&amp;"
-		)
-		.replace(
-			/</g,
-			"&lt;"
-		)
-		.replace(
-			/>/g,
-			"&gt;"
-		)
-		.replace(
-			/"/g,
-			"&quot;"
-		)
-		.replace(
-			/'/g,
-			"&#039;"
-		);
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+// =================================================
+// ERROR UI
+// =================================================
+
+function showMoviesError(message) {
+
+    const container =
+        document.getElementById(
+            "allmoviecontainer"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+        <div class="col-12">
+
+            <div class="alert alert-danger text-center">
+
+                <i class="bi bi-exclamation-triangle me-2"></i>
+
+                ${escapeHtml(
+                    message ||
+                    "Unable to load movies."
+                )}
+
+            </div>
+
+        </div>
+
+    `;
 
 }

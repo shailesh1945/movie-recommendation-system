@@ -68,6 +68,35 @@ body {
 	font-weight: 600;
 }
 
+.rating-star {
+	font-size: 32px;
+	color: #6b7280;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.rating-star:hover {
+	color: #fbbf24;
+	transform: scale(1.1);
+}
+
+.rating-star.active {
+	color: #fbbf24;
+}
+
+#ratingStars i {
+	color: #6c757d;
+	transition: 0.2s ease;
+}
+
+#ratingStars i:hover {
+	transform: scale(1.15);
+}
+
+#ratingStars i.active {
+	color: #ffc107;
+}
+
 .rating {
 	color: #fbbf24;
 	font-size: 20px;
@@ -220,6 +249,56 @@ body {
 					<p id="movieDescription" class="description">-</p>
 
 
+					<!-- User Rating -->
+
+					<!-- User Rating -->
+
+					<div class="mt-4 p-4 rounded"
+						style="background: #111827; border: 1px solid #374151;">
+
+						<h5 class="mb-3">
+							<i class="bi bi-star-fill text-warning me-2"></i> Rate This Movie
+						</h5>
+
+						<!-- 1 to 5 Stars -->
+
+						<div id="ratingStars" class="d-flex gap-2 mb-2">
+
+							<i class="bi bi-star rating-star" data-rating="1"></i> <i
+								class="bi bi-star rating-star" data-rating="2"></i> <i
+								class="bi bi-star rating-star" data-rating="3"></i> <i
+								class="bi bi-star rating-star" data-rating="4"></i> <i
+								class="bi bi-star rating-star" data-rating="5"></i>
+
+						</div>
+
+
+						<!-- Selected Rating -->
+
+						<div class="text-secondary mb-3">
+
+							Your rating: <span id="selectedRating" class="text-warning">
+								Not rated </span>
+
+						</div>
+
+
+						<!-- Submit -->
+
+						<button type="button" id="submitRatingBtn" class="btn btn-danger"
+							onclick="submitRating()">
+
+							<i class="bi bi-star-fill me-1"></i> Submit Rating
+
+						</button>
+
+
+						<!-- Success/Error Message -->
+
+						<div id="ratingMessage" class="mt-3"></div>
+
+					</div>
+
 					<!-- Trailer -->
 
 					<div id="trailerContainer" class="mt-4 d-none">
@@ -240,11 +319,13 @@ body {
 							class="btn btn-outline-warning">
 
 							<i id="watchlistIcon" class="bi bi-bookmark-plus"></i> <span
-								id="watchlistText"> Add to My List </span>
+								id="watchlistText">Add to My List</span>
 
 						</button>
 
 					</div>
+
+					<hr class="my-4">
 
 				</div>
 
@@ -257,27 +338,40 @@ body {
 
 	<script>
 
+let selectedRating = 0;
+
 const API = {
 
     BASE_URL: "http://localhost:8081",
 
-    ADMIN_MOVIES: {
+    MOVIES: {
         DETAILS: "/api/movies/"
+    },
+
+    RATINGS: {
+        MY_RATING: "/api/ratings/movie/",
+        SAVE: "/api/ratings/movie/"
     }
 
 };
 
 
-// Get movie ID from URL
+// =================================================
+// GET MOVIE ID
+// =================================================
 
 const urlParams =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
 
 const movieId =
     urlParams.get("movieId");
 
 
-// Load movie when page opens
+// =================================================
+// PAGE LOAD
+// =================================================
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -292,30 +386,45 @@ document.addEventListener(
             return;
         }
 
+
+        // Setup rating stars
+
+        setupRatingStars();
+
+
+        // Load movie details
+
         loadMovieDetails(movieId);
+
+
+        // Load user's existing rating
+
+        loadMyRating(movieId);
 
     }
 );
 
 
-// Load movie details
+// =================================================
+// LOAD MOVIE DETAILS
+// =================================================
 
 async function loadMovieDetails(movieId) {
 
     try {
 
-        
-        const response = await apiFetch(
+        const response =
+            await apiFetch(
 
-        		API.BASE_URL +
-                API.ADMIN_MOVIES.DETAILS +
+                API.BASE_URL +
+                API.MOVIES.DETAILS +
                 movieId,
 
-			    {
-			        method: "GET"
-			    }
+                {
+                    method: "GET"
+                }
 
-			);
+            );
 
 
         if (!response.ok) {
@@ -326,7 +435,7 @@ async function loadMovieDetails(movieId) {
 
         }
 
-		/*
+
         const movie =
             await response.json();
 
@@ -337,21 +446,22 @@ async function loadMovieDetails(movieId) {
         );
 
 
-        displayMovie(movie);
-		*/
-        const movie = await response.json();
+        console.log(
+            "POSTER URL =",
+            movie.posterUrl
+        );
 
-        console.log("Movie Details:", movie);
-        console.log("POSTER URL =", movie.posterUrl);
 
         displayMovie(movie);
-	
+
+
     } catch (error) {
 
         console.error(
             "Error loading movie:",
             error
         );
+
 
         showError(
             error.message ||
@@ -363,11 +473,457 @@ async function loadMovieDetails(movieId) {
 }
 
 
-// Display movie
+// =================================================
+// RATING
+// =================================================
+
+
+// -------------------------------------------------
+// Load Current User Rating
+// -------------------------------------------------
+
+async function loadMyRating(movieId) {
+
+    try {
+
+        const response =
+            await apiFetch(
+
+                API.BASE_URL +
+                API.RATINGS.MY_RATING +
+                movieId +
+                "/my-rating",
+
+                {
+                    method: "GET"
+                }
+
+            );
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Unable to load user rating."
+            );
+
+            return;
+        }
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "My rating:",
+            result
+        );
+
+
+        if (
+            result.success &&
+            result.data
+        ) {
+
+            selectedRating =
+                Number(
+                    result.data.rating
+                );
+
+
+            updateRatingStars();
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Rating loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+// -------------------------------------------------
+// Setup Rating Stars
+// -------------------------------------------------
+
+function setupRatingStars() {
+
+    const stars =
+        document.querySelectorAll(
+            "#ratingStars i"
+        );
+
+
+    if (!stars.length) {
+
+        console.warn(
+            "Rating stars not found."
+        );
+
+        return;
+    }
+
+
+    stars.forEach(
+        function (star) {
+
+            star.addEventListener(
+                "click",
+                function () {
+
+                    selectedRating =
+                        Number(
+                            this.dataset.rating
+                        );
+
+
+                    updateRatingStars();
+
+                }
+            );
+
+
+            // Optional hover effect
+
+            star.addEventListener(
+                "mouseenter",
+                function () {
+
+                    const hoverRating =
+                        Number(
+                            this.dataset.rating
+                        );
+
+
+                    highlightRating(
+                        hoverRating
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    const ratingStars =
+        document.getElementById(
+            "ratingStars"
+        );
+
+
+    if (ratingStars) {
+
+        ratingStars.addEventListener(
+            "mouseleave",
+            function () {
+
+                updateRatingStars();
+
+            }
+        );
+
+    }
+
+}
+
+
+// -------------------------------------------------
+// Highlight Stars
+// -------------------------------------------------
+
+function highlightRating(rating) {
+
+    const stars =
+        document.querySelectorAll(
+            "#ratingStars i"
+        );
+
+
+    stars.forEach(
+        function (star) {
+
+            const value =
+                Number(
+                    star.dataset.rating
+                );
+
+
+            if (value <= rating) {
+
+                star.classList.remove(
+                    "bi-star"
+                );
+
+
+                star.classList.add(
+                    "bi-star-fill"
+                );
+
+            } else {
+
+                star.classList.remove(
+                    "bi-star-fill"
+                );
+
+
+                star.classList.add(
+                    "bi-star"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+// -------------------------------------------------
+// Update Selected Rating UI
+// -------------------------------------------------
+
+function updateRatingStars() {
+
+    const stars =
+        document.querySelectorAll(
+            "#ratingStars i"
+        );
+
+
+    stars.forEach(
+        function (star) {
+
+            const value =
+                Number(
+                    star.dataset.rating
+                );
+
+
+            if (value <= selectedRating) {
+
+                star.classList.remove(
+                    "bi-star"
+                );
+
+
+                star.classList.add(
+                    "bi-star-fill",
+                    "active"
+                );
+
+            } else {
+
+                star.classList.remove(
+                    "bi-star-fill",
+                    "active"
+                );
+
+
+                star.classList.add(
+                    "bi-star"
+                );
+
+            }
+
+        }
+    );
+
+
+    const selectedRatingElement =
+        document.getElementById(
+            "selectedRating"
+        );
+
+
+    if (selectedRatingElement) {
+
+        if (selectedRating > 0) {
+
+            selectedRatingElement.textContent =
+                selectedRating + " / 5";
+
+        } else {
+
+            selectedRatingElement.textContent =
+                "Not rated";
+
+        }
+
+    }
+
+}
+
+
+// -------------------------------------------------
+// Submit Rating
+// -------------------------------------------------
+
+async function submitRating() {
+
+    if (selectedRating === 0) {
+
+        alert(
+            "Please select a rating first."
+        );
+
+        return;
+    }
+
+
+    const button =
+        document.getElementById(
+            "submitRatingBtn"
+        );
+
+
+    try {
+
+        if (button) {
+
+            button.disabled = true;
+
+            button.innerHTML = `
+                Saving...
+                <span class="spinner-border spinner-border-sm ms-2"></span>
+            `;
+
+        }
+
+
+        const response =
+            await apiFetch(
+
+                API.BASE_URL +
+                API.RATINGS.SAVE +
+                movieId +
+                "?rating=" +
+                selectedRating,
+
+                {
+                    method: "POST"
+                }
+
+            );
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "Rating response:",
+            result
+        );
+
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
+
+            throw new Error(
+                result.message ||
+                "Failed to save rating."
+            );
+
+        }
+
+
+        // Success message
+
+        const ratingMessage =
+            document.getElementById(
+                "ratingMessage"
+            );
+
+
+        if (ratingMessage) {
+
+            ratingMessage.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="bi bi-check-circle me-2"></i>
+                    Rating saved successfully!
+                </div>
+            `;
+
+        }
+
+
+        // Reload movie details
+        // so average rating is updated
+
+        await loadMovieDetails(
+            movieId
+        );
+
+
+        // Reload user's rating
+
+        await loadMyRating(
+            movieId
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Rating error:",
+            error
+        );
+
+
+        const ratingMessage =
+            document.getElementById(
+                "ratingMessage"
+            );
+
+
+        if (ratingMessage) {
+
+            ratingMessage.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    ${error.message}
+                </div>
+            `;
+
+        }
+
+    } finally {
+
+        if (button) {
+
+            button.disabled = false;
+
+            button.innerHTML = `
+                <i class="bi bi-star-fill"></i>
+                Submit Rating
+            `;
+
+        }
+
+    }
+
+}
+
+
+// =================================================
+// DISPLAY MOVIE
+// =================================================
 
 function displayMovie(movie) {
 
+    // -------------------------------------------------
     // Movie ID
+    // -------------------------------------------------
 
     document.getElementById(
         "movieId"
@@ -375,7 +931,9 @@ function displayMovie(movie) {
         movie.movieId ?? "-";
 
 
+    // -------------------------------------------------
     // Title
+    // -------------------------------------------------
 
     document.getElementById(
         "movieTitle"
@@ -383,7 +941,9 @@ function displayMovie(movie) {
         movie.title ?? "-";
 
 
+    // -------------------------------------------------
     // Director
+    // -------------------------------------------------
 
     document.getElementById(
         "movieDirector"
@@ -391,7 +951,9 @@ function displayMovie(movie) {
         movie.director ?? "-";
 
 
-    // Release year
+    // -------------------------------------------------
+    // Release Year
+    // -------------------------------------------------
 
     document.getElementById(
         "movieReleaseYear"
@@ -399,7 +961,9 @@ function displayMovie(movie) {
         movie.releaseYear ?? "-";
 
 
+    // -------------------------------------------------
     // Duration
+    // -------------------------------------------------
 
     document.getElementById(
         "movieDuration"
@@ -407,25 +971,26 @@ function displayMovie(movie) {
         movie.duration ?? "-";
 
 
+    // -------------------------------------------------
     // Language
-	const language =
-    movie.languageName ??
-    movie.language ??
-    movie.language_name ??
-    "-";
+    // -------------------------------------------------
 
-	document.getElementById(
-    "movieLanguage"
-	).textContent = language;
-	
-	/*
+    const language =
+        movie.languageName ??
+        movie.language ??
+        movie.language_name ??
+        "-";
+
+
     document.getElementById(
         "movieLanguage"
     ).textContent =
-        movie.languageName ?? "-";
-	*/
+        language;
 
-    // Rating
+
+    // -------------------------------------------------
+    // Average Rating
+    // -------------------------------------------------
 
     document.getElementById(
         "movieRating"
@@ -433,56 +998,70 @@ function displayMovie(movie) {
         movie.averageRating ?? "0";
 
 
+    // -------------------------------------------------
     // Description
+    // -------------------------------------------------
 
     document.getElementById(
         "movieDescription"
     ).textContent =
-        movie.description ?? "No description available.";
+        movie.description ??
+        "No description available.";
 
 
+    // -------------------------------------------------
     // Poster
+    // -------------------------------------------------
 
     const poster =
-    document.getElementById("moviePoster");
-
-	if (
-    	movie.posterUrl &&
-    	movie.posterUrl.trim() !== ""
-	) {
-
-    	poster.src =
-        API.BASE_URL + movie.posterUrl;
-
-    	console.log(
-        	"Poster loaded from:",
-        	poster.src
-    	);
-
-	} else {
-
-    	poster.src =
-        	"${pageContext.request.contextPath}/images/default-movie-poster.png";
-	}
+        document.getElementById(
+            "moviePoster"
+        );
 
 
+    if (
+        movie.posterUrl &&
+        movie.posterUrl.trim() !== ""
+    ) {
+
+        poster.src =
+            API.BASE_URL +
+            movie.posterUrl;
+
+
+        console.log(
+            "Poster loaded from:",
+            poster.src
+        );
+
+    } else {
+
+        poster.src =
+            "${pageContext.request.contextPath}/images/default-movie-poster.png";
+
+    }
+
+
+    // -------------------------------------------------
     // Trailer
+    // -------------------------------------------------
+
+    const trailerContainer =
+        document.getElementById(
+            "trailerContainer"
+        );
+
+
+    const trailer =
+        document.getElementById(
+            "movieTrailer"
+        );
+
 
     if (
         movie.trailerUrl &&
         movie.trailerUrl.trim() !== ""
     ) {
-
-        const trailerContainer =
-            document.getElementById(
-                "trailerContainer"
-            );
-
-        const trailer =
-            document.getElementById(
-                "movieTrailer"
-            );
-
 
         trailer.href =
             movie.trailerUrl;
@@ -492,10 +1071,18 @@ function displayMovie(movie) {
             "d-none"
         );
 
+    } else {
+
+        trailerContainer.classList.add(
+            "d-none"
+        );
+
     }
 
 
-    // Hide loading
+    // -------------------------------------------------
+    // Hide Loading
+    // -------------------------------------------------
 
     document.getElementById(
         "loadingMessage"
@@ -504,7 +1091,9 @@ function displayMovie(movie) {
     );
 
 
-    // Show details
+    // -------------------------------------------------
+    // Show Movie Details
+    // -------------------------------------------------
 
     document.getElementById(
         "movieDetails"
@@ -515,7 +1104,9 @@ function displayMovie(movie) {
 }
 
 
-// Show error
+// =================================================
+// SHOW ERROR
+// =================================================
 
 function showError(message) {
 
@@ -541,7 +1132,9 @@ function showError(message) {
 }
 
 
-// Back button
+// =================================================
+// BACK BUTTON
+// =================================================
 
 function goBack() {
 
@@ -551,6 +1144,7 @@ function goBack() {
 
 </script>
 
+	<<<<<<< HEAD
 
 	<script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
@@ -559,6 +1153,9 @@ function goBack() {
 	<script src="${pageContext.request.contextPath}/assets/js/auth.js"></script>
 
 	<script src="${pageContext.request.contextPath}/assets/js/watchlist.js"></script>
+	=======
+	<script src="${pageContext.request.contextPath}/assets/js/api.js"></script>
+	>>>>>>> e3af109 (solve issue of rating module)
 
 </body>
 </html>

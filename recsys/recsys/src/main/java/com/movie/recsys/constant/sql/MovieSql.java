@@ -46,18 +46,38 @@ public final class MovieSql {
         """;
 
     public static final String FIND_BY_ID = """
-        SELECT
-            m.*,
-            l.language_name,
-            ROUND(IFNULL(AVG(r.rating),0),1) average_rating
-        FROM movies m
-        LEFT JOIN languages l
-            ON l.language_id = m.language_id
-        LEFT JOIN ratings r
-            ON r.movie_id = m.movie_id
-        WHERE m.movie_id = ?
-        GROUP BY m.movie_id
-        """;
+    SELECT
+        m.movie_id,
+        m.title,
+        m.description,
+        m.release_year,
+        m.duration,
+        m.director,
+        m.language_id,
+        m.poster_url,
+        m.trailer_url,
+        m.created_at,
+        l.language_name,
+        ROUND(IFNULL(AVG(r.rating), 0), 1) AS average_rating
+    FROM movies m
+    LEFT JOIN languages l
+        ON l.language_id = m.language_id
+    LEFT JOIN ratings r
+        ON r.movie_id = m.movie_id
+    WHERE m.movie_id = ?
+    GROUP BY
+        m.movie_id,
+        m.title,
+        m.description,
+        m.release_year,
+        m.duration,
+        m.director,
+        m.language_id,
+        m.poster_url,
+        m.trailer_url,
+        m.created_at,
+        l.language_name
+    """;
 
     public static final String FIND_ALL = """
         SELECT
@@ -74,19 +94,45 @@ public final class MovieSql {
         """;
 
     public static final String LATEST_MOVIES = """
-        SELECT
-            m.*,
-            l.language_name,
-            ROUND(IFNULL(AVG(r.rating),0),1) average_rating
-        FROM movies m
-        LEFT JOIN languages l
-            ON l.language_id = m.language_id
-        LEFT JOIN ratings r
-            ON r.movie_id = m.movie_id
-        GROUP BY m.movie_id
-        ORDER BY m.release_year DESC
-        LIMIT 12
-        """;
+    SELECT
+        m.movie_id,
+        m.title,
+        m.description,
+        m.release_year,
+        m.duration,
+        m.director,
+        m.language_id,
+        m.poster_url,
+        m.trailer_url,
+        m.created_at,
+        l.language_name,
+        ROUND(IFNULL(AVG(r.rating), 0), 1) AS average_rating
+
+    FROM movies m
+
+    LEFT JOIN languages l
+        ON l.language_id = m.language_id
+
+    LEFT JOIN ratings r
+        ON r.movie_id = m.movie_id
+
+    GROUP BY
+        m.movie_id,
+        m.title,
+        m.description,
+        m.release_year,
+        m.duration,
+        m.director,
+        m.language_id,
+        m.poster_url,
+        m.trailer_url,
+        m.created_at,
+        l.language_name
+
+    ORDER BY m.release_year DESC
+
+    LIMIT 12
+    """;
 
     public static final String TOP_RATED = """
         SELECT
