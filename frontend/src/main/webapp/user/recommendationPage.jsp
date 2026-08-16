@@ -181,31 +181,31 @@ footer {
 						data-id="1">Action</button>
 
 					<button type="button" class="preference-chip" data-type="genre"
-						data-id="2">Thriller</button>
+						data-id="2">Adventure</button>
 
 					<button type="button" class="preference-chip" data-type="genre"
 						data-id="3">Comedy</button>
 
 					<button type="button" class="preference-chip" data-type="genre"
-						data-id="4">Horror</button>
+						data-id="4">Drama</button>
 
 					<button type="button" class="preference-chip" data-type="genre"
 						data-id="5">Romance</button>
 
 					<button type="button" class="preference-chip" data-type="genre"
-						data-id="6">Crime</button>
+						data-id="6">Sci-Fi</button>
 
 					<button type="button" class="preference-chip" data-type="genre"
-						data-id="7">Sci-Fi</button>
+						data-id="7">Thriller</button>
 
 					<button type="button" class="preference-chip" data-type="genre"
-						data-id="8">Adventure</button>
+						data-id="8">Animation</button>
 
 					<button type="button" class="preference-chip" data-type="genre"
-						data-id="9">Fantasy</button>
+						data-id="9">Horror</button>
 
 					<button type="button" class="preference-chip" data-type="genre"
-						data-id="10">Drama</button>
+						data-id="10">Fantasy</button>
 
 				</div>
 

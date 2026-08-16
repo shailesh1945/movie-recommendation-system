@@ -59,13 +59,13 @@ async function loadRecommendations() {
 		// GET /api/recommendations
 		// =========================================
 
-		
-		const response = await apiFetch(		
+
+		const response = await apiFetch(
 			API.BASE_URL +
-					API.RECOMMENDATIONS.LIST, {
-		  
-						method: "GET"
-		 
+			API.RECOMMENDATIONS.LIST, {
+
+			method: "GET"
+
 		});
 
 
@@ -220,25 +220,25 @@ async function loadRecommendations() {
 
 function displayRecommendations(movies) {
 
-    const container =
-        document.getElementById(
-            "recommendationContainer"
-        );
+	const container =
+		document.getElementById(
+			"recommendationContainer"
+		);
 
-    if (!container) {
-        return;
-    }
+	if (!container) {
+		return;
+	}
 
-    // =============================================
-    // No Movies
-    // =============================================
+	// =============================================
+	// No Movies
+	// =============================================
 
-    if (
-        !Array.isArray(movies) ||
-        movies.length === 0
-    ) {
+	if (
+		!Array.isArray(movies) ||
+		movies.length === 0
+	) {
 
-        container.innerHTML = `
+		container.innerHTML = `
 
             <div class="col-12 text-center py-5">
 
@@ -267,27 +267,27 @@ function displayRecommendations(movies) {
 
         `;
 
-        return;
-    }
+		return;
+	}
 
-    // =============================================
-    // Clear Container
-    // =============================================
+	// =============================================
+	// Clear Container
+	// =============================================
 
-    container.innerHTML = "";
+	container.innerHTML = "";
 
-    // =============================================
-    // Create Movie Cards
-    // =============================================
+	// =============================================
+	// Create Movie Cards
+	// =============================================
 
-    movies.forEach(function(movie) {
+	movies.forEach(function(movie) {
 
-        const card =
-            createMovieCard(movie);
+		const card =
+			createMovieCard(movie);
 
-        container.appendChild(card);
+		container.appendChild(card);
 
-    });
+	});
 }
 
 // =================================================
@@ -393,37 +393,37 @@ function createMovieCard(movie) {
 	            </h5>
 
 	            ${genre
-	                ? `
+			? `
 	                    <p class="card-text  mb-1 text-white">
 
 	                        <i class="bi bi-film me-1"></i>
 
 	                        ${escapeHtml(
-	                            formatValue(genre)
-	                        )}
+				formatValue(genre)
+			)}
 
 	                    </p>
 	                  `
-	                : ""
-	            }
+			: ""
+		}
 
 	            ${language
-	                ? `
+			? `
 	                    <p class="card-text  mb-1 text-white">
 
 	                        <i class="bi bi-globe me-1"></i>
 
 	                        ${escapeHtml(
-	                            formatValue(language)
-	                        )}
+				formatValue(language)
+			)}
 
 	                    </p>
 	                  `
-	                : ""
-	            }
+			: ""
+		}
 
 	            ${releaseYear
-	                ? `
+			? `
 	                    <p class="card-text text-light">
 
 	                        <i class="bi bi-calendar me-1"></i>
@@ -432,8 +432,8 @@ function createMovieCard(movie) {
 
 	                    </p>
 	                  `
-	                : ""
-	            }
+			: ""
+		}
 
 	        </div>
 
@@ -460,11 +460,11 @@ function createMovieCard(movie) {
 			function() {
 
 				window.location.href =
-					CONTEXT_PATH +
-					"/movie-details?id=" +
+					"./movie-details.jsp?movieId=" +
 					encodeURIComponent(
 						movieId
 					);
+
 
 			}
 		);
